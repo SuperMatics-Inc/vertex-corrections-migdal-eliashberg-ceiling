@@ -72,7 +72,7 @@ jobs:
       - name: Public prose safeguards
         run: |
           set -euo pipefail
-          if grep -nE '—|---|\b(G1-[A-Z]+|MS-VERTEX|ADIABATIC|EXTHOL|HUBHOL)[[:alnum:]_-]*|ceiling-20261118|D:/|C:/t|\bMac\b|\blane\b|reserved DOI' paper/main.tex README.md; then exit 1; fi
+          if grep -nE '—|\b(G1-[A-Z]+|MS-VERTEX|ADIABATIC|EXTHOL|HUBHOL)[[:alnum:]_-]*|ceiling-20261118|D:/|C:/t|\bMac\b|\blane\b|reserved DOI' paper/main.tex README.md; then exit 1; fi
           grep -qF 'This preprint has not been peer reviewed.' paper/main.tex
           grep -qF 'This preprint has not been peer reviewed.' README.md
           grep -qF '10.5281/zenodo.24407163' paper/main.tex
@@ -103,6 +103,7 @@ jobs:
           pdftotext main.pdf main.txt
           if grep -nE '—|---|\b(G1-[A-Z]+|MS-VERTEX|ADIABATIC|EXTHOL|HUBHOL)[[:alnum:]_-]*|ceiling-20261118|D:/|C:/t|\bMac\b|\blane\b' main.txt; then exit 1; fi
           tr -s '[:space:]' ' ' < main.txt | grep -qF 'This preprint has not been peer reviewed.'
+          tr -s '[:space:]' ' ' < main.txt | grep -qF 'Separate AI agents performed the independent reviews.'
       - uses: actions/upload-artifact@v4
         with:
           name: vertex-corrections-migdal-eliashberg-ceiling-paper

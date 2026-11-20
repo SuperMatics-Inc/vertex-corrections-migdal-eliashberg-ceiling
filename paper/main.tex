@@ -11,6 +11,7 @@
 \usepgfplotslibrary{groupplots}
 \pgfplotsset{compat=1.16}
 \usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\usepackage{xurl}
 
 % ---------- evidence labels ----------
 \newcommand{\PROVED}{\upshape\mdseries\textsc{Proved}}
@@ -38,7 +39,12 @@
 
 \title{Vertex corrections and the Migdal--Eliashberg ceiling:\\ rigorous bounds in a spherical overlap model}
 \author{Davis Rens, SuperMatics Inc.\\\href{https://orcid.org/0000-0001-5839-5197}{ORCID 0000-0001-5839-5197}}
-\date{}
+\newcommand{\MSPAPERDOI}{10.5281/zenodo.24407163}
+\newcommand{\MSSUPPDOI}{10.5281/zenodo.24407165}
+\newcommand{\MSREPOURL}{https://github.com/SuperMatics-Inc/vertex-corrections-migdal-eliashberg-ceiling}
+\date{Preprint:~\href{https://doi.org/\MSPAPERDOI}{doi:\MSPAPERDOI}\\
+Supplementary records:~\href{https://doi.org/\MSSUPPDOI}{doi:\MSSUPPDOI}\\
+Source:~\url{\MSREPOURL}}
 
 \begin{document}
 \maketitle
@@ -442,8 +448,8 @@ The signed estimates of Theorem~\ref{thm:V3a} rely on the spherical joint densit
 
 %--------------------------------------------------------------------
 \section*{Supporting material and data availability}
-% DOI-SUPP: not yet assigned.
-The full proofs, replay scripts, certificate logs and independent review records R0 to R5 accompany this preprint as supplementary material. The mapping from each numbered statement to its record, file and line is in \texttt{CLAIMS.md}. No empirical data are used. Every number in this paper is computed from the model parameters stated in the text, and the scripts in records R0 to R5 reproduce it. AI agents generated the proofs, code and drafts under D. Rens' direction. Independent reviews were performed by separate AI agents. This preprint has not been peer reviewed.
+This preprint is archived at \url{https://doi.org/\MSPAPERDOI} and the supporting records at \url{https://doi.org/\MSSUPPDOI}. The source of both is \url{\MSREPOURL}.
+The full proofs, replay scripts, certificate logs and independent review records R0 to R5 accompany this preprint as supplementary material. The mapping from each numbered statement to its record, file and line is in \texttt{CLAIMS.md}. No empirical data are used. Every number in this paper is computed from the model parameters stated in the text, and the scripts in records R0 to R5 reproduce it. AI agents generated the proofs, code, and manuscript drafts under D. Rens' direction. Separate AI agents performed the independent reviews. This preprint has not been peer reviewed.
 
 %--------------------------------------------------------------------
 \bibliographystyle{plain}
