@@ -1,0 +1,13 @@
+eta=1 closed=34/45 radial=12
+  lambda=1/9 radial_x=1/16,1/8 open_x=none
+  lambda=1/4 radial_x=1/8,1/4,1/2 open_x=1/16
+  lambda=1/2 radial_x=1/4,1/2,1 open_x=1/16,1/8
+  lambda=1 radial_x=1/2,1,2 open_x=1/16,1/8,1/4
+  lambda=2 radial_x=2 open_x=1/16,1/8,1/4,1/2,1
+eta=3/2 closed=40/45 radial=16
+  lambda=1/9 radial_x=1/16 open_x=none
+  lambda=1/4 radial_x=1/16,1/8,1/4,1/2 open_x=none
+  lambda=1/2 radial_x=1/16,1/8,1/4,1/2,1 open_x=none
+  lambda=1 radial_x=1/8,1/4,1/2,1 open_x=1/16
+  lambda=2 radial_x=1,2 open_x=1/16,1/8,1/4,1/2
+phase3_historical_receipt_union: pairing<=0.72827964 preconditioned_normal_map_G_q<=0.70929592

@@ -1,0 +1,95 @@
+ATTEMPT 2,1,1/16
+UNRESOLVED primary slab=3/30: normal center defect=0.0526235, minimum guard q=0.414433
+ATTEMPT 2,3/2,1/16
+UNRESOLVED primary slab=4/30: normal center defect=0.0566265, minimum guard q=0.425469
+ATTEMPT 1,1,1/16
+UNRESOLVED primary slab=6/30: normal center defect=0.0463525, minimum guard q=0.349215
+ATTEMPT 1,3/2,1/16
+UNRESOLVED primary slab=8/30: normal center defect=0.0508824, minimum guard q=0.345546
+ATTEMPT 1/2,1,1/16
+UNRESOLVED primary slab=11/30: normal center defect=0.0497526, minimum guard q=0.344902
+ATTEMPT 1/2,3/2,1/16
+UNRESOLVED primary slab=14/30: normal center defect=0.0509028, minimum guard q=0.310527
+ATTEMPT 1/4,1,1/16
+UNRESOLVED primary slab=19/30: normal center defect=0.0515919, minimum guard q=0.346598
+ATTEMPT 1/4,3/2,1/16
+UNRESOLVED primary slab=24/30: normal center defect=0.0534963, minimum guard q=0.319124
+ATTEMPT 1/9,1,1/16
+CLOSED 1/9,1,1/16 pairing<=0.37193588 q<=0.27347440
+ATTEMPT 1/9,3/2,1/16
+CLOSED 1/9,3/2,1/16 pairing<=0.29333966 q<=0.12821333
+ATTEMPT 2,1,1/8
+UNRESOLVED primary slab=5/30: normal center defect=0.04036, minimum guard q=0.503056
+ATTEMPT 2,3/2,1/8
+UNRESOLVED primary slab=6/30: normal center defect=0.036699, minimum guard q=0.442246
+ATTEMPT 1,1,1/8
+UNRESOLVED primary slab=10/30: normal center defect=0.0349023, minimum guard q=0.431738
+ATTEMPT 1,3/2,1/8
+UNRESOLVED primary slab=13/30: normal center defect=0.0335116, minimum guard q=0.404391
+ATTEMPT 1/2,1,1/8
+UNRESOLVED primary slab=17/30: normal center defect=0.0346158, minimum guard q=0.371441
+ATTEMPT 1/2,3/2,1/8
+UNRESOLVED primary slab=22/30: normal center defect=0.0333607, minimum guard q=0.346042
+ATTEMPT 1/4,1,1/8
+UNRESOLVED primary slab=28/30: normal center defect=0.0347453, minimum guard q=0.332402
+ATTEMPT 1/4,3/2,1/8
+CLOSED 1/4,3/2,1/8 pairing<=0.44580266 q<=0.24097493
+ATTEMPT 1/9,1,1/8
+CLOSED 1/9,1,1/8 pairing<=0.27424631 q<=0.09225844
+ATTEMPT 2,1,1/4
+UNRESOLVED primary slab=8/30: normal center defect=0.0213984, minimum guard q=0.552442
+ATTEMPT 2,3/2,1/4
+UNRESOLVED primary slab=10/30: normal center defect=0.0193556, minimum guard q=0.530267
+ATTEMPT 1,1,1/4
+UNRESOLVED primary slab=16/30: normal center defect=0.0171606, minimum guard q=0.495573
+ATTEMPT 1,3/2,1/4
+UNRESOLVED primary slab=21/30: normal center defect=0.0155103, minimum guard q=0.499711
+ATTEMPT 1/2,1,1/4
+UNRESOLVED primary slab=27/30: normal center defect=0.0174793, minimum guard q=0.421143
+ATTEMPT 1/2,3/2,1/4
+CLOSED 1/2,3/2,1/4 pairing<=0.52615152 q<=0.35849747
+ATTEMPT 1/4,1,1/4
+CLOSED 1/4,1,1/4 pairing<=0.41390601 q<=0.16200745
+ATTEMPT 1/4,3/2,1/4
+CLOSED 1/4,3/2,1/4 pairing<=0.34167143 q<=0.10859885
+ATTEMPT 2,1,1/2
+UNRESOLVED primary slab=13/30: normal center defect=0.00965215, minimum guard q=0.629506
+ATTEMPT 2,3/2,1/2
+UNRESOLVED primary slab=16/30: normal center defect=0.00839115, minimum guard q=0.601989
+ATTEMPT 1,1,1/2
+UNRESOLVED primary slab=24/30: normal center defect=0.00830304, minimum guard q=0.593211
+ATTEMPT 1,3/2,1/2
+CLOSED 1,3/2,1/2 pairing<=0.58765056 q<=0.70929592
+ATTEMPT 1/2,1,1/2
+CLOSED 1/2,1,1/2 pairing<=0.49912863 q<=0.31847285
+ATTEMPT 1/2,3/2,1/2
+CLOSED 1/2,3/2,1/2 pairing<=0.40073340 q<=0.22450981
+ATTEMPT 1/4,1,1/2
+CLOSED 1/4,1,1/2 pairing<=0.31808953 q<=0.09768399
+ATTEMPT 1/4,3/2,1/2
+CLOSED 1/4,3/2,1/2 pairing<=0.26944300 q<=0.07689401
+ATTEMPT 2,1,1
+UNRESOLVED primary slab=22/30: normal center defect=0.005043, minimum guard q=0.692675
+ATTEMPT 2,3/2,1
+UNRESOLVED primary slab=29/30: normal center defect=0.00497329, minimum guard q=0.706534
+ATTEMPT 1,1,1
+CLOSED 1,1,1 pairing<=0.50318817 q<=0.48836236
+ATTEMPT 1,3/2,1
+CLOSED 1,3/2,1 pairing<=0.40155653 q<=0.33801636
+ATTEMPT 1/2,1,1
+CLOSED 1/2,1,1 pairing<=0.35042604 q<=0.17379907
+ATTEMPT 1/2,3/2,1
+CLOSED 1/2,3/2,1 pairing<=0.28765207 q<=0.13221398
+ATTEMPT 2,1,2
+CLOSED 2,1,2 pairing<=0.44333061 q<=0.47805873
+ATTEMPT 2,3/2,2
+CLOSED 2,3/2,2 pairing<=0.36954961 q<=0.34378870
+ATTEMPT 1,1,2
+CLOSED 1,1,2 pairing<=0.32553312 q<=0.19759064
+Traceback (most recent call last):
+  File "D:\dev\scratch\ceiling-20261118\G1-GAP\radial_moments.py", line 195, in <module>
+    self.setup_transfers()
+    ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\dev\scratch\ceiling-20261118\G1-GAP\radial.py", line 448, in main
+    if out is None:
+ArithmeticError: 25/44 requested Krawczyk nodes unresolved

@@ -1,0 +1,19 @@
+ATTEMPT 2,1,1/8
+UNRESOLVED primary slab=2/20: normal center defect=0.0788842, minimum guard q=1.11277
+ATTEMPT 1/2,1,1/8
+UNRESOLVED primary slab=6/20: normal center defect=0.0403144, minimum guard q=0.524751
+ATTEMPT 1/9,1,1/8
+UNRESOLVED primary slab=17/20: normal center defect=0.0377687, minimum guard q=0.347232
+ATTEMPT 2,1,1
+UNRESOLVED primary slab=8/20: normal center defect=0.0171863, minimum guard q=0.525561
+ATTEMPT 1/2,1,1
+PRIMARY pairing<=0.42267993 q<=0.34511907
+ATTEMPT 2,1,2
+UNRESOLVED primary slab=18/20: normal center defect=0.0168738, minimum guard q=0.558867
+Traceback (most recent call last):
+  File "D:\dev\scratch\ceiling-20261118\G1-GAP\radial.py", line 438, in <module>
+    main()
+    ~~~~^^
+  File "D:\dev\scratch\ceiling-20261118\G1-GAP\radial.py", line 432, in main
+    raise ArithmeticError(f'{bad}/{len(nodes)} requested Krawczyk nodes unresolved')
+ArithmeticError: 5/6 requested Krawczyk nodes unresolved

@@ -1,0 +1,10 @@
+SPATIAL exact angular fixtures=45; mutants rejected=4
+lambda,x,w,static_upper_or_status,derivative_upper
+2,1/16,1,UNRESOLVED slab=0/1; residual/x=1.061; overlap/x=0.9081; q=inf
+Traceback (most recent call last):
+  File "D:\dev\scratch\ceiling-20261118\G1-GAP\static.py", line 291, in <module>
+    main()
+    ~~~~^^
+  File "D:\dev\scratch\ceiling-20261118\G1-GAP\static.py", line 275, in main
+    raise ArithmeticError(f'uncertified static grid point: lambda={lam}, x={x}, w={w}')
+ArithmeticError: uncertified static grid point: lambda=2, x=1/16, w=1

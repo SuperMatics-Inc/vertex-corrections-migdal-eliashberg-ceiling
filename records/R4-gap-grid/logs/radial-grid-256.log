@@ -1,0 +1,37 @@
+ATTEMPT 2,1,1/4
+UNRESOLVED primary slab=13/48: normal center defect=0.0230074, minimum guard q=0.492543
+ATTEMPT 2,3/2,1/4
+UNRESOLVED primary slab=17/48: normal center defect=0.021483, minimum guard q=0.490697
+ATTEMPT 1,1,1/4
+UNRESOLVED primary slab=21/48: normal center defect=0.0225581, minimum guard q=0.401008
+ATTEMPT 1,3/2,1/4
+UNRESOLVED primary slab=29/48: normal center defect=0.0212059, minimum guard q=0.421136
+ATTEMPT 1/2,1,1/4
+UNRESOLVED primary slab=33/48: normal center defect=0.0254293, minimum guard q=0.362059
+ATTEMPT 1/2,3/2,1/4
+UNRESOLVED primary slab=47/48: normal center defect=0.0239419, minimum guard q=0.39811
+ATTEMPT 1/4,1,1/4
+CLOSED 1/4,1,1/4 pairing<=0.51095979 q<=0.37647356
+ATTEMPT 1/4,3/2,1/4
+CLOSED 1/4,3/2,1/4 pairing<=0.35875423 q<=0.14268352
+ATTEMPT 2,1,1/2
+UNRESOLVED primary slab=19/48: normal center defect=0.0144358, minimum guard q=0.537493
+ATTEMPT 2,3/2,1/2
+UNRESOLVED primary slab=25/48: normal center defect=0.0134708, minimum guard q=0.552894
+ATTEMPT 1,1,1/2
+UNRESOLVED primary slab=31/48: normal center defect=0.015716, minimum guard q=0.476253
+ATTEMPT 1,3/2,1/2
+UNRESOLVED primary slab=42/48: normal center defect=0.0141209, minimum guard q=0.50652
+ATTEMPT 1/2,1,1/2
+CLOSED 1/2,1,1/2 pairing<=0.64068028 q<=0.59229096
+ATTEMPT 1/2,3/2,1/2
+CLOSED 1/2,3/2,1/2 pairing<=0.42122864 q<=0.25391981
+ATTEMPT 1/4,1,1/2
+CLOSED 1/4,1,1/2 pairing<=0.33598485 q<=0.13020694
+ATTEMPT 1/4,3/2,1/2
+CLOSED 1/4,3/2,1/2 pairing<=0.27416094 q<=0.08372549
+ATTEMPT 2,1,1
+UNRESOLVED primary slab=32/48: normal center defect=0.0102342, minimum guard q=0.602173
+ATTEMPT 2,3/2,1
+UNRESOLVED primary slab=42/48: normal center defect=0.00949805, minimum guard q=0.612928
+ATTEMPT 1,1,1

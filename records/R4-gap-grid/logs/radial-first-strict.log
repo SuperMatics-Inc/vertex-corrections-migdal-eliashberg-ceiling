@@ -1,0 +1,23 @@
+ATTEMPT 2,1,1
+UNRESOLVED primary slab=17/32: normal center defect=0.0131143, minimum guard q=0.569344
+ATTEMPT 2,3/2,1
+UNRESOLVED primary slab=22/32: normal center defect=0.0128773, minimum guard q=0.553623
+ATTEMPT 1,1,1
+UNRESOLVED primary slab=28/32: normal center defect=0.0139504, minimum guard q=0.521623
+ATTEMPT 1,3/2,1
+Traceback (most recent call last):
+  File "D:\dev\scratch\ceiling-20261118\G1-GAP\radial.py", line 438, in <module>
+    main()
+    ~~~~^^
+  File "D:\dev\scratch\ceiling-20261118\G1-GAP\radial.py", line 425, in main
+    out,why = verify(lam,eta,x,r,witness)
+              ~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "D:\dev\scratch\ceiling-20261118\G1-GAP\radial_check.py", line 194, in verify
+    outcome,reason,_ = b.finish(record,r,i/slabs,(i+1)/slabs,delta)
+                       ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\dev\scratch\ceiling-20261118\G1-GAP\radial.py", line 315, in finish
+    normal,pair = self.signed_rows(line,theta0,rb,rP,(core,wing),wing)
+                  ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\dev\scratch\ceiling-20261118\G1-GAP\radial.py", line 244, in signed_rows
+    row += coef*(cv[:self.cells]+rv[:self.cells])
+numpy._core._exceptions._UFuncOutputCastingError: Cannot cast ufunc 'add' output from dtype('complex128') to dtype('float64') with casting rule 'same_kind'

@@ -1,0 +1,452 @@
+% SuperMatics preprint. Every statement is traced to a source record in CLAIMS.md.
+% Record labels R0 to R5 are defined in the introduction; the full mapping is in CLAIMS.md.
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs,array}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\usepackage{pgfplots}
+\usepgfplotslibrary{groupplots}
+\pgfplotsset{compat=1.16}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+
+% ---------- evidence labels ----------
+\newcommand{\PROVED}{\upshape\mdseries\textsc{Proved}}
+\newcommand{\CERT}{\upshape\mdseries\textsc{Certified}}
+\newcommand{\NUM}{\upshape\mdseries\textsc{Numerical}}
+\newcommand{\OPEN}{\upshape\mdseries\textsc{Open}}
+
+% ---------- notation ----------
+\newcommand{\Cinf}{C_\infty}
+\newcommand{\kB}{k_{\mathrm B}}
+\newcommand{\Tceil}{T_{\mathrm{ceil}}}
+\newcommand{\Tlin}{T_{\mathrm{lin}}}
+\newcommand{\Rg}{\mathrm{ME}}
+\newcommand{\dd}{\,\mathrm d}
+\newcommand{\sS}{\sup\sigma S}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{problem}[theorem]{Open problem}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\title{Vertex corrections and the Migdal--Eliashberg ceiling:\\ rigorous bounds in a spherical overlap model}
+\author{Davis Rens, SuperMatics Inc.\\\href{https://orcid.org/0000-0001-5839-5197}{ORCID 0000-0001-5839-5197}}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The phonon-only scalar Migdal--Eliashberg (ME) equations on the positive reflected normal branches specified below have the ceiling $\kB\Tlin<\Cinf\sqrt{AM}$, where $A$ is the relative height of the electronic density of states and $M=\int\Omega^2\dd\lambda(\Omega)$ is the phonon spectral moment. The exact coefficient $\Cinf$ rounds to $0.18272624777232952$ \cite{RensScalar}. We ask whether this ceiling survives addition of the first crossed skeleton to the rainbow self-energy.
+For a local flat band we obtain an explicit inflation and recover the uninflated bound at fixed coupling for sufficiently small $\Omega_{\max}/W$. In a projected spherical band we prove stability above an inflated threshold within a small-$x$ window. A pointwise contraction for $AR(T)\le1/9$ gives a high-temperature bound if $A\lambda<1/9$ and an onset bound strictly below the ceiling if $A\lambda\le1/26^2$. An overlap argument gives the uninflated bound for bounded weak coupling under a sufficient bandwidth-ratio guard.
+For the spherical Einstein model at $1/9\le\lambda\le2$, continuum estimates and finite arithmetic certificates extend coverage but leave regions above the ceiling unclosed. A separate lattice calculation gives three grid-refined numerical pairing roots below the ceiling. Neither a universal bound for the crossed skeleton nor a counterexample is established.
+\end{abstract}
+
+\tableofcontents
+
+%--------------------------------------------------------------------
+\section{Introduction and question}\label{sec:intro}
+
+The ME comparison used here is scalar and phonon-only, with a momentum- and electronic-energy-independent vertex and the same nonnegative transfer in the normal and pairing channels. It assumes positive reflected normal widths, nonzero finite phonon mass and second moment, and finite DOS height relative to a positive reference $N_0$. For even-frequency singlet pairing we write
+\begin{equation}\label{eq:ceiling}
+\Tceil=\frac{\Cinf\sqrt{A\,M}}{\kB},\qquad \Cinf=\frac{\sqrt{g(2)}}{2\pi},
+\end{equation}
+where $g(2)$ is the spectral top of the soft scalar $\gamma=2$ operator. The exact coefficient is used in the guards; $0.18272624777232952$ is rounded and exceeds the certified upper endpoint $0.1827262477723295176168720$ (record R0, certified endpoint). The scalar result is \cite{RensScalar}, on the conjectures of Kiessling, Altshuler and Yuzbashyan \cite{KAYGamma,KAY}; related work and formalisations include \cite{Kondratev,Siraj,KumarGSI}. The finite-DOS extensions are \PROVED\ (computer-assisted). Case~(a) uses a common real shift at fixed temperature, centered for even DOS when the real integral converges or has a symmetric principal-value prescription on infinite bands. Case~(e) uses a self-consistent asymmetric branch with the relative real equation defined in ordinary Matsubara order. We do not combine these extensions with each other and do not assert an anisotropic or Coulomb-inclusive theorem. For other phonon-mediated bounds see \cite{MoussaCohen,EsterlisBound}.
+
+Migdal's approximation neglects vertex corrections, and the first of them is the crossed (vertex-corrected) self-energy diagram. Full-bandwidth treatments beyond Migdal exist \cite{Schrodi}, and the vertex expansion has an extensive literature, for example \cite{Miller,Paci,GrimaldiI,GrimaldiII,GrimaldiScattoni,ChubukovVertex}. Recent work examines where Migdal--Eliashberg theory breaks down in Holstein-type models, through quantum Monte Carlo \cite{EsterlisBreakdown}, polaron and bipolaron formation \cite{ChubukovVertex,ChubukovPolaron}, and, for a specific material, a calculation that includes the leading vertex correction \cite{Mishra}. The question addressed here is narrower.
+
+\begin{quote}\emph{Does the proved ME ceiling \eqref{eq:ceiling} survive the first vertex correction?}\end{quote}
+
+Here ``survive'' refers to the upper linear pairing boundary on a named normal branch where it exists, for rainbow plus first crossed with bare phonons, fixed chemical potential and no Coulomb term. Most bounds use the regular branch; Theorem~\ref{thm:V1} applies to any solution with the specified centering and widths.
+
+\paragraph{What is shown.}
+\begin{itemize}
+\item \PROVED\ A local crossed skeleton with flat DOS obeys the ceiling inflated by a factor that tends to $1$ as $\Omega_{\max}/W\to0$ at fixed $\lambda$ (Theorem~\ref{thm:V1}), and two tempting estimates are shown to be false (Proposition~\ref{prop:obstruction}, Theorem~\ref{thm:V2}).
+\item \PROVED\ The spherical estimate excludes instability within $x\le x_*$ above an inflated threshold (Theorem~\ref{thm:V3a}). The pointwise Young-ball criterion $AR(T)\le1/9$ gives stability above $\tau_Y$ if $A\lambda<1/9$, and an onset bound strictly below the ceiling if $A\lambda\le1/26^2$ (Theorem~\ref{thm:V3b}). The overlap theorem gives the uninflated bound under a sufficient guard (Theorem~\ref{thm:B2}).
+\item \PROVED\ and \CERT\ for the spherical Einstein model at $1/9\le\lambda\le2$, two full-coupling windows, a weak edge interval, and finite grids (Theorem~\ref{thm:V4} and Propositions~\ref{prop:V4grid},~\ref{prop:V4static}). The grid labels certify nodes, not a continuum of parameters.
+\item \NUM\ Three grid-refined homogeneous-branch pairing roots below the ceiling at fixed density in a finite-DOS lattice (Section~\ref{sec:lattice}); the largest onset over all branches is unknown.
+\end{itemize}
+
+\paragraph{What is not claimed.} We do not claim that vertex corrections preserve or violate the ceiling in general, or that the local conserving crossed treatment is new \cite{Miller}. An earlier \NUM\ van Hove model gave $134.27$~K against a rounded $A=1$ scalar reference of $129.85$~K on a $24\times24$ grid with 24 positive Matsubara frequencies. The momentum grid is not converged and the DOS has $A=\infty$, so the reference is not its ceiling (Section~\ref{sec:lattice}). Nothing here is a measurement or a prediction of a material's $T_c$.
+
+\paragraph{Supplementary records.} The full proofs, replay scripts, certificate logs and independent review records accompany this preprint as supplementary material and are grouped as R0 to R5: R0 the scalar ceiling, R1 the local crossed skeleton, R2 the signed momentum-resolved form together with its formalised algebra, R3 the spherical onset estimates, R4 the spherical Einstein gap and grid, and R5 the finite lattice. Each statement below names the record, section and line that prove it.
+
+\paragraph{Plan.} Section~\ref{sec:model} defines the model. Section~\ref{sec:results} states the results with exact hypotheses and displays their coverage in the $(x,\lambda)$ plane. Section~\ref{sec:proofs} gives proof sketches and points to the full proofs in the records R1 to R5. Section~\ref{sec:verification} describes the computer-assisted and Lean verification and its limits, Section~\ref{sec:lattice} the finite-lattice numerics, and Section~\ref{sec:open} what remains open.
+
+%--------------------------------------------------------------------
+\section{Model}\label{sec:model}
+
+\subsection{Notation and the first crossed skeleton}
+
+Use energy units for $\Omega$ and $\tau=\kB T$. Set $\nu=\pi\tau$, $\omega_n=(2n+1)\nu$ and $x=\nu/W$, with $W$ the band half-width. For the crossed bounds take a nonnegative measure $\dd\lambda(\Omega)$ of finite positive mass $\lambda$ on $(0,\Omega_{\max}]$:
+\begin{equation}\label{eq:moments}
+K_j=\int\frac{\Omega^2}{\Omega^2+(2\nu j)^2}\dd\lambda(\Omega),\quad K_0=\lambda,\quad M=\int\Omega^2\dd\lambda,\quad R=\sum_{j\in\mathbb Z}K_j,\quad L=\sum_{j\ge1}K_j,
+\end{equation}
+with $m=\Omega_{\max}/W$ and $\rho=m\sqrt\lambda$. The Einstein measure is a single atom of mass $\lambda$ at $\Omega$, and $M=\lambda\Omega^2$. The finite DOS ratio is $A=\operatorname*{ess\,sup}_\xi N(\xi)/N_0$ with $0<N_0=N(0)<\infty$. Momentum and its DOS pushforward are normalized per spin to one state (per cell for lattice bands); Matsubara sums use counting measure. Write $\eta=T/\Tceil$.
+
+\begin{definition}[First crossed skeleton]\label{def:skeleton}
+The Nambu self-energy is the sum of the rainbow term and the crossed term,
+\begin{equation}\label{eq:skeleton}
+\Sigma_p=\tau\sum_{s}V_{p-s}\,\sigma_3G_s\sigma_3\;+\;\tau^2\sum_{s,t}V_{s}V_{t}\;\sigma_3G_a\sigma_3G_b\sigma_3G_c\sigma_3,
+\end{equation}
+with $a=p-s$, $b=p-s-t$, $c=p-t$. Each four-label carries momentum and Matsubara index, and its sum includes momentum integration. We use bare phonons, fixed chemical potential, no Coulomb term and even-frequency singlet pairing. For a constant spatial transfer, $V_j=K_j/N_0$.
+\end{definition}
+
+In the local version (Theorem~\ref{thm:V1}) each line is integrated separately against the DOS, at fixed half-filled chemical potential with a constant Hartree offset absorbed. The momentum-resolved version imposes $a+c-b=p$. Before normal-state elimination its real anomalous insertions at $a,b,c$ have coefficients $\operatorname{Re}(z_bz_c)$, $\operatorname{Re}(z_a\overline{z_c})$ and $\operatorname{Re}(z_az_b)$, respectively. The alternating square arises in the eliminated form, not from an overall minus sign on the raw middle insertion.
+
+\subsection{The spherical overlap model}
+
+\begin{definition}[Spherical overlap model]\label{def:spherical}
+Let $D\subset\mathbb R^3$ be the unit ball with Lebesgue measure divided by $\mathrm{vol}(D)$, and set all lines to zero outside $D$. The dispersion is $\xi(k)=W(2|k|^3-1)$ on $D$, giving a flat DOS on $[-W,W]$, $N_0=1/(2W)$, $A=1$ and $E_F=W$. The transfer is $V_j=K_j/N_0$. The spectrum is specified separately: Theorem~\ref{thm:V2}(iii)--(iv) and Theorem~\ref{thm:V4} are Einstein, while Theorem~\ref{thm:V3a} and the uniform Theorem~\ref{thm:B2} statement permit general spectra. Theorem~\ref{thm:V3a} also treats a balanced spectator circle.
+\end{definition}
+
+For the three-line phase space at fixed external momentum $k$ with $K=|k|>0$, the joint measure in $\dd\xi_a\dd\xi_b\dd\xi_c$ is, almost everywhere and with no dropped factor, the product of the envelope
+\begin{equation}\label{eq:joint}
+\frac{\dd\xi_a\dd\xi_b\dd\xi_c}{48\,W^3R_aR_bR_c},\qquad R_i=\Big(\tfrac{1+\xi_i/W}{2}\Big)^{1/3},
+\end{equation}
+and the angular factor
+\[
+\Theta=\frac{\operatorname{length}\big([|R_a-K|,R_a+K]\cap[|R_b-R_c|,R_b+R_c]\big)}{2K}\le1 .
+\]
+The measure is thereby equal to that product, not merely bounded by it: $\Theta$ is the exact normalized angular-overlap factor at fixed radii, and the fold estimates below use this exact joint density. At $K=0$ the law takes a different form, and there the envelope~\eqref{eq:joint} is used only as an upper bound. The projection is a model choice, not a lattice approximation or a fit to a material.
+
+\subsection{The regular branch and the onset}
+
+\begin{definition}[Regular branch, onset]\label{def:regular}
+The \emph{regular branch} is the normal solution continued from zero interaction at the same temperature, where justified by a contraction. It is not an arbitrary positive-width solution. For the self-adjoint linearised pairing kernel $B$, strict instability means $\sup\sigma(B)>1$, equality is marginal, and strict stability means $\sup\sigma(B)<1$. We use $\Tlin$ for the supremum of temperatures with $\sup\sigma(B)\ge1$ on the named branch where it exists, and zero for an empty set. Strict stability excludes either convention for counting the marginal point. The relevant form is congruent to $I-B$; negative eigenvalues below $-1$ do not signal a pairing instability.
+\end{definition}
+
+Existence and uniqueness of other branches, real-axis causality and competing orders are not asserted anywhere below. We also stress what a statement of the form $\kB\Tlin\le\Cinf\sqrt{AM}$ is: a property of the linearised, truncated equations on a named branch, not a statement about the many-body transition temperature.
+
+\subsection{Labels}
+
+\PROVED\ denotes a complete analytic proof that has passed an independent review recorded with the supplementary material, or an exact rational argument. \CERT\ denotes a finite arithmetic enclosure: the peak guards are checked by exact rational and interval calculations, while the signed-tube and radial parts use padded binary64 under the assumptions in Section~\ref{sec:verification}. \NUM\ denotes a computation without such an enclosure.
+
+%--------------------------------------------------------------------
+\section{Results}\label{sec:results}
+
+In every theorem the hypothesis list is part of the statement. Constants such as $2^{-80}B^{-8}$ are sufficient, not sharp.
+
+\subsection{A local crossed skeleton}
+
+\begin{theorem}[Local crossed skeleton, flat DOS]\label{thm:V1}\hfill\PROVED\\
+Take a flat DOS on $[-W,W]$ ($A=1$), the local first crossed skeleton and even-frequency singlet pairing. For any centered particle--hole-symmetric normal solution ($\chi_n=0$) with positive reflected widths, the pairing stability estimate gives
+\begin{equation}\label{eq:V1}
+\kB\Tlin\;\le\;\Cinf\sqrt{AM}\,\Big[1+30\big((1+\lambda)\rho+\rho^2\big)\Big].
+\end{equation}
+The bound does not require a regular branch or the existence guard. If $(1+\lambda)\rho\le1/100$, a centered positive-width solution exists pointwise for every $\tau\in[\Cinf\sqrt M,\,2\Cinf\sqrt M]$. At fixed finite $\lambda$, the uninflated ceiling holds if $\epsilon=30[(1+\lambda)\rho+\rho^2]<\delta_\lambda$, where $\delta_\lambda=1-\lambda h((2\pi\Cinf\sqrt\lambda)^{-1})>0$ and $h$ is the scalar Einstein spectral top per unit coupling.
+\end{theorem}
+
+The inflation need not be uniformly small; the sufficient regime is $(1+\lambda)\rho\ll1$. Neither branch selection, uniqueness nor real-axis causality is asserted. The vertex-specific content is the cancellation in Lemma~\ref{lem:local}. Miller et al.\ give an earlier local conserving treatment \cite{Miller}; Paci et al.\ compute the local-vertex onset with a half-filled constant DOS \cite{Paci}.
+
+\begin{proposition}[Two estimates that fail]\label{prop:obstruction}\hfill\PROVED\\
+At fixed positive $\lambda$ and $\tau=\Omega$, the dynamic triangle at zero spatial transfer and frequency pair $(-1,0)$ tends as $m\to0$ to $\lambda$ for bare and $\lambda/(1+\lambda)$ for ME-dressed flat-band lines. In the simple-cubic example only the bare pointwise limit $\lambda$ is established. For $m\le1/20$, the norm of the absolute Cooper-weighted frequency block of one bare flat-band end insertion is at least $\lambda K_1\arctan(1/16)/(2\pi)$, with $K_1=\lambda/(1+4\pi^2)$.
+\end{proposition}
+
+Continuity in spatial transfer rules out an essential-supremum $O(\lambda m)$ triangle estimate for these examples. A termwise absolute bound vanishing with $m$ cannot hold uniformly for the specified bare blocks. Neither result bounds the fully crossed self-consistent operator or the sum of signed terms.
+
+\subsection{Signed crossed form in a momentum-resolved model}
+
+\begin{theorem}[Signed form, forward limit, obstruction, overlap window]\label{thm:V2}\hfill\PROVED, with scope as stated\\
+Let the first crossed skeleton be momentum resolved with Einstein phonons and $\Cinf$ as above.
+\begin{enumerate}
+\item[(i)] \emph{Ultranarrow forward limit.} On $[-\pi,\pi)$ take $\xi=W(2|k|/\pi-1)$ ($A=1$, $E_F=W$, $v_F=2W/\pi$), $M=\lambda\Omega^2$, fixed finite positive Fermi-surface coupling $\lambda$, and $V_j(q)=4\lambda W\,\mathbf1_{|q|\le q_c}\Omega^2/[\Omega^2+(2\nu j)^2]$ with $0<q_c<\pi$. If $v_Fq_c=o(\Omega)$, the regular branch is stable for every $\tau$ above any fixed positive fraction of $\sqrt\lambda\,\Omega$ as $m\to0$.
+\item[(ii)] \emph{A negative crossed contribution need not vanish.} Even at the exact ceiling, take the same forward model at fixed $\lambda=2^{32}$, $\tau=\Cinf\sqrt\lambda\,\Omega$, and $v_Fq_c=(\delta/\lambda)\nu$. Thus $\lambda\Omega/E_F\to0$ as $m\to0$. Write $B_0=\int V_0=2\lambda v_Fq_c$, $r_0=B_0/(\pi^2\tau)$ and $k_1=K_1/\lambda$. For the localized trial use $\delta=2^{-16}$: the margin is $55/262144>1/8192$ and $F_X/Q_0\le-r_0^2/16384$. For the momentum-independent trial gap fix sufficiently small $\delta>0$ before taking small $m$: $F_X/Q_0\le-r_0^2k_1/128$, with $k_1<1/1000$. Both families obey $F\ge(9/32)Q_0$ for all admissible trials, so neither is an onset counterexample.
+\item[(iii)] \emph{Overlap window.} In the spherical overlap model of Definition~\ref{def:spherical} with Einstein coupling $\lambda$, there is $t_0(\lambda)<\Cinf\sqrt\lambda$ and $x_\lambda>0$ such that the regular branch has no even-frequency singlet onset for $t_0(\lambda)\,\Omega\le\tau\le x_\lambda W/\pi$ (the window is non-empty for $\Omega/W$ small enough), and $|F_X|/Q_0=O_\lambda\big((\tau/W)[1+\log(W/\tau)]^3\big)$ as $\tau/W\to0$. The result is qualitative in $\lambda$ and not uniform as $\lambda\to\infty$.
+\item[(iv)] \emph{Weak coupling in the projected spherical Einstein model of (iii).} For $0<\lambda\le2^{-20}$ the regular branch is stable at every $\tau\ge\sqrt\lambda\,\Omega/8$, without restriction on $m$. Hence $\tau_{\rm lin}\le\sqrt\lambda\,\Omega/8<\Cinf\sqrt M$.
+\end{enumerate}
+The universal onset statement is \OPEN.
+\end{theorem}
+
+Part~(ii) is the reason the proofs below cannot treat the crossed term as a small perturbation of the ME gap. The Lean-checked finite algebra behind parts of this theorem is listed in Section~\ref{sec:verification}.
+
+\subsection{Spherical band and the Young-ball regime}
+
+\begin{theorem}[Signed spherical window]\label{thm:V3a}\hfill\PROVED\\
+Take the spherical band with a general spectrum as in~\eqref{eq:moments}, or extend it to $D\times\mathbb T$ with normalized Haar measure on the circle, $\xi(k,\theta)=\xi(k)$ and $V_j(q,q_\theta)=K_jv(q_\theta)/N_0$. Here $v$ is even, nonnegative and of mean one, and $\|v-1\|_1\le1/(16B)$. Set $B\ge\max(1,\lambda+3\sqrt\lambda)$ and $x_*=2^{-80}B^{-8}$. For $\tau\ge\tau_c=\Cinf\sqrt M$ and $0<x\le x_*$ the regular branch exists and the pairing form satisfies
+\begin{equation}\label{eq:V3a}
+F[y]\;\ge\;\big[1-\sS(1)-C_0x\big]\,Q_0[\bar y]+\tfrac38\,Q_0[y_\perp],\qquad C_0=13000\,B^4,
+\end{equation}
+where $\bar y_n$ is the mean over all momentum variables in the probability measure proportional to $|Q_n|$, and $y_\perp=y-\bar y$. Within $0<x\le x_*$, stability holds for $T\ge\Tceil(1+52000\,B^4\rho)$. The constants are sufficient, not sharp, and not uniform as $B\to\infty$.
+\end{theorem}
+
+\begin{theorem}[Young-ball criterion and weak-coupling onset bound]\label{thm:V3b}\hfill\PROVED\\
+Use a constant spatial transfer on an inversion-invariant projected continuum domain or additive momentum group with Haar measure, with $\xi(-k)=\xi(k)$ almost everywhere and an even normalized marginal DOS bounded by $AN_0$. At any $\tau>0$ such that $r=AR(\tau)\le1/9$, contraction gives the unique regular solution within $\|\Sigma\|_\infty\le\nu/3$, and pairing has absolute Schur bound strictly below one. The criterion holds at every $\tau\ge\tau_Y$ if $A\lambda<1/9$, yielding
+\begin{equation}\label{eq:V3b}
+\kB\Tlin\le\tau_Y=\frac{9\,A\,M_1}{2\,(1-9A\lambda)},\qquad M_1=\int\Omega\dd\lambda(\Omega),
+\end{equation}
+and for $A\lambda\le1/26^2$ one has $\tau_Y<\tfrac{9}{50}\sqrt{AM}<\Cinf\sqrt{AM}$, with no adiabatic assumption. This does not exclude pairing at temperatures below $\tau_Y$.
+\end{theorem}
+
+\begin{theorem}[Overlap of the two regimes]\label{thm:B2}\hfill\PROVED\\
+For fixed Einstein $0<\lambda<1/9$ and sufficiently small $\Omega/W$, the spherical window of Theorem~\ref{thm:V2}(iii) joins the Young-ball regime to give stability for every $\tau\ge t_0(\lambda)\Omega$, with $t_0(\lambda)<\Cinf\sqrt\lambda$. For general spectra on the sphere and its balanced extension the low-$x$ estimate is instead Theorem~\ref{thm:V3a}. For $0<\lambda\le\Lambda<1/9$, a sufficient guard for the uniform uninflated ceiling is
+\begin{equation}\label{eq:B2}
+\rho<\frac{x_h}{\pi}\sqrt{12\Big(\frac19-\Lambda\Big)},
+\end{equation}
+with $\delta_*=\inf_{\lambda\le\Lambda}\delta_\lambda>0$, $B=1+\Lambda+3\sqrt\Lambda$ and $x_h=\min(x_*,\delta_*/(2C_0))$. The two contraction regimes overlap on $\max(x_c,x_Y)<x<x_h$, where $x_c=\pi\tau_c/W$ and $x_Y=\pi\rho/\sqrt{12(1/9-\Lambda)}$. On that branch $\tau_{\rm lin}\le\tau_c$. The result is not uniform in unbounded coupling and contains no claim of a crossing or of a universal ceiling.
+\end{theorem}
+
+\noindent\OPEN: marginal DOS control alone gives neither the joint-density regularity nor the balanced variance estimate. The Young-ball high-temperature conclusion for $A\lambda<1/9$ does not address larger couplings, and the small-$x$ estimates deteriorate with growing $\lambda$.
+
+\subsection{Spherical Einstein model at \texorpdfstring{$1/9\le\lambda\le2$}{couplings from 1/9 to 2}}
+
+All statements here concern the projected spherical Einstein band with $A=1$, fixed chemical potential and the rainbow plus first crossed skeleton. Stability results concern the regular continuation from zero coupling, with the full Matsubara line and all allowed momentum sectors, not just radial trial gaps. The record R4 has been independently reviewed, and that review covers both the continuum and grid claims and qualifies the arithmetic trust base in Section~\ref{sec:verification}.
+
+\begin{theorem}[Continuum windows and weak edge]\label{thm:V4}
+\noindent\PROVED\ (analytic estimates, with separate checks of the constants).
+\begin{enumerate}
+\item[(i)] \emph{Static-transfer limit.} As $\Omega/W\to0$ at fixed $x$ and $\lambda$ (with $W=1$ and $g=2\lambda x/\pi$), the rainbow and first crossed normal terms become, on each Matsubara block, $\Sigma_n=g\!\int_D z_n\,\dd\mu+g^2(z_n*z_n*z_n)|_D$. Here $*$ is the normalized spatial convolution of zero-extended lines. Writing $z_n=r_n-iQ_n$, the unsymmetrized vertex $g+g^2(3\,r_n*r_n-Q_n*Q_n)$ enters the block kernel between the weights $|z_n(p)|$ and $|z_n(k)|$. The negative $Q_n*Q_n$ term is kept. The Ward identity gives a conditional positivity criterion: the unsymmetrized vertex is pointwise nonnegative if $g\|z_n\|_2^2\le1$ on every block, which is an assumption about the branch and not a consequence of the theorem. The limit is $\eta\to\infty$, not the slice $\eta=1$.
+\item[(ii)] \emph{Small $x$.} For $0<x\le2^{-40}$, $1/9\le\lambda\le2$ and $\eta\ge1$, the regular branch exists with pairing gap $>0.00807313$. This uses the absolute spatial overlap estimate, not the signed bound in Theorem~\ref{thm:V3a}.
+\item[(iii)] \emph{Large $x$.} For $x\ge19/2$ on the same coupling and temperature-ratio range, a contraction from zero coupling gives pairing spectral top $<0.70468692$.
+\item[(iv)] \emph{Weak edge.} If $R\le3/25$, the regular branch has pairing spectral top $\le0.78467306$. In the static model this covers all $x>0$ for $1/9\le\lambda\le3/25$. In the finite Einstein model with $1/9\le\lambda\le7/60$, it gives stability for all $x$ at $\eta\ge30$; if $\Omega/W\le2^{-43}$, joining to (ii) gives stability for all $\eta\ge1$.
+\end{enumerate}
+The two windows are disjoint. Map convergence in~(i) is not a global branch theorem.
+\end{theorem}
+
+\begin{proposition}[Finite Einstein grid]\label{prop:V4grid}
+\noindent\CERT\ (grid nodes only). On the grid $x\in\{\tfrac1{16},\tfrac18,\tfrac14,\tfrac12,1,2,4,8,16\}$, $\lambda\in\{\tfrac19,\tfrac14,\tfrac12,1,2\}$, the pairing top is below 1 at $34/45$ points at $\eta=1$ and $40/45$ at $\eta=\tfrac32$.
+
+Peak boxes contribute $15$ and $16$ points, respectively. Their majorant extends to larger $x,\eta$ and smaller $\lambda$; no monotonicity of the eigenvalue is used. Pointwise signed finite-transfer tubes contribute another $7$ and $8$ points with top $\le0.50417617$. The momentum-dependent calculation adds $28$ pointwise nodes ($12$ and $16$), with common pairing upper bound $0.72827964$ and contraction bound $0.70929592$ for the preconditioned normal map.
+\end{proposition}
+
+\begin{proposition}[Static and near-static grid]\label{prop:V4static}
+\noindent\CERT\ (grid nodes only). A common upper bound on the pairing spectral top at the $45$ static $(\lambda,x)$ nodes is $0.70431955$, with the largest enclosure at $(\lambda,x)=(2,1/16)$. The estimate extends to the finite Einstein model at the same nodes for every $\eta\ge2^{18}$ by bounding the omitted transfers. It gives neither a uniform bound between nodes nor continuation down to $\eta=1$.
+\end{proposition}
+
+\begin{remark}[Numerical diagnostic]\label{rem:V4num}
+\NUM. Among the temperatures strictly above $\Tceil$ sampled in this run, the largest pairing top was $0.89644635$, at $(\lambda,x,\eta)=(2,1/64,1.01)$. The calculation used 256 radial cells and 12 positive frequencies in the $\ell=0$ sector. It is a truncated calculation, not a bound. The sufficient tube test did not close at $(2,1/16,1)$ even with 1024 spatial cells; this does not detect an instability or show that the branch ends.
+\end{remark}
+
+\subsection{Coverage map}
+
+Figure~\ref{fig:coverage} shows the two finite Einstein slices. Since $\Omega/W=x/(\pi\Cinf\eta\sqrt{\lambda})$, varying $x$ at fixed $\eta$ and $\lambda$ varies $\Omega/W$; the panels are not heating scans at fixed $\Omega/W$. Only the full-coupling windows are indicated as regions. The figure omits the peak-box extensions, weak-edge result, static grid and off-slice numerical diagnostic. Unclosed regions remain, and a failed sufficient guard is inconclusive.
+
+\begin{figure}[t]
+\centering
+\newcommand{\Vfourwindows}{%
+  \addplot[fill=green!22,draw=green!45!black,forget plot]
+    coordinates {(9.5,0.11111111)(22,0.11111111)(22,2)(9.5,2)} \closedcycle;
+  \draw[green!45!black,thick,-{Stealth}] (axis cs:0.046,0.11111111) -- (axis cs:0.035,0.11111111);
+  \draw[green!45!black,thick,-{Stealth}] (axis cs:0.046,2) -- (axis cs:0.035,2);
+  \draw[green!45!black,thick] (axis cs:0.046,0.11111111) -- (axis cs:0.046,2);
+}
+\begin{tikzpicture}
+\begin{groupplot}[
+  group style={group size=2 by 1,horizontal sep=0.45cm,yticklabels at=edge left},
+  xmode=log, ymode=log, width=0.47\linewidth, height=5.5cm,
+  xmin=0.032, xmax=22, ymin=0.085, ymax=2.55,
+  xtick={0.0625,0.125,0.25,0.5,1,2,4,8,16},
+  xticklabels={$\frac1{16}$,$\frac18$,$\frac14$,$\frac12$,$1$,$2$,$4$,$8$,$16$},
+  ytick={0.11111111,0.25,0.5,1,2},
+  yticklabels={$\frac19$,$\frac14$,$\frac12$,$1$,$2$},
+  ticklabel style={font=\scriptsize}, minor tick num=0, xlabel={$x=\pi\kB T/W$},
+  closed node/.style={only marks,mark=*,mark size=1.6pt,blue!70!black},
+  open node/.style={only marks,mark=o,mark size=1.6pt,black!75}]
+\nextgroupplot[title={$\eta=1$ ($34/45$ closed)},ylabel={$\lambda$}]
+\Vfourwindows
+\addplot[closed node] coordinates {
+ (0.0625,0.11111111)(0.125,0.11111111)(0.25,0.11111111)(0.5,0.11111111)(1,0.11111111)(2,0.11111111)(4,0.11111111)(8,0.11111111)(16,0.11111111)
+ (0.125,0.25)(0.25,0.25)(0.5,0.25)(1,0.25)(2,0.25)(4,0.25)(8,0.25)(16,0.25)
+ (0.25,0.5)(0.5,0.5)(1,0.5)(2,0.5)(4,0.5)(8,0.5)(16,0.5)
+ (0.5,1)(1,1)(2,1)(4,1)(8,1)(16,1)
+ (2,2)(4,2)(8,2)(16,2)};
+\addplot[open node] coordinates {
+ (0.0625,0.25) (0.0625,0.5)(0.125,0.5) (0.0625,1)(0.125,1)(0.25,1)
+ (0.0625,2)(0.125,2)(0.25,2)(0.5,2)(1,2)};
+\nextgroupplot[title={$\eta=\tfrac32$ ($40/45$ closed)}]
+\Vfourwindows
+\addplot[closed node] coordinates {
+ (0.0625,0.11111111)(0.125,0.11111111)(0.25,0.11111111)(0.5,0.11111111)(1,0.11111111)(2,0.11111111)(4,0.11111111)(8,0.11111111)(16,0.11111111)
+ (0.0625,0.25)(0.125,0.25)(0.25,0.25)(0.5,0.25)(1,0.25)(2,0.25)(4,0.25)(8,0.25)(16,0.25)
+ (0.0625,0.5)(0.125,0.5)(0.25,0.5)(0.5,0.5)(1,0.5)(2,0.5)(4,0.5)(8,0.5)(16,0.5)
+ (0.125,1)(0.25,1)(0.5,1)(1,1)(2,1)(4,1)(8,1)(16,1)
+ (1,2)(2,2)(4,2)(8,2)(16,2)};
+\addplot[open node] coordinates {(0.0625,1)(0.0625,2)(0.125,2)(0.25,2)(0.5,2)};
+\end{groupplot}
+\end{tikzpicture}
+\caption{Filled circles are \CERT\ stability nodes and open circles are unclosed nodes, not instabilities. Only the two full-coupling \PROVED\ windows are marked: shading for $x\ge19/2$ and arrows for the off-scale window $x\le2^{-40}$. The peak-box extensions to larger $x,\eta$ and smaller $\lambda$ are omitted. Unclosed regions remain.}\label{fig:coverage}
+\end{figure}
+
+%--------------------------------------------------------------------
+\section{Proof sketches}\label{sec:proofs}
+
+Full proofs are in the \texttt{RIGOR.md} files named in each paragraph, which are supplementary material to this preprint; the mapping from numbered statements to file and line is in the accompanying \texttt{CLAIMS.md}. What follows records the structure only.
+
+\subsection{The signed identity}
+
+\begin{lemma}[Signed identity, momentum-resolved]\label{lem:signed}
+Assume $V_s\ge0$ and separately even in momentum and frequency. On a sign-preserving branch put $z_p=(i\omega_p-\xi_p-\Sigma_p)^{-1}=r_p-iQ_p$, $u_p=\omega_p-\operatorname{Im}\Sigma_p$ and $Q_p=u_p|z_p|^2$, so $\omega_p Q_p>0$. Take a real even-frequency singlet trial $\varphi$ in the inversion-even momentum sector and set $y=\varphi/u$. Take minus the imaginary part of the normal equation, multiply by $y_p$, subtract the anomalous equation and test with $Q_p y_p$. Reanchoring gives $F=Q_0+F_{\Rg}+F_X$:
+\begin{align}
+Q_0&=\int\omega_p Q_p|y_p|^2,\qquad F_{\Rg}=\frac\tau2\int V_s Q_pQ_a|y_p-y_a|^2,\\
+F_X&=\tau^2\!\int V_s V_t\Big[-\tfrac14 Q_pQ_aQ_bQ_c|y_p-y_a+y_b-y_c|^2\nonumber\\
+&\hspace{8em}+\tfrac12\sum_{v=a,b,c}Q_pQ_v r_{v'}r_{v''}|y_p-y_v|^2\Big],
+\end{align}
+where $v$ ranges over three corner occurrences and $v',v''$ denote the other two. Polarization extends the identity to complex trials in the same parity sector.
+\end{lemma}
+
+\noindent\emph{Source.} R2 \texttt{RIGOR.md}, \S1, lines 3--29. The first term of $F_X$ is the alternating four-corner square, the second the three real-line-weighted pair squares. Keeping only the four-corner square misses a genuine forward contribution. The identity is exact; the review audited the signs, the coefficients and the form domain (verdict \texttt{ACCEPT-WITH-FIXES} for R2 as a whole).
+
+\begin{lemma}[Local reduction, four-corner square]\label{lem:local}
+Under the centered flat-band normal-branch hypotheses of Theorem~\ref{thm:V1}, write $a=n-j$, $b=n-j-l$, $c=n-l$, $w_n=2n+1$, $s_n=|u_n|/(\pi\tau)$, $\sigma_n=\operatorname{sgn}(w_n)=\operatorname{sgn}(u_n)$ and $b_n=\tfrac2\pi\arctan(W/(\pi\tau s_n))$. Set $q_n=\sigma_n b_n$, $y_n=\varphi_n/u_n$, $\kappa=\pi^2\tau N_0=\pi^2\tau/(2W)$. The equations are
+\begin{align}
+\frac{u_n}{\pi\tau}&=w_n+\sum_jK_jq_a-\kappa\sum_{j,l}K_jK_l\,q_aq_bq_c,\nonumber\\
+\frac{\varphi_n}{\pi\tau}&=\sum_jK_jq_ay_a-\kappa\sum_{j,l}K_jK_l\,q_aq_bq_c\,(y_a-y_b+y_c),\label{eq:localeq}
+\end{align}
+and the four-corner average is
+\begin{equation}\label{eq:QX}
+Q_X=-\frac\kappa4\sum_{n,j,l}K_jK_l\,q_nq_aq_bq_c\,|y_n-y_a+y_b-y_c|^2,
+\end{equation}
+with all terms having $j=0$ or $l=0$ vanishing. Counting coincident corners with multiplicity gives $|Q_X|\le16\kappa L^2\sum_n b_n|y_n|^2\le4X\|f\|_2^2$, where $X=4\kappa L^2$ and $f_n=\sqrt{|w_n|b_n}\,y_n$.
+\end{lemma}
+
+\noindent\emph{Source.} R1 \texttt{RIGOR.md}, \S1 (equations 3--5 of that record). The cancellation in~\eqref{eq:QX} (terms with $j=0$ or $l=0$ vanish) is the vertex-specific content of the proof. The hypotheses are exactly those of Theorem~\ref{thm:V1}, so $\chi_n=0$ and the reflected widths are positive. A nonzero real shift $\chi_n$ is excluded, and the displayed arctangent weight $b_n$ and the local reduction are not asserted for it.
+
+Before folding, note the convention used throughout. The bound in~\eqref{eq:QX} is a ledger entry on the full signed line, where $\|f\|_2^2$ is summed over all integers $n$. On the odd subspace, reflection halves both the full-line crossed form and the squared norm, so the same normalized bound holds on the positive half-line. The folded ledger below therefore inherits the value $4X$, not $2X$.
+
+In the folded $f$ coordinates ($n,m\ge0$), set $D_{nm}=K_{|n-m|}$, $H_{nm}=K_{n+m+1}$ and $P_{nm}=D_{nm}-H_{nm}$. The canceled ME form is $I-S(b)$ with entries
+\begin{align*}
+ S(b)_{nm}&=\frac{\sqrt{b_nb_m}(D_{nm}+H_{nm})}{\sqrt{w_nw_m}},\quad n\ne m,\\
+ S(b)_{nn}&=\frac{2H_{nn}b_n-\sum_{m\ne n}P_{nm}b_m}{w_n}.
+\end{align*}
+
+\begin{lemma}[Scalar comparison (imported)]\label{lem:import}
+$\sup\sigma S(1)\le\Cinf^2M/\tau^2$.
+\end{lemma}
+
+\noindent The scalar input \cite{RensScalar} bounds the unit-weight comparison $S(1)$, not the raw Cooper operator. In the canceled matrix $K_0$ drops out and the soft transfer envelope is $M/(2\pi\tau j)^2$ for $j\ge1$.
+
+\subsection{Theorem~\ref{thm:V1}}
+
+On the centered normal widths the comparison is $\sup\sigma S(b)\le\sup\sigma S(1)+D_*$, where
+\[
+D_*=\frac{2\tau}{W}\big[2L+K_1+(\lambda+2L+X)K_1\big].
+\]
+For $\tau\ge\tau_0=\Cinf\sqrt M$, put $r=\tau_0/\tau$. Then $L\le M/(24\tau^2)\le\tfrac43r^2$ and $X\le\tfrac{20}{3}\rho r^3$, giving $D_*+4X\le r\epsilon$. The form is bounded below by $(1-r^2-r\epsilon)I$, strictly positive at $\tau\ge\tau_0(1+\epsilon)$. For fixed $\lambda$ the scalar gap $\delta_\lambda$ instead pays this loss when $\epsilon<\delta_\lambda$.
+
+Separately, on $[\tau_0,2\tau_0]$ with $(1+\lambda)\rho\le1/100$, Brouwer's theorem on finite positive-frequency boxes with bounds $w_n-7/8$ and $w_n+\lambda+2L+X$ for $n\ge0$, reflected to negative frequencies, gives pointwise existence by diagonal extraction and dominated convergence. The full proof is R1 \texttt{RIGOR.md}, \S1.
+
+\subsection{Proposition~\ref{prop:obstruction} and Theorem~\ref{thm:V2}}
+
+The obstruction of Proposition~\ref{prop:obstruction} is by direct integration of the three-line triangle at $\tau=\Omega$ in the limit $m\to0$ (R1 \texttt{RIGOR.md}, \S2). For Theorem~\ref{thm:V2}(i) one controls $r=B/(\pi^2\tau)$ with $B=\sum_j\!\int V_j$: positivity, monotone integral comparison and the Einstein kernel give $B/B_0\le1+\Omega/(2\tau)$ and $B/B_0-1\le(\Omega/\nu)^2$, where $B_0=\int V_0=2\lambda v_Fq_c$. In the ball $\|\Sigma\|_\infty\le\nu/2$ the normal map has image bound $2r+8r^2$ and Lipschitz bound $4r+48r^2$; at $r=1/16$ these equal $5/32$ and $7/16$, so the map is a contraction there and the ball contains a unique fixed point, which continues from zero interaction and preserves inversion and frequency-conjugation symmetry. When $v_Fq_c=o(\Omega)$ the bound on $r$ tends to zero uniformly for $\tau\ge c\sqrt\lambda\,\Omega$, any fixed $c>0$. The strength integral in the forward window is $\lambda s$ with $s=v_Fq_c/\Omega$, whereas the one-loop frequency derivative at a Fermi point is $\lambda s/(1+s)$. This differs from the perfect-forward model of \cite{Rademaker}, which holds fixed the integrated $g_0^2/\Omega^2$, and which is a different limit.
+
+The two witnesses in (ii) evaluate Lemma~\ref{lem:signed} on explicit trials. In (iii), reanchoring that lemma and applying \eqref{eq:joint} gives $|F_X|\le10L_{\rm ov}Q_0$, where
+\[
+L_{\rm ov}=\frac{2R^2 x J(x)^3}{3\pi^2},\qquad
+J(x)=\int_{-1}^1 \frac{[(1+v)/2]^{-1/3}}{\sqrt{x^2+v^2}}\dd v.
+\]
+At bounded $R$, $L_{\rm ov}\to0$ as $x\to0$; it is not the rainbow tail $L$. The strict scalar gap at finite coupling absorbs the overlap and dressed-weight errors. Part (iv) uses Schur with weight $|z|$ in the ball $\|\Sigma\|_\infty\le\nu/2$. See R2 \texttt{RIGOR.md}, \S\S2--4.
+
+\subsection{Theorems~\ref{thm:V3a}, \ref{thm:V3b}, \ref{thm:B2}}
+
+\emph{Theorem~\ref{thm:V3a}.} For centered reference lines and external momentum in the core, the fold costs for $h=0,1,2,3$ real line factors in the core are $1,7,56,672$, and the signed integral of each three-component product is bounded by $63/W^3$ in absolute value. That $63/W^3$ bound is asserted only for such reference lines with fixed nonzero frequency widths at external core momenta. It is not asserted for arbitrary dressed lines or for exterior momenta: the replacement of reference by dressed lines is charged separately in the width control, and exterior momenta are handled by absolute-value estimates. In the normalized $|Q_n|$-weighted mean sector the crossed coefficient can be integrated before taking absolute values, costing $O(x)$ against the ME gap. The exterior fraction \emph{divided by} $|2n+1|$ is at most $14(B+2)x$. The remainder retains $3/8$ coercivity after absorbing the mixed term and charging the direct crossed loss, with $\delta=10L_{\rm ov}\le1/8$. On the spectator circle the balanced convolution estimate controls the variance. See R3 \texttt{RIGOR.md}, \S A.
+
+\emph{Theorem~\ref{thm:V3b}.} In the Young ball with $h=1/3$, the rainbow image bound in units of $\nu$ is $r/(1-h)$. Triple H\"older bounds the crossed image by $c r^2/(1-h)^3$, with
+\[
+J_{3/2}=\int_{\mathbb R}(1+t^2)^{-3/4}\dd t<6,\qquad c=(J_{3/2}/\pi)^2<4.
+\]
+At $r=1/9$ the strict improvement over $c=4$ puts the image below $1/3$ and the Lipschitz and Schur bounds below 1. For $\tau_Y$, use $R\le\lambda+M_1/(2\tau)$ and $M_1\le\sqrt{\lambda M}$. See R3 \texttt{RIGOR.md}, \S B--B1.
+
+\emph{Theorem~\ref{thm:B2}.} The spherical Einstein splice joins Theorem~\ref{thm:V2}(iii) to the Young criterion; the general-spectrum splice, including the balanced extension, joins Theorem~\ref{thm:V3a} to that criterion. In the overlap the low-$x$ root stays inside the Young ball throughout the coupling homotopy. Uniqueness in that ball identifies the two solutions. Equation~\eqref{eq:B2} is sufficient for the latter overlap, not necessary. See R3 \texttt{RIGOR.md}, \S B2.
+
+\subsection{Theorem~\ref{thm:V4}}
+
+\begin{lemma}[Static limit and Ward identity]\label{lem:static}
+In the limit $\Omega/W\to0$ at fixed $x$ and $\lambda$, the rainbow-plus-first-crossed normal map limits to the decoupled static equations in Theorem~\ref{thm:V4}(i). The Ward identity gives pointwise nonnegativity of the unsymmetrized static vertex whenever $g\|z_n\|_2^2\le1$ on every block; positivity of the static pairing form is then conditional on the further bounds stated in R4 \texttt{RIGOR.md}, \S5.
+\end{lemma}
+
+\noindent\emph{Source.} R4 \texttt{RIGOR.md}, \S1 (lines 3--22); \S5 (lines 65 onward) holds the static positivity criterion and a separate numerical diagnostic.
+
+The review checked the large-$x$ contraction and the small-$x$ argument using the absolute overlap estimate (R4 \texttt{RIGOR.md}, \S\S2--3). The weak-edge argument (\S8) sharpens the H\"older constant to $c<3$ with $a=7/10$ in place of $1-h$. Its normal derivative and pairing Schur bound is $R/a^2+9R^2/a^4$ throughout the zero-coupling homotopy.
+
+The grid uses peak majorants, finite-transfer signed tubes and momentum-dependent radial centers. The last method encloses a cellwise approximate inverse and gives a contraction for the preconditioned normal map on each continuation slab, then bounds the full pairing form. The radial center does not restrict the trial gap to radial functions. See R4 \texttt{RIGOR.md}, \S\S4--7, 9.
+
+%--------------------------------------------------------------------
+\section{Computer-assisted and Lean verification}\label{sec:verification}
+
+Table~\ref{tab:verify} lists artifacts that check finite algebra, arithmetic enclosures, formula mutants, or receipt bookkeeping, as indicated. These checks have different scopes: an audit of recorded bounds does not recompute them, and the analytic integrals and limits are proved by hand in the corresponding \texttt{RIGOR.md}.
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.9cm}>{\raggedright\arraybackslash}p{5.1cm}>{\raggedright\arraybackslash}p{5.0cm}@{}}
+\toprule
+Record & Artifact (exit 0 unless noted) & Scope\\\midrule
+R1 local skeleton & \texttt{Core.lean}, \texttt{check\_exact.py}; Lean 4.35.0, \texttt{lean.exe -j1}; reviewer reran both & finite algebra only; axioms propext, Classical.choice, Quot.sound\\
+R2 signed form & \texttt{replay\_form.py}, \texttt{replay\_bounds.py} (11 mutants rejected); reviewer \texttt{independent\_checks.py} & Nambu interpolation, ME folding, localized margin $55/262144>1/8192$\\
+R2 formalised algebra & \texttt{build.ps1}, \texttt{lake build}; 13 theorems & forward\_guards, corner\_window, forward\_geometry, witness\_guards, angular\_guards, angular\_absorption, angular\_partial\_fraction, overlap\_jacobian, overlap\_guards, nambu\_interpolation, nambu\_normal, odd\_interpolation, four\_anchor; no \texttt{sorry}, no \texttt{native\_decide}\\
+R3 onset & \texttt{replay.py} (625 joint-density fixtures, six mutants); reviewer \texttt{independent\_checks.py} (second machine) & joint-density replay; no Lean\\
+R4 gap and grid
+ & \texttt{replay.py}; \texttt{static.py} (two spatial enclosures); \texttt{finite.py} and \texttt{finite\_check.py}; \texttt{radial\_check.py}; \texttt{grid\_receipts.py} & Constants, grid enclosures and mutant fixtures; the last script audits the 28-node momentum-dependent receipts only. Unresolved selections return nonzero. No Lean.\\\bottomrule
+\end{tabular}
+\caption{Verification artifacts. Exit codes are those reported in the source records or, where noted, by the reviewers. No verification artifact was rerun by the manuscript author, other than the single spot check noted in the trust-base paragraph below.}\label{tab:verify}
+\end{table}
+
+\paragraph{Lean.} The file \texttt{Core.lean} of R1 and the formalised-algebra project of R2 cover finite algebra only. For the latter, the 13 theorems above were built with exit 0 using the axioms propext, Classical.choice and Quot.sound. \emph{Not} formalised: the analytic integrals, the finite-grid replay totals, the external spectral enclosure, branch existence, limits, and onset exclusion. R3 and R4 carry no Lean. The scalar ceiling itself has a machine-checked finite and algebraic core in case~(e) of R0.
+
+\paragraph{Trust base.} The peak guards involve no floating-point arithmetic: they are checked by exact rational and interval calculations. The signed-tube and radial enclosures, including the static grid, use padded IEEE~754 binary64 arithmetic with round-to-nearest. All floating-point work is IEEE~754 binary64 with round-to-nearest, and every elementary operation is assumed accurately rounded, that is, within the standard binary64 bound of at most a few units in the last place. The signed-tube enclosures additionally assume a conventional binary64 product/sum rounding bound for the BLAS kernels they call; the radial enclosures assume \texttt{abs}, \texttt{sqrt}, and \texttt{hypot} are evaluated to standard binary64 accuracy. They are not interval-library or proof-assistant certificates. The static replays use different spatial enclosures but share padding and tail logic. For the 28 added finite Einstein nodes, the reviewer checked a second spatial/frequency implementation with shared slab, pairing-growth and moment bounds, not a second independent proof. Fixtures reject a correlation sign error, an omitted positive transfer wing, and a corrupted inverse entry. The 28-node momentum-dependent receipt audit pins the exact node set and checks both reported upper bounds against historical closure records. It does not rerun the operator enclosures. Separately, \texttt{radial\_averaged.py} was rerun at $(\lambda,\eta,x)=(1,1,1/2)$: the node closed with exit 0, pairing top $\le0.6481$ and preconditioned contraction bound $q_G\le0.6481$. The published maxima are still those of the historical receipts. See R4 \texttt{RIGOR.md}, \S\S4, 6, 7, 9 and the review of R4.
+
+%--------------------------------------------------------------------
+\section{Finite lattice numerics}\label{sec:lattice}
+
+\emph{The lattice results are \NUM.} They concern pairing in a truncated model, with a separate charge diagnostic, and do not settle the lattice ceiling over all branches.
+There is no full proof file and no independent review for this record (R5).
+
+\paragraph{Model.} The one-dimensional periodic band is $E(k)=(2|k|/\pi-1)\,\mathrm{eV}$ on $[-\pi,\pi]$, with hopping amplitudes decaying as $1/r^2$. The band extends from $-1$ to $1$~eV, giving $\varepsilon_F=1$~eV at half filling and flat DOS $N_0=0.5$ states per eV per spin per site ($A=1$). The Einstein interaction at bosonic energy $\omega_b$ is $V(i\omega_b)=(\lambda/N_0)\Omega^2/(\Omega^2+\omega_b^2)$, with $M=\lambda\Omega^2$. The sampled nonadiabatic parameter $\lambda\Omega/\varepsilon_F$ spans $0.025$ to $0.4$. The anomalous map retains all three insertion positions (six scalar terms), adapting \cite{Schrodi}.
+
+\paragraph{ME control.} At half filling, the ME onset from the finite-DOS code agrees with an independent continuum implementation (exact flat-band propagator, positive frequencies only) to within $0.00065$~K over nine roots at the same Matsubara cutoff. This checks the ME reduction, not the crossed skeleton. A discretised-equation audit of the normal $u$, normal $\chi$, and gap maps gives discrepancies $3.47\times10^{-18}$, $1.39\times10^{-17}$ and $8.67\times10^{-19}$ (independent discretised-equation audit, exit 0); this is a check of the discrete equations, not an independent continuum validation.
+
+\paragraph{Half filling: branch ambiguity.} On the sampled grid of 66 momenta and 8 positive frequencies, the unconstrained solutions show particle--hole defects of $0.029$~eV at $(\lambda,\Omega/\varepsilon_F)=(1,0.1)$ and $0.204$~eV at $(2,0.2)$. On that grid the projected symmetric solves failed before the pairing root; the unprojected normal relative residuals were $0.013917$ at $(1,0.2)$, $0.00152538$ at $(0.5,0.2)$ and $0.00207196$ at $(2,0.05)$. The exploratory roots recorded in R5 do not establish a converged particle--hole-symmetric onset. Charge stability was not assessed on these branches.
+
+\paragraph{Fixed density $n=0.6$.} The corrected number equation uses the exact free reference at the shifted chemical potential. Here $\mu_0=-0.4$~eV and $\varepsilon_F=0.6$~eV. W denotes temperature continuation, C a cold start and L coupling continuation from the $\lambda=2$ anchor. C and L generally check the W root rather than solve it anew. At $(2,0.05)$, C independently resolves the root on the finest grid, and an upward $\lambda=1\to2$ continuation is compared at that same point. These comparisons do not establish uniqueness or thermodynamic branch selection.
+
+\begin{proposition}[Three grid-refined homogeneous-branch pairing roots, \NUM]\label{prop:lattice}
+At $n=0.6$ the W pairing roots $T_W$ at $(\lambda,\Omega/\varepsilon_F)=(1,0.10),(1,0.20),(2,0.05)$ are $79.929\pm0.096$~K, $153.238\pm0.108$~K and $78.784\pm0.033$~K, respectively. The ratios to $\Tceil$ are $0.62824\pm0.00075$, $0.60222\pm0.00042$ and $0.87574\pm0.00037$. At $(2,0.05)$ the central value uses a $1/N_\omega^2$ extrapolation from the last two frequency refinements, where $N_\omega$ counts positive fermionic frequencies; the ME control is $73.277\pm0.005$~K. These spreads combine grid shifts and root tolerance, not rigorous error bounds.
+\end{proposition}
+
+The other six of the nine points are non-converged or branch-ambiguous. The earlier path-dependent eigenvalue $3.449$ at $(1,0.05)$ was not reproduced on retrace, and that branch remains unassessed. The leading pairing eigenvector's parity has not been established at every point, and the thermodynamic choice among branches is unknown. Run details are recorded in R5.
+
+\paragraph{Charge diagnostic (\NUM).} At $\Omega/\varepsilon_F=0.05$ and $\lambda=2$, the static RPA eigenvalue at $2k_F$ is $7.3176$ at the W pairing root on the $514/64$ grid before extrapolation. It is $U_{\rm eff}\chi_0$, where $U_{\rm eff}=\lambda/N_0$ and the total-spin bubble is $1.8294$~eV$^{-1}$. Heating the homogeneous state at this same phonon ratio on $514/32$ gives static RPA poles near $13{,}420$~K for $\lambda=2$ and $6{,}161$~K for $\lambda=1$. These are about $170$ times the $\lambda=2$ W root on $514/64$ and $151$ times the unresolved $\lambda=1$ ordinary pairing reference on $514/32$, respectively. Grid notation counts momenta and positive frequencies in that order. These are model-internal mean-field diagnostics, not physical one-dimensional ordering temperatures or proof of charge-density-wave preemption.
+
+\emph{Conclusion.} A ceiling for the finite-$A$ lattice remains \OPEN. The earlier \NUM\ van Hove calculation gave $134.27/129.85=13427/12985\simeq1.034039276088$ relative to the rounded $A=1$ scalar reference, with $\lambda=1.5$, $\Omega=\varepsilon_F=0.05$~eV, a $24\times24$ spatial grid and 24 positive frequencies. The grid is not momentum-converged and the band has $A=\infty$; that comparison cannot test either finite-$A$ ceiling.
+
+%--------------------------------------------------------------------
+\section{What remains open}\label{sec:open}
+
+\begin{problem}[Intermediate temperature at $\lambda\ge1/9$]\label{prob:intermediate}
+The continuum windows, peak-box extensions and finite grid leave unclosed regions. In the two finite Einstein slices of Figure~\ref{fig:coverage}, 16 nodes remain unclosed; a failed sufficient guard or a truncated pairing top below unity does not decide stability there. A regular-branch and pairing enclosure above the ceiling outside the covered sets is still missing.
+\end{problem}
+
+\begin{problem}[Universal onset]\label{prob:universal}
+Prove or refute $\kB\Tlin\le\Cinf\sqrt{AM}$ uniformly in $\lambda$ and $\Omega/W$ for the first crossed skeleton. Theorem~\ref{thm:V2}(ii) shows any proof must control the full dressed pairing form.
+\end{problem}
+
+\begin{problem}[Other channels and momentum-dependent coupling]\label{prob:channels}
+Odd-frequency and triplet channels, and arbitrary momentum-dependent $V_j(q)$ with bounded DOS only, are untreated. Theorem~\ref{thm:V3b} needs constant-in-momentum transfer, and Theorem~\ref{thm:V3a} needs the spherical or balanced geometry.
+\end{problem}
+
+\begin{problem}[Higher skeletons]\label{prob:higher}
+Skeletons beyond rainbow plus first crossed, bare versus dressed phonons, Coulomb terms and fluctuations of the chemical potential are not covered.
+\end{problem}
+
+\begin{problem}[A signed lattice extension]\label{prob:lattice}
+The signed estimates of Theorem~\ref{thm:V3a} rely on the spherical joint density. A lattice with finite $A$ and a signed extension is missing, and the finite-lattice numerics of Section~\ref{sec:lattice} do not substitute for it.
+\end{problem}
+
+\paragraph{Remarks on scope.} The Lean artifacts cover finite algebra only. The results are about the linear instability of a truncated Eliashberg equation on a named branch; they are not exact transition temperatures, they do not assess competing orders, and a numerical onset in a model is not a measurement of any material.
+
+%--------------------------------------------------------------------
+\section*{Supporting material and data availability}
+% DOI-SUPP: not yet assigned.
+The full proofs, replay scripts, certificate logs and independent review records R0 to R5 accompany this preprint as supplementary material. The mapping from each numbered statement to its record, file and line is in \texttt{CLAIMS.md}. No empirical data are used. Every number in this paper is computed from the model parameters stated in the text, and the scripts in records R0 to R5 reproduce it. AI agents generated the proofs, code and drafts under D. Rens' direction. Independent reviews were performed by separate AI agents. This preprint has not been peer reviewed.
+
+%--------------------------------------------------------------------
+\bibliographystyle{plain}
+\bibliography{refs}
+
+\end{document}

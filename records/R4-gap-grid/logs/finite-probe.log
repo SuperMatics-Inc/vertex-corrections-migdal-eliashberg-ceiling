@@ -1,0 +1,61 @@
+lambda,eta,x,pairing_upper,normal_upper
+1/9,1,1/16,UNRESOLVED slab 14/24: residual=0.131106, radius=0.471983
+1/9,1,1/8,UNRESOLVED slab 16/24: residual=0.117223, radius=0.422001
+1/9,1,1/4,UNRESOLVED slab 19/24: residual=0.0983811, radius=0.423039
+1/9,1,1/2,0.45519979,0.45808945
+1/9,3/2,1/16,UNRESOLVED slab 17/24: residual=0.119159, radius=0.428972
+1/9,3/2,1/8,UNRESOLVED slab 19/24: residual=0.104951, radius=0.451289
+1/9,3/2,1/4,UNRESOLVED slab 23/24: residual=0.0941388, radius=0.404797
+1/9,3/2,1/2,0.29988173,0.30148654
+1/4,1,1/16,UNRESOLVED slab 8/24: residual=0.137959, radius=0.413878
+1/4,1,1/8,UNRESOLVED slab 9/24: residual=0.122753, radius=0.368258
+1/4,1,1/4,UNRESOLVED slab 10/24: residual=0.0938181, radius=0.403418
+1/4,1,1/2,UNRESOLVED slab 14/24: residual=0.0875854, radius=0.376617
+1/4,1,1,0.57321568,0.57770724
+1/4,3/2,1/16,UNRESOLVED slab 10/24: residual=0.126908, radius=0.456869
+1/4,3/2,1/8,UNRESOLVED slab 11/24: residual=0.110713, radius=0.398568
+1/4,3/2,1/4,UNRESOLVED slab 13/24: residual=0.096855, radius=0.416477
+1/4,3/2,1/2,UNRESOLVED slab 17/24: residual=0.0825235, radius=0.354851
+1/4,3/2,1,0.34571806,0.34843733
+1/2,1,1/16,UNRESOLVED slab 5/24: residual=0.146627, radius=0.439881
+1/2,1,1/8,UNRESOLVED slab 5/24: residual=0.109142, radius=0.39291
+1/2,1,1/4,UNRESOLVED slab 6/24: residual=0.0970209, radius=0.41719
+1/2,1,1/2,UNRESOLVED slab 8/24: residual=0.0845801, radius=0.363695
+1/2,1,1,UNRESOLVED slab 15/24: residual=0.0693511, radius=0.360626
+1/2,1,2,0.39001983,0.39332874
+1/2,3/2,1/16,UNRESOLVED slab 6/24: residual=0.124785, radius=0.449227
+1/2,3/2,1/8,UNRESOLVED slab 7/24: residual=0.121278, radius=0.363834
+1/2,3/2,1/4,UNRESOLVED slab 8/24: residual=0.101629, radius=0.365863
+1/2,3/2,1/2,UNRESOLVED slab 11/24: residual=0.093801, radius=0.337684
+1/2,3/2,1,UNRESOLVED slab 20/24: residual=0.0715652, radius=0.372139
+1/2,3/2,2,0.27408962,0.27657409
+1,1,1/16,UNRESOLVED slab 3/24: residual=0.154314, radius=0.385786
+1,1,1/8,UNRESOLVED slab 3/24: residual=0.119973, radius=0.431904
+1,1,1/4,UNRESOLVED slab 4/24: residual=0.124162, radius=0.372486
+1,1,1/2,UNRESOLVED slab 5/24: residual=0.0988603, radius=0.355897
+1,1,1,UNRESOLVED slab 9/24: residual=0.0727798, radius=0.378455
+1,1,2,UNRESOLVED slab 19/24: residual=0.0690941, radius=0.359289
+1,1,4,0.29355804,0.29629266
+1,3/2,1/16,UNRESOLVED slab 4/24: residual=0.158974, radius=0.397436
+1,3/2,1/8,UNRESOLVED slab 4/24: residual=0.125533, radius=0.376598
+1,3/2,1/4,UNRESOLVED slab 5/24: residual=0.120189, radius=0.360568
+1,3/2,1/2,UNRESOLVED slab 6/24: residual=0.0919185, radius=0.39525
+1,3/2,1,UNRESOLVED slab 12/24: residual=0.0753563, radius=0.391853
+1,3/2,2,0.58297100,0.59441852
+1,3/2,4,0.22254283,0.22474596
+2,1,1/16,UNRESOLVED slab 2/24: residual=0.211365, radius=0.35932
+2,1,1/8,UNRESOLVED slab 2/24: residual=0.171429, radius=0.342857
+2,1,1/4,UNRESOLVED slab 2/24: residual=0.128433, radius=0.385299
+2,1,1/2,UNRESOLVED slab 3/24: residual=0.123699, radius=0.371098
+2,1,1,UNRESOLVED slab 6/24: residual=0.0968904, radius=0.348806
+2,1,2,UNRESOLVED slab 12/24: residual=0.0778878, radius=0.334918
+2,1,4,UNRESOLVED slab 24/24: residual=0.0675725, radius=0.351377
+2,1,8,0.23207262,0.23438000
+2,3/2,1/16,UNRESOLVED slab 2/24: residual=0.168124, radius=0.420309
+2,3/2,1/8,UNRESOLVED slab 2/24: residual=0.141353, radius=0.424059
+2,3/2,1/4,UNRESOLVED slab 3/24: residual=0.158191, radius=0.395477
+2,3/2,1/2,UNRESOLVED slab 3/24: residual=0.10448, radius=0.449266
+2,3/2,1,UNRESOLVED slab 7/24: residual=0.0909267, radius=0.390985
+2,3/2,2,UNRESOLVED slab 15/24: residual=0.0762997, radius=0.396758
+2,3/2,4,0.40308446,0.41057403
+NEW closed=11/59 slices=[5, 6]

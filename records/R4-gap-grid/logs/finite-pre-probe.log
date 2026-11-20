@@ -1,0 +1,35 @@
+lambda,eta,x,pairing_upper,normal_upper
+1/9,1,1/16,UNRESOLVED slab 58/96: residual=0.137057, radius=0.493404
+1/9,1,1/8,UNRESOLVED slab 66/96: residual=0.121836, radius=0.523896
+1/9,1,1/4,UNRESOLVED slab 80/96: residual=0.106718, radius=0.458889
+1/9,1,1/2,0.45211490,0.45396057
+1/9,3/2,1/16,UNRESOLVED slab 72/96: residual=0.129299, radius=0.555985
+1/9,3/2,1/8,UNRESOLVED slab 81/96: residual=0.115437, radius=0.49638
+1/9,3/2,1/4,UNRESOLVED slab 93/96: residual=0.0941178, radius=0.404706
+1/9,3/2,1/2,0.29824671,0.29909730
+1/4,1,1/16,UNRESOLVED slab 32/96: residual=0.13065, radius=0.561796
+1/4,1,1/8,UNRESOLVED slab 36/96: residual=0.116579, radius=0.501288
+1/4,1,1/4,UNRESOLVED slab 43/96: residual=0.102184, radius=0.43939
+1/4,1,1/2,UNRESOLVED slab 57/96: residual=0.0869314, radius=0.373805
+1/4,1,1,0.56468599,0.56630505
+1/4,3/2,1/16,UNRESOLVED slab 41/96: residual=0.124856, radius=0.53688
+1/4,3/2,1/8,UNRESOLVED slab 46/96: residual=0.112905, radius=0.48549
+1/4,3/2,1/4,UNRESOLVED slab 54/96: residual=0.097959, radius=0.421224
+1/4,3/2,1/2,UNRESOLVED slab 71/96: residual=0.0845007, radius=0.439404
+1/4,3/2,1,0.34198735,0.34285976
+1/2,1,1/16,UNRESOLVED slab 20/96: residual=0.131249, radius=0.472498
+1/2,1,1/8,UNRESOLVED slab 22/96: residual=0.114158, radius=0.490878
+1/2,1,1/4,UNRESOLVED slab 26/96: residual=0.0998661, radius=0.429424
+1/2,1,1/2,UNRESOLVED slab 34/96: residual=0.0849461, radius=0.44172
+1/2,1,1,UNRESOLVED slab 61/96: residual=0.0662107, radius=0.344296
+1/2,1,2,0.38558440,0.38662746
+1/2,3/2,1/16,UNRESOLVED slab 26/96: residual=0.125946, radius=0.541568
+1/2,3/2,1/8,UNRESOLVED slab 29/96: residual=0.113795, radius=0.489321
+1/2,3/2,1/4,UNRESOLVED slab 34/96: residual=0.0996261, radius=0.428392
+1/2,3/2,1/2,UNRESOLVED slab 44/96: residual=0.0839712, radius=0.43665
+1/2,3/2,1,UNRESOLVED slab 81/96: residual=0.0668328, radius=0.34753
+1/2,3/2,2,0.27113009,0.27183428
+1,1,1/16,UNRESOLVED slab 13/96: residual=0.141022, radius=0.50768
+1,1,1/8,UNRESOLVED slab 14/96: residual=0.119698, radius=0.514702
+1,1,1/4,UNRESOLVED slab 16/96: residual=0.0999809, radius=0.429918
+1,1,1/2,UNRESOLVED slab 21/96: residual=0.0862128, radius=0.448307

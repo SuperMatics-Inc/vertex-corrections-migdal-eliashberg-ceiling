@@ -1,0 +1,115 @@
+name: replay-and-paper
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Source manifest
+        run: |
+          set -euo pipefail
+          sha256sum -c MANIFEST.sha256
+          sha256sum -c ADMITTED.sha256
+      - name: Install pinned replay dependencies
+        run: python -m pip install --disable-pip-version-check numpy==2.5.5 scipy==1.18.1 sympy==1.14.0 mpmath==1.3.0 python-flint
+      - name: R0 scalar ceiling replay
+        working-directory: records/R0-scalar-ceiling
+        run: |
+          set -euo pipefail
+          python -B replay.py | tee replay.out
+          grep -qF 'PASS replay: all five relative-width targets and gamma=2 absolute width' replay.out
+          grep -qF 'CERTIFIED gamma=2 T_lin/g rounds to 0.18272624777232952' replay.out
+      - name: R1 inflated comparison and exact algebra
+        working-directory: records/R1-local-skeleton
+        run: |
+          set -euo pipefail
+          python -B check_exact.py | tee replay.out
+          grep -qF 'exact algebra replay: signed form, row moments, rational guards, three mutants' replay.out
+      - name: R2 signed form, forward margin and independent checks
+        run: |
+          set -euo pipefail
+          cd records/R2-signed-form
+          python -B replay_form.py | tee form.out
+          grep -qF 'six mutants rejected' form.out
+          python -B replay_bounds.py | tee bounds.out
+          grep -qF 'Exact forward margin 55/262144 > 1/8192' bounds.out
+          cd review
+          python -B independent_checks.py | tee independent.out
+          grep -qF 'Independent exact polynomial, one-static limit, and rational guards agree' independent.out
+      - name: R3 onset replay and independent checks
+        run: |
+          set -euo pipefail
+          cd records/R3-onset
+          python -B replay.py | tee replay.out
+          grep -qF 'Mutant rejected' replay.out
+          cd review
+          python -B independent_checks.py | tee independent.out
+          grep -qF 'Overlap strictly below join; both small-x norm bounds fit Young ball' independent.out
+      - name: R4 gap, grid receipts and independent checks
+        run: |
+          set -euo pipefail
+          cd records/R4-gap-grid
+          python -B replay.py | tee grid.out
+          grep -qF 'GRID certified=54/135' grid.out
+          grep -qF 'MUTANTS rejected=5' grid.out
+          python -B finite_check.py | tee finite-check.out
+          grep -qF 'FINITE CHECK inverse-moment rational rounding fixture PASS' finite-check.out
+          python -B radial_check.py | tee radial-check.out
+          grep -qF 'RADIAL FIXTURES PASS: 3/3 mutants rejected' radial-check.out
+          python -B finite.py --published | tee finite.out
+          grep -qF 'FINITE PASS worst pairing upper<=0.50417617; unresolved=44' finite.out
+          python -B grid_receipts.py logs | tee receipts.out
+          grep -qF 'phase3_historical_receipt_union: pairing<=0.72827964 preconditioned_normal_map_G_q<=0.70929592' receipts.out
+          cd review
+          python -B independent_checks.py | tee independent.out
+          grep -qF 'near-static: max residual/x <=' independent.out
+      - name: Public prose safeguards
+        run: |
+          set -euo pipefail
+          if grep -nE '—|---|\b(G1-[A-Z]+|MS-VERTEX|ADIABATIC|EXTHOL|HUBHOL)[[:alnum:]_-]*|ceiling-20261118|D:/|C:/t|\bMac\b|\blane\b|reserved DOI' paper/main.tex README.md; then exit 1; fi
+          grep -qF 'This preprint has not been peer reviewed.' paper/main.tex
+          grep -qF 'This preprint has not been peer reviewed.' README.md
+          grep -qF '10.5281/zenodo.24407163' paper/main.tex
+          grep -qF '10.5281/zenodo.24407165' paper/main.tex
+  paper:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Tectonic and poppler
+        run: |
+          set -euo pipefail
+          curl -fsSL https://github.com/tectonic-typesetting/tectonic/releases/download/tectonic%400.17.0/tectonic-0.17.0-x86_64-unknown-linux-gnu.tar.gz | sudo tar -xz -C /usr/local/bin
+          tectonic --version
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends poppler-utils
+      - name: Build the manuscript
+        working-directory: paper
+        run: |
+          set -euo pipefail
+          tectonic --keep-logs main.tex
+          if grep -nE 'Overfull|Undefined|Citation.*undefined|There were undefined' main.log; then exit 1; fi
+          test -s main.pdf
+          pdfinfo -url main.pdf > urls.txt
+          grep -qF 'https://doi.org/10.5281/zenodo.24407163' urls.txt
+          grep -qF 'https://doi.org/10.5281/zenodo.24407165' urls.txt
+          grep -qF 'https://github.com/SuperMatics-Inc/vertex-corrections-migdal-eliashberg-ceiling' urls.txt
+          pdftotext main.pdf main.txt
+          if grep -nE '—|---|\b(G1-[A-Z]+|MS-VERTEX|ADIABATIC|EXTHOL|HUBHOL)[[:alnum:]_-]*|ceiling-20261118|D:/|C:/t|\bMac\b|\blane\b' main.txt; then exit 1; fi
+          tr -s '[:space:]' ' ' < main.txt | grep -qF 'This preprint has not been peer reviewed.'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: vertex-corrections-migdal-eliashberg-ceiling-paper
+          path: |
+            paper/main.pdf
+            paper/main.log
+            paper/main.tex
+            paper/refs.bib
+            paper/urls.txt
+          if-no-files-found: error

@@ -1,0 +1,62 @@
+FINITE MUTANTS rejected=3 (reflection, cutoff tail, middle insertion)
+lambda,eta,x,pairing_upper,normal_upper,preconditioned_slabs
+1/9,1,1/16,UNRESOLVED slab 58/96: residual=0.137057, radius=0.493404
+1/9,1,1/8,UNRESOLVED slab 66/96: residual=0.121836, radius=0.523896
+1/9,1,1/4,UNRESOLVED slab 80/96: residual=0.106718, radius=0.458889
+1/9,1,1/2,0.40321316,0.40494222,4
+1/9,3/2,1/16,UNRESOLVED slab 72/96: residual=0.129299, radius=0.555985
+1/9,3/2,1/8,UNRESOLVED slab 81/96: residual=0.115437, radius=0.49638
+1/9,3/2,1/4,0.59595194,0.59827248,6
+1/9,3/2,1/2,0.28984920,0.29068156,2
+1/4,1,1/16,UNRESOLVED slab 32/96: residual=0.13065, radius=0.561796
+1/4,1,1/8,UNRESOLVED slab 36/96: residual=0.116579, radius=0.501288
+1/4,1,1/4,UNRESOLVED slab 43/96: residual=0.102184, radius=0.43939
+1/4,1,1/2,UNRESOLVED slab 57/96: residual=0.0869314, radius=0.373805
+1/4,1,1,0.55668870,0.55828800,4
+1/4,3/2,1/16,UNRESOLVED slab 41/96: residual=0.124856, radius=0.53688
+1/4,3/2,1/8,UNRESOLVED slab 46/96: residual=0.112905, radius=0.48549
+1/4,3/2,1/4,UNRESOLVED slab 54/96: residual=0.097959, radius=0.421224
+1/4,3/2,1/2,UNRESOLVED slab 71/96: residual=0.0845007, radius=0.439404
+1/4,3/2,1,0.33969753,0.34056306,4
+1/2,1,1/16,UNRESOLVED slab 20/96: residual=0.131249, radius=0.472498
+1/2,1,1/8,UNRESOLVED slab 22/96: residual=0.114158, radius=0.490878
+1/2,1,1/4,UNRESOLVED slab 26/96: residual=0.0998661, radius=0.429424
+1/2,1,1/2,UNRESOLVED slab 34/96: residual=0.0849461, radius=0.44172
+1/2,1,1,UNRESOLVED slab 61/96: residual=0.0662107, radius=0.344296
+1/2,1,2,0.38450491,0.38554360,2
+1/2,3/2,1/16,UNRESOLVED slab 26/96: residual=0.125946, radius=0.541568
+1/2,3/2,1/8,UNRESOLVED slab 29/96: residual=0.113795, radius=0.489321
+1/2,3/2,1/4,UNRESOLVED slab 34/96: residual=0.0996261, radius=0.428392
+1/2,3/2,1/2,UNRESOLVED slab 44/96: residual=0.0839712, radius=0.43665
+1/2,3/2,1,UNRESOLVED slab 81/96: residual=0.0668328, radius=0.34753
+1/2,3/2,2,0.27071484,0.27141706,1
+1,1,1/16,UNRESOLVED slab 13/96: residual=0.141022, radius=0.50768
+1,1,1/8,UNRESOLVED slab 14/96: residual=0.119698, radius=0.514702
+1,1,1/4,UNRESOLVED slab 16/96: residual=0.0999809, radius=0.429918
+1,1,1/2,UNRESOLVED slab 21/96: residual=0.0862128, radius=0.448307
+1,1,1,UNRESOLVED slab 38/96: residual=0.066449, radius=0.345535
+1,1,2,UNRESOLVED slab 76/96: residual=0.0625408, radius=0.325212
+1,1,4,0.29020586,0.29098291,0
+1,3/2,1/16,UNRESOLVED slab 16/96: residual=0.126378, radius=0.543427
+1,3/2,1/8,UNRESOLVED slab 18/96: residual=0.116662, radius=0.501647
+1,3/2,1/4,UNRESOLVED slab 21/96: residual=0.101977, radius=0.438503
+1,3/2,1/2,UNRESOLVED slab 28/96: residual=0.0892995, radius=0.383988
+1,3/2,1,UNRESOLVED slab 51/96: residual=0.0678539, radius=0.35284
+1,3/2,2,0.55437597,0.55710337,1
+1,3/2,4,0.21982767,0.22041061,0
+2,1,1/16,UNRESOLVED slab 8/96: residual=0.145398, radius=0.523432
+2,1,1/8,UNRESOLVED slab 9/96: residual=0.134043, radius=0.482555
+2,1,1/4,UNRESOLVED slab 10/96: residual=0.108397, radius=0.466106
+2,1,1/2,UNRESOLVED slab 13/96: residual=0.0914512, radius=0.39324
+2,1,1,UNRESOLVED slab 24/96: residual=0.0700981, radius=0.36451
+2,1,2,UNRESOLVED slab 49/96: residual=0.0652782, radius=0.339446
+2,1,4,0.59384371,0.59683710,1
+2,1,8,0.22929702,0.22991174,1
+2,3/2,1/16,UNRESOLVED slab 10/96: residual=0.145292, radius=0.523052
+2,3/2,1/8,UNRESOLVED slab 11/96: residual=0.130012, radius=0.468043
+2,3/2,1/4,UNRESOLVED slab 12/96: residual=0.10334, radius=0.444361
+2,3/2,1/2,UNRESOLVED slab 16/96: residual=0.089583, radius=0.465832
+2,3/2,1,UNRESOLVED slab 31/96: residual=0.0715704, radius=0.372166
+2,3/2,2,UNRESOLVED slab 64/96: residual=0.0666583, radius=0.346623
+2,3/2,4,0.39112970,0.39294401,0
+NEW closed=13/59 slices=[6, 7]

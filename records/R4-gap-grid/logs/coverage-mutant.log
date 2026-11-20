@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "D:\dev\scratch\ceiling-20261118\G1-GAP\grid_receipts.py", line 105, in <module>
+    main()
+    ~~~~^^
+  File "D:\dev\scratch\ceiling-20261118\G1-GAP\grid_receipts.py", line 86, in main
+    require(bounds[0] <= Q('0.72827964'), 'historical pairing maximum exceeds 0.72827964')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\dev\scratch\ceiling-20261118\G1-GAP\grid_receipts.py", line 26, in require
+    raise ArithmeticError(message)
+ArithmeticError: historical pairing maximum exceeds 0.72827964
+mutant_exit=1

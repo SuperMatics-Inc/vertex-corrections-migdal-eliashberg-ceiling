@@ -1,0 +1,37 @@
+ATTEMPT 1/2,1,1/16
+UNRESOLVED primary slab=14/36: normal center defect=0.0596283, minimum guard q=0.358635
+ATTEMPT 1/2,3/2,1/16
+UNRESOLVED primary slab=18/36: normal center defect=0.0627864, minimum guard q=0.326547
+ATTEMPT 1/4,1,1/16
+UNRESOLVED primary slab=22/36: normal center defect=0.0520746, minimum guard q=0.294115
+ATTEMPT 1/4,3/2,1/16
+UNRESOLVED primary slab=29/36: normal center defect=0.0592269, minimum guard q=0.300796
+ATTEMPT 1/9,1,1/16
+CLOSED 1/9,1,1/16 pairing<=0.37020923 q<=0.26382117
+ATTEMPT 1/9,3/2,1/16
+CLOSED 1/9,3/2,1/16 pairing<=0.29198611 q<=0.12093154
+ATTEMPT 1/2,1,1/8
+UNRESOLVED primary slab=23/36: normal center defect=0.0317477, minimum guard q=0.360338
+ATTEMPT 1/2,3/2,1/8
+UNRESOLVED primary slab=31/36: normal center defect=0.0313348, minimum guard q=0.349675
+ATTEMPT 1/4,1,1/8
+CLOSED 1/4,1,1/8 pairing<=0.58993867 q<=0.46768116
+ATTEMPT 1/4,3/2,1/8
+CLOSED 1/4,3/2,1/8 pairing<=0.42271550 q<=0.18191481
+ATTEMPT 1/9,1,1/8
+CLOSED 1/9,1,1/8 pairing<=0.27055121 q<=0.07872010
+ATTEMPT 1/2,1,1/4
+UNRESOLVED primary slab=36/36: normal center defect=0.0163821, minimum guard q=0.435929
+ATTEMPT 1/2,3/2,1/4
+CLOSED 1/2,3/2,1/4 pairing<=0.50775517 q<=0.29646638
+ATTEMPT 1/4,1,1/4
+CLOSED 1/4,1,1/4 pairing<=0.40866687 q<=0.14248644
+ATTEMPT 1/4,3/2,1/4
+CLOSED 1/4,3/2,1/4 pairing<=0.33901830 q<=0.09654494
+Traceback (most recent call last):
+  File "D:\dev\scratch\ceiling-20261118\G1-GAP\radial_averaged.py", line 62, in <module>
+    main(AveragedReplay,second)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\dev\scratch\ceiling-20261118\G1-GAP\radial.py", line 454, in main
+    out,why = verify(lam,eta,x,r,witness)
+ArithmeticError: 7/15 requested Krawczyk nodes unresolved

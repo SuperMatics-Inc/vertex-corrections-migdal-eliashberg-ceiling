@@ -1,0 +1,11 @@
+name = "SignedFinite"
+version = "0.1.0"
+defaultTargets = ["Signed"]
+moreLeanArgs = ["-j1", "-M5500"]
+
+[[require]]
+name = "MathlibPrebuilt"
+path = "prebuilt"
+
+[[lean_lib]]
+name = "Signed"

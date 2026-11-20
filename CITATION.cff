@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: Please cite the preprint and this software supplement.
+type: software
+title: Replay, certificate and review records for vertex corrections and the Migdal-Eliashberg ceiling
+version: 1.0.0
+license: Apache-2.0
+authors:
+  - family-names: Rens
+    given-names: Davis
+    affiliation: SuperMatics Inc.
+    orcid: 'https://orcid.org/0000-0001-5839-5197'
+doi: 10.5281/zenodo.24407165
+repository-code: 'https://github.com/SuperMatics-Inc/vertex-corrections-migdal-eliashberg-ceiling'
+preferred-citation:
+  type: article
+  title: 'Vertex corrections and the Migdal-Eliashberg ceiling: rigorous bounds in a spherical overlap model'
+  authors:
+    - family-names: Rens
+      given-names: Davis
+      affiliation: SuperMatics Inc.
+      orcid: 'https://orcid.org/0000-0001-5839-5197'
+  doi: 10.5281/zenodo.24407163
+  year: 2026

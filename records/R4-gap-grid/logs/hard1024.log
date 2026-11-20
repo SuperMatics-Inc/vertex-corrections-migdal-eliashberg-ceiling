@@ -1,0 +1,9 @@
+ATTEMPT 2,1,1/16
+UNRESOLVED primary slab=25/72: normal center defect=0.0119764, minimum guard q=0.467679
+Traceback (most recent call last):
+  File "D:\dev\scratch\ceiling-20261118\G1-GAP\radial_moments.py", line 195, in <module>
+    main(MomentReplay,second)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "D:\dev\scratch\ceiling-20261118\G1-GAP\radial.py", line 448, in main
+    raise ArithmeticError(f'{bad}/{len(nodes)} requested Krawczyk nodes unresolved')
+ArithmeticError: 1/1 requested Krawczyk nodes unresolved
