@@ -80,6 +80,8 @@ jobs:
   paper:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      SOURCE_DATE_EPOCH: "1795132800"
     steps:
       - uses: actions/checkout@v4
       - name: Install Tectonic and poppler
