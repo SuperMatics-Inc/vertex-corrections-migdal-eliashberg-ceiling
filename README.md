@@ -3,7 +3,7 @@
 Davis Rens  
 SuperMatics Inc.  
 [ORCID 0000-0001-5839-5197](https://orcid.org/0000-0001-5839-5197)  
-Version 2.0.0
+Version 2.0.1
 
 Paper DOI: <https://doi.org/10.5281/zenodo.24410274>  
 Supplementary records DOI: <https://doi.org/10.5281/zenodo.24410273>  
@@ -74,6 +74,7 @@ CI (`.github/workflows/ci.yml`) verifies `MANIFEST.sha256` and `ADMITTED.sha256`
 - The open problems are rewritten around what the new results leave undecided.
 - Review records removed from the tree; available in version 1 history.
 - No statement of version 1 is withdrawn.
+- The flat-sheet solver job of CI installs `scipy==1.18.1` alongside `numpy==2.5.5`. Tag `v2.0.0` is the deposited tree, whose workflow installs `numpy` only for that job and so stops on the missing import, and it stays the tree of the supplement archive; tag `v2.0.1` adds that one install line and the hash pins that follow it, with no change to the paper or the records.
 
 ## Disclosure and review
 

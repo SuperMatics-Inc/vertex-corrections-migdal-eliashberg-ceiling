@@ -1,6 +1,6 @@
-# BUILD.md, version 2.0.0
+# BUILD.md, version 2.0.1
 
-Build record for the released version 2.0.0 of *Vertex corrections and the Migdal-Eliashberg ceiling: a geometric dichotomy between nested and curved Fermi surfaces*. Every hash below is SHA-256 of the file bytes as released. `MANIFEST.sha256` pins the whole tree, `ADMITTED.sha256` the same bytes in the form accepted for release, and CI verifies both.
+Build record for the released version 2 of *Vertex corrections and the Migdal-Eliashberg ceiling: a geometric dichotomy between nested and curved Fermi surfaces*, tagged `v2.0.0` at the deposited tree and `v2.0.1` at the tree with the CI install correction of section 4. The manuscript, the paper record and every record file are identical under both tags. Every hash below is SHA-256 of the file bytes as released. `MANIFEST.sha256` pins the whole tree, `ADMITTED.sha256` the same bytes in the form accepted for release, and CI verifies both.
 
 ## 1. Manuscript and paper record
 
@@ -41,7 +41,9 @@ The PDF is not byte-reproducible across Tectonic versions or machines, so CI doe
 
 ## 4. Supplement archive
 
-`vertex-corrections-migdal-eliashberg-ceiling-replay.zip` in the supplementary record `10.5281/zenodo.24410273` is `git archive` of tag `v2.0.0`, so it holds the tree of records R0 to R6 without review records and without superseded drafts. Its hash is recorded in the release receipt of the Zenodo upload, not here, because a file cannot contain the hash of the archive of the tree that contains it.
+`vertex-corrections-migdal-eliashberg-ceiling-replay.zip` in the supplementary record `10.5281/zenodo.24410273` is `git archive` of tag `v2.0.0`, so it holds the records R0 to R6 without review records and without superseded drafts. Its bytes are 602070 and its SHA-256 is `c448dd9f35b26e7e52db54dd3852d4cc642ac3a6bead132d880dec3db37f02d1`, which `git archive` of tag `v2.0.0` reproduces; the hash is recorded as a literal because a file cannot contain the hash of the archive of the tree that contains it.
+
+Tag `v2.0.1` carries one install correction in CI. The workflow of tag `v2.0.0` installs `numpy==2.5.5` alone for the flat-sheet solver job, whose script imports `scipy.optimize` and `scipy.sparse.linalg`, so that job of the archived workflow stops on the missing import; every other job of it behaves as described above. The correction is one line, `scipy==1.18.1` added to that install step, together with the hash pins below that follow it and this note. Tag `v2.0.1` therefore differs from the deposited archive in exactly these files: `.github/workflows/ci.yml`, `MANIFEST.sha256`, `ADMITTED.sha256`, `BUILD.md` and `README.md`. No evidence file, no record and no manuscript byte differs. The published description of the supplementary record carries the same statement.
 
 ## 5. Documents of the release
 
