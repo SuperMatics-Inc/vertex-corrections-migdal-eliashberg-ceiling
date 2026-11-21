@@ -17,6 +17,8 @@ jobs:
           sha256sum -c MANIFEST.sha256
           sha256sum -c ADMITTED.sha256
           echo 'a82fcf97f95f6f6f7707a4890e786cd6c8ea39f0b07fbe1036fc2df73e4e0a7d  records/R6-flat-sheet/verify_1d.log' | sha256sum -c -
+          echo 'e6cf2a2c069c2fca381294a2d4286940401db5f5ab1aecb6960e83cf007ca3cb  records/R7-flat-sheet-certificate/cert_default.log' | sha256sum -c -
+          echo '69e8a8dc372b7c0158d3614db59d220ee682968885680daef7bcf1dad23a9e64  records/R7-flat-sheet-certificate/independent_nk24_m200_rerun.log' | sha256sum -c -
       - name: Install pinned replay dependencies
         run: python -m pip install --disable-pip-version-check numpy==2.5.5 scipy==1.18.1 sympy==1.14.0 mpmath==1.3.0 python-flint
       - name: R0 scalar ceiling replay
@@ -99,9 +101,59 @@ jobs:
           grep -qF 'This preprint has not been peer reviewed.' README.md
           grep -qF '10.5281/zenodo.24410274' paper/main.tex
           grep -qF '10.5281/zenodo.24410273' paper/main.tex
+          grep -qF '10.5281/zenodo.24415577' README.md
+          grep -qF '10.5281/zenodo.24415572' README.md
           grep -qF '10.5281/zenodo.24410274' README.md
           grep -qF '10.5281/zenodo.24410273' README.md
           grep -qF "orcid.org/0000-0001-5839-5197" README.md CITATION.cff
+  r7-certificate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install pinned certificate dependencies
+        run: python -m pip install --disable-pip-version-check mpmath==1.4.1 numpy==2.5.5 scipy==1.18.1 python-flint==0.9.0 gmpy2==2.3.2
+      - name: R7 default certificate
+        working-directory: records/R7-flat-sheet-certificate
+        run: |
+          set -euo pipefail
+          python -B cert.py | tee cert.out
+          test "$(grep -cF 'CERTIFIED  (all inequalities hold)' cert.out)" -eq 2
+          test "$(grep -cF 'k < 1 -> True' cert.out)" -eq 2
+          python - <<'EOF'
+          # Checked numerically with a fixed slack: the enclosure lower bounds move only in their
+          # last digits across platforms, and the fixed-point radius depends on the floating
+          # candidate, so exact strings would make the job tied to one machine.
+          import re
+          t = open('cert.out', encoding='utf-8').read()
+          lam = [float(x) for x in re.findall(r'lambda_max >= ([0-9.]+)', t)]
+          imu = [float(x) for x in re.findall(r'min \|Im u\| >= ([0-9.]+)', t)]
+          rad = [float(x) for x in re.findall(r'unique fixed point in \|\|Sigma-Sigma_0\|\|_inf <= ([0-9.E+-]+)', t)]
+          assert len(lam) == len(imu) == len(rad) == 2, (lam, imu, rad)
+          assert lam[0] >= 1.0057975124 and lam[1] >= 1.0199337112, lam
+          assert imu[0] >= 0.056577681803 and imu[1] >= 0.038415264890, imu
+          assert rad[0] <= 5.834e-17 and rad[1] <= 3.638e-17, rad
+          print('lambda_max', lam, 'min |Im u|', imu, 'fixed-point radii', rad, 'within bounds')
+          EOF
+      - name: R7 second-checker self-tests
+        working-directory: records/R7-flat-sheet-certificate
+        run: |
+          set -euo pipefail
+          python -B independent.py --selftest | tee independent-selftest.out
+          grep -qF 'containment failures 0, width failures 0' independent-selftest.out
+          python -B independent.py --selftest-gap | tee independent-selftest-gap.out
+          grep -qF -- '-> PASS' independent-selftest-gap.out
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r7-flat-sheet-certificate-run
+          path: |
+            records/R7-flat-sheet-certificate/cert.out
+            records/R7-flat-sheet-certificate/independent-selftest.out
+            records/R7-flat-sheet-certificate/independent-selftest-gap.out
+          if-no-files-found: error
   flat-sheet-solver:
     runs-on: ubuntu-latest
     timeout-minutes: 30

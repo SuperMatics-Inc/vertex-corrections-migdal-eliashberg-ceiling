@@ -1,61 +1,92 @@
-# CLAIMS.md, version 2
+# CLAIMS.md, version 3.0.0
 
-Statement-to-record map for `paper/main.tex` (`main.tex` sha256 `ad5ebc1fedbd44683055683379107011f3d8a1bf05147a112d0efbcc967243aa`, `main.pdf` sha256 `0de7aad87ac5bc05f7c01a7c3b7eea3f0c150f0b900a1c0c1f1b148226a690f0`, 26 pages). Source paths are relative to the repository root. The new record is `records/R6-flat-sheet/`, whose `RIGOR.md`, `RESULT.md`, `replay.py` and `verify_1d.log` keep the reviewed line numbers and contents (hashes in `BUILD.md`).
+Statement-to-record map for the released manuscript. The manuscript is `paper/main.tex` (sha256
+`9a4944297579fbdfdaa5590e59a0f7d06b504f7c729de60057fd7405c4401e41`, 118647 bytes) and its PDF is
+`paper/main.pdf` (sha256 `ee9f15012993dd2b445c85cc8e0f0cc3868d7ee240fbc013a752509af3ea60d6`, 299526 bytes,
+31 pages). The released version 2 manuscript, which is the baseline of this text, is `paper/main.tex` at tag
+`v2.0.1` of this repository. The certificate record cited below is `records/R7-flat-sheet-certificate/`, and the
+hash of every file of it is in `BUILD.md` section 3.
 
-Labels have the same meaning as in the released first version and in the review record of the new results:
-
-- **PROVED**: a complete analytic proof that has passed the independent review recorded with the supplementary material, or an exact rational argument.
-- **CERTIFIED**: a finite arithmetic enclosure, exact rational or interval. The four peak guards stand alone in this class.
-- **CERTIFIED (padded binary64)**: a floating-point bound with an explicit forward-error bound, evaluated in IEEE 754 binary64 with round-to-nearest under stated accuracy assumptions.
+Labels have the same meaning as in the released versions:
+- **PROVED**: a complete analytic proof that has passed the independent review recorded with the supplementary
+  material, or an exact rational argument.
+- **CERTIFIED**: a finite arithmetic enclosure, exact rational or interval, decided on endpoints.
+- **CERTIFIED (padded binary64)**: a floating-point bound with an explicit forward-error bound, evaluated in
+  IEEE 754 binary64 with round-to-nearest under stated accuracy assumptions.
 - **NUMERICAL**: a computed value without such an enclosure.
 - **OPEN**: a statement not established.
 
-The label assignment for the new results is the one recorded by the independent review of the new record (items C1, C3 to C7 in its section 3). That review is a process record and is not part of the supplement; every number and every hypothesis below is traceable to the replay records and logs listed in the table.
+Numbering in the built PDF: `sec:certified` is Section 4.4, the fourth subsection of the results section, "A
+certified crossing at two discretisation points" (page 14), `def:cert` is Definition 4.6, `prop:sym` is
+Proposition 4.7, `thm:C` is Theorem 4.8, and the reproduction subsection is "Theorem 4.8" in Section 7. The record
+calls the theorem "Theorem C"; the manuscript numbers it and refers to it only by `\ref`.
 
-All results govern the linearized pairing onset $\Tlin$ of the rainbow plus first-crossed skeleton at fixed bare chemical potential, on a sign-preserving normal branch. None is a measured $T_c$ and none claims that a material is superconducting.
+## 0. What this version adds to the map
 
-## 1. New and changed claims
+The map of versions 1 and 2 is unchanged for every statement that this version does not touch: rows C1 to C8 of the
+version 2 map and its open-problem rows stay valid, because the corresponding paragraphs, labels and record
+references are byte-identical in `paper/main.tex`. The only exception is that the `main.tex` line numbers recorded
+there are shifted by the insertions listed in `BUILD.md` section 4; identify statements by label, not by line.
+Nothing is withdrawn: every statement that version 2 asserted is asserted here with the same label.
 
-| Item | Label in the paper | Artifact and scope | Source |
+## 1. New statements of version 3
+
+| claim | label | record and evidence | where in `main.tex` |
 |---|---|---|---|
-| **C1** Flat-sheet scaling limit. Of the eight sheet combinations three keep the middle line in the collar, the fourth is separated by the bandwidth; the prefactors do not carry $m$; the rainbow limit is purely imaginary; the crossed limit is the exact residues $I_1$ and $I_{23}$ and does not vanish as $m\to0$ at fixed $\eta$. | PROVED (`Theorem~\ref{thm:flat}`, Section~\ref{sec:flat}) | R6. Analytic; the model is the 1D periodic band or the 2D parallel flat sheets with $A=1$, $V_j=K_j/N_0$, $\mu_0=-0.4W$, $4k_F\notin2\pi\mathbb Z$. | `records/R6-flat-sheet/RIGOR.md:35-70` (statement and proof), residues at `records/R6-flat-sheet/RIGOR.md:62-66`; `records/R6-flat-sheet/RESULT.md:11`; replay check `records/R6-flat-sheet/replay.py:142` (`check_1d_bare_crossed_residue`) |
-| **C3a** Crossing of the flat-sheet limit. Top eigenvalue of the linearized pairing operator of the limit after Richardson extrapolation $1.004245$, $1.013678$, $1.014628$ at $\lambda=4,6,8$; $\eta_{\rm crit}=1.008871$, $1.045617$, $1.065128$, i.e. the linear onset lies $0.89\%$ to $6.51\%$ above the ceiling. | NUMERICAL (`Proposition~\ref{prop:flatcross}`) | R6. Fixed discretizations $(N_w,Y_{\max},N_y)\in\{(16,240,481),(24,180,361)\}$ with a 7-point convergence table; two explicit solutions; no enclosure of the continuum operator. | `records/R6-flat-sheet/RIGOR.md:73-75` (continuation tables), `records/R6-flat-sheet/RESULT.md:14-18` (both tables), `records/R6-flat-sheet/verify_1d.log:27,36,45` (Richardson extrapolations), `records/R6-flat-sheet/verify_1d.log:11-16` ($\eta_{\rm crit}$ root finding) |
-| **C3b** Finite-$m$ lower bounds at fixed discretization and fixed numerical normal solution: $\lambda_{\max}(K_{\rm sym}[\Sigma_{\rm num}])\ge1.0090706553$ at $(\lambda,m)=(6,0.008)$, $N_k=2050$, $N_w=12$, and $\ge1.0123025473$ at $(8,0.005)$, $N_k=3074$, $N_w=12$. | CERTIFIED (padded binary64) (`Proposition~\ref{prop:flatcert}`) | R6. Rayleigh quotient at a dyadic-rational trial vector, Higham forward-error bound for the FFT/matmul path, 50-digit directed-rounding decimal cross-check. Bounds the matrix of the computed branch, not the exact branch and not the continuum. | `records/R6-flat-sheet/verify_1d.log:49,53` (`rq_lo`), `records/R6-flat-sheet/RESULT.md:21-22`, `records/R6-flat-sheet/RIGOR.md:82`; code `records/R6-flat-sheet/verify_1d_counterexample.py:248` (`iv_rayleigh_lower_bound`), `:268` (`solve_finite_m_lattice`) |
-| **C3c** CDW caveat. Static RPA charge response at the nesting vector, ${\rm rpa}_{2k_F}=8.41$ to $10.37$ over $\lambda=6,8$ and $m=0.005$ to $0.012$, so the resummed interaction is unstable at $2k_F$ and the normal branch is not the physical ground state of that band. | NUMERICAL, stated as a scope restriction (`Remarks~\ref{rem:cdw}`) | R6. Mean-field RPA evaluation of the same interaction; it is not an additional model. | `records/R6-flat-sheet/RIGOR.md:87`, `records/R6-flat-sheet/RESULT.md:24`, values in `records/R6-flat-sheet/verify_1d.log:49-53` (`rpa_2kf=8.4092, 8.4297, 9.7963, 9.8285, 9.9731, 10.3743`) |
-| **C4** Coarea-curvature sufficiency. Strict convexity of the energy collars, a uniform Fermi velocity bound and nondegenerate pocket tangencies give the three-line strip overlap bound, in every $d\ge2$ and without rotation symmetry. | PROVED (`Lemma~\ref{lem:coarea}`) | R6. Analytic. Unchanged hypotheses (H1) to (H3) of the record. | `records/R6-flat-sheet/RIGOR.md:100-129`, headline `records/R6-flat-sheet/RIGOR.md:6` |
-| **C5** Layer-cake reduction. Each power of a propagator decomposes into an energy slice with weight, giving $\cJ_3\le C_{\rm LC}(1+\log_+(1/x))^{3+\beta}/(ab)$ and hence the $o(1)$ crossed correction of (C7); $C_{\rm LC}=3C_{\rm geom}+34$. | PROVED with CERTIFIED constants (`Lemma~\ref{lem:layercake}`) | R6. Analytic reduction; constants checked in exact rational and 60-digit interval arithmetic, with four formula mutants rejected. | `records/R6-flat-sheet/RIGOR.md:130-145` (statement, constants at `:133,:145`); replay check `records/R6-flat-sheet/replay.py:73` (`check_positive_theorem_constants`) |
-| **C6** All-$x$ Young-ball closure. Under a constant transfer $V_j=K_j/N_0$ and a particle-hole-even DOS, $AR\le1/9$ and (H1) to (H3) give the uninflated ceiling at every $x$, with no small-$x$ hypothesis. | PROVED (`Theorem~\ref{thm:curved}(1)`) | R6. Carried from the earlier version and now stated as the all-$x$ half of the dichotomy; the two extra hypotheses are required and the asymmetric case is open. | `records/R6-flat-sheet/RIGOR.md:150`; earlier records `records/R3-onset/RIGOR.md` §B, the earlier curved-surface record (c) as cited there |
-| **C7** Small-$x$ curved-FS window. Strictly convex $C^2$ collars in $d\ge2$, a sign-preserving branch with $u_n\ge c_0|\omega_n|$, and $x\le x_*(B,\text{geometry})$ give $|F_X|\le10L_XQ_0$ with $L_X$ as displayed, hence the crossed skeleton shifts the momentum-resolved ME onset of that branch by at most a relative $1+O((A v_{\max}R)^2\rho^\alpha(1+\log_+(1/\rho))^{3+\beta})$; for constant transfer and even DOS the ceiling itself holds up to the same factor. | PROVED (`Theorem~\ref{thm:curved}(2)`) | R6. Analytic, conditional on branch existence; the comparison is with the ME onset on the same branch except in the symmetric subcase. | `records/R6-flat-sheet/RIGOR.md:152-160` (statement, subcases (i), (ii), (iii) at `:155-160`); the exponents quoted in the abstract, $\alpha=1$, $\beta=1$ in $d=2$ and $\alpha=1$, $\beta=0$ in $d\ge3$, are `records/R6-flat-sheet/RIGOR.md:128` |
-| **C8** Supersession note. Theorem~\ref{thm:V3a} keeps its statement and proof and is the rotationally symmetric instance of (C7); the earlier Young-ball and overlap theorems keep their scope. | PROVED | R1 to R4 records unchanged; the relation is analytic. | `main.tex` remark after `thm:V3a`; `records/R6-flat-sheet/RIGOR.md:162`; earlier records as cited in the version 1 claims list |
+| **D1** The finite two-flat-sheet model: moments, dispersion, $A=1$, $N_0=1/2$, $\omega_n=2n+1$ for $n=-N_w,\dots,N_w-1$, $M=2N_w$, $\tau=\eta\Cinf\sqrt{\lambda}m$, $K(d)=m^2/(m^2+(2\pi\tau d)^2)$, $g_{\rm RB}=2\lambda\tau$, $C_X=(2\lambda\tau/N_k)^2$ as exact rationals, the map $\Phi$, and the linearised operator $B$ in the az gauge. | definition (no label of proof) | R7. `CERT.md:84-118` (section 2), a verbatim transcription of `solve_finite_m_lattice`; fidelity checks `CERT.md:283-292` ($\Phi$ vs the FFT map $8.89\cdot10^{-17}$/$7.51\cdot10^{-17}$, $B$ vs `apply_full` $6.66\cdot10^{-16}$/$4.44\cdot10^{-16}$, both \NUM) | `def:cert`, lines 404 to 429 |
+| **P1** $B(\Sigma)=B(\Sigma)^{\mathsf T}$ for every $\Sigma\in\mathbb C^{M\times N_k}$, with no symmetry assumed on $\Sigma$; consequently a Rayleigh quotient of a fixed vector bounds $\lambda_{\max}(B)$, and the earlier nonsymmetric perturbation inequality is not used. | PROVED | R7. `CERT.md:119-140` (Proposition 1, proof); sanity check (\NUM) `CERT.md:138-140`, $5.55\cdot10^{-17}$ on non-inversion-even perturbations | `prop:sym` with its proof, lines 431 to 445 |
+| **C9a (N)** Fixed point. $\Phi$ has exactly one fixed point in the sup-norm ball of radius $\rho=10^{-12}$ around $\Sigma_0$, with $\|\Sigma^\star-\Sigma_0\|_\infty\le5.83329104641\cdot10^{-17}$ ($m=1/100$) and $\le3.63702630192\cdot10^{-17}$ ($m=1/200$), from $r\le5.83329104451\cdot10^{-17}$, $k\le3.25923499198\cdot10^{-10}$ and $r\le3.63702630028\cdot10^{-17}$, $k\le4.50507433578\cdot10^{-10}$ with $r+k\rho\le\rho$, $k<1$. No contraction of $\Phi$ is used or asserted. | CERTIFIED | R7. `CERT.md:39-47` (statement), `:223-234` and `:238-248` (bounds tables), `cert_main.log`, `cert_m200.log`, `cert_default.log` | `thm:C` item (N), `eq:certN`, lines 452 to 466 |
+| **C9b (K)** Crossing on the whole box: $\lambda_{\max}(B(\Sigma))\ge1.00579751250$ at $m=1/100$ and $\ge1.01993371122$ at $m=1/200$ for every $\Sigma\in\mathrm{Box}(\Sigma_0,\rho)$, i.e. $\ge1+\theta$ with $\theta=5\cdot10^{-3}$, clearing $1+\theta$ by at least $7.97512500371\cdot10^{-4}$ and $1.49337112263\cdot10^{-2}$, hence exceeding unity by at least $5.7975125\cdot10^{-3}$ and $1.993371122\cdot10^{-2}$. | CERTIFIED, by the symmetric Rayleigh quotient on the box with P1 | R7. `CERT.md:49-55` (statement), `:168-178` (method), `:179-182` (precision replay); margins are `bound - 1 - theta` as printed by `cert.py:784-785` | `thm:C` item (K), `eq:certK`, lines 457 to 466 |
+| **C9c (S)** Second checker: an independently written program with its own transcription and its own 160-bit MPFR directed-rounding intervals reproduces (N) for both parameter sets ($r\le1.43466873225\cdot10^{-16}$, $k\le1.53363171691\cdot10^{-9}$; $r\le1.00667718670\cdot10^{-16}$, $k\le2.06306136514\cdot10^{-9}$) and (K) at $N_k=8$, $m=1/100$ ($\ge1.03881800695$) and at $N_k=24$, $m=1/100$ ($\ge1.00579751243$). At $N_k=24$, $m=1/200$ it also reproduces (K), with $\lambda_{\max}\ge1.01993371112$. | CERTIFIED for every reproduced item of both models, each on two interval programs | R7. `CERT.md:65-78`, `independent_nk8.log`, `independent_nk24.log`, `independent_nk24_m200_rerun.log` (`[J] PASS`, `exit=0`, wall 2020.8 s), `independent_nk24_m200.log` (the killed first attempt, stage `[H]`, kept as the record of it: `CERT.md:71-74` and the P1-2 row at `CERT.md:388`) | `thm:C` item (S), line 463 |
+| **C9d (V)** Vertex-decisiveness: the pure-rainbow column of the same lattices gives $\lambda_{\rm ME}=0.980079149$ ($m=1/100$) and $0.994520242$ ($m=1/200$), both below unity, so the crossing of C9b is produced by the crossed skeleton and not by the rainbow equation. No certified upper bound on $\lambda_{\rm ME}$ is computed. | NUMERICAL, explicitly not certified | R7. `CERT.md:57-63`, `RESULT.md` section 2 (marked NUMERICAL), values from `records/R6-flat-sheet/verify_1d_counterexample.py::solve_finite_m_lattice`; `CERT.md:283-292` last column | `thm:C` item (V), line 464 |
+| **C9e** Guard and refusal record: box guard (radii $\ge\rho/2$), constant guard (no radius-0 certified coupling), endpoint decisions everywhere, one guard for the pole-free strip ($\min|\mathrm{Im}\,(i\omega_n\nu-\xi-\Sigma)|\ge0.0565776818037$ and $\ge0.0384152648904$), ten broken variants refused with exit 1, and both bounds reproduced at 400 bits. | CERTIFIED (guards); the pole distances are certified, the mutant and precision replays are exit-code evidence | R7. `CERT.md:142-193` (method), `:194-218` (mutants), `:219-282` (all bounds), `:320-362` (commands and exit codes), `mutants/*.log`, `cert_prec400.log`, `cert_prec400_m200.log` | lines 470 to 494, 703, 710 |
+| **C9f** Adjacent discretisations ($N_k=48$, $N_k=64$, $N_w=16$, $\lambda=6$, $m=2/100$, $m=1/400$): binary64 diagnostics only, not enclosures; the crossing survives $N_k\to48,64$ and $N_w\to16$; $m=1/400$ does not isolate the vertex effect because the rainbow column alone crosses there. | NUMERICAL | R7. `CERT.md:296-318` (both tables), `ladder.log` | line 492 |
+| **C9g** Scope: Theorem C is a statement about the finite discretised model; it is not the continuum operator, carries no Matsubara tail, is not a measured $T_c$ and not a material, and does not address the charge and Peierls instabilities of the nested band. | statement of scope | R7. `CERT.md:7-8`, `:296-318`; band caveat unchanged from version 2 (`rem:cdw`) | lines 494 to 498 |
 
-## 2. Open problems of version 2 and their sources
+## 2. Changed status of existing statements
 
-| Problem | Content | Source |
-|---|---|---|
-| `prob:intermediate` | Intermediate $x>x_*$ at $\lambda\ge1/9$ without rotational symmetry; the 16 unclosed grid nodes remain undecided. | `records/R6-flat-sheet/RIGOR.md:162` (open boundary 1); unclosed nodes from `records/R4-gap-grid/RIGOR.md` as recorded in the version 1 claims list |
-| `prob:asymmetry` | Existence of the sign-preserving normal branch without particle-hole symmetry and without a constant transfer; needed to compare $\frac{1}{\pi\sqrt2}\sqrt{AM}$ with $\Cinf\sqrt{AM}$ on one branch. | `records/R6-flat-sheet/RIGOR.md:159-160`, `records/R6-flat-sheet/RIGOR.md:162` (open boundary 2) |
-| `prob:flatcert` | Three gaps to an end-to-end certification: fixed-point defect ($\|D\mathcal F_X\|_{l^\infty}\approx2.96$ at $\lambda=6,8$), Matsubara tail ($0.027>0.012$ at $N_w=12$), and $N_k\to\infty$, $m\to0$ at fixed $\eta$. | `records/R6-flat-sheet/RIGOR.md:82-83` (items (a) and (b) and the finite-$m$ sequence) |
-| `prob:tangency` | Degenerate tangencies, inflections and vanishing relative curvature; (H3) excludes them. | `records/R6-flat-sheet/RIGOR.md:95` (H3), `records/R6-flat-sheet/RIGOR.md:6` |
-| `prob:higher`, `prob:lattice`, `prob:channels` | Unchanged from version 1. | Version 1 claims list |
+| statement | version 2 | version 3 | evidence |
+|---|---|---|---|
+| `prob:flatcert`, Gap 1 (fixed-point defect) | OPEN at every truncation, with the phase-blind supremum norm of the Jacobian at about $2.96$ blocking a contracted remainder bound | closed at $N_k=24$, $N_w=12$, $m=1/100$ and $m=1/200$, where the inversion of $I-DF$ is in $576$ dimensions (C9a); still OPEN at the truncations of `prop:flatcert` (dimension of order $10^5$) | `CERT.md:39-47`, `:296-318`; `main.tex` lines 398, 765 |
+| `prob:flatcert`, Gap 2 (Matsubara tail) | OPEN | OPEN, unchanged | `CERT.md:302` |
+| `prob:flatcert`, Gap 3 (continuum and adiabatic limits) | OPEN | OPEN, unchanged | `CERT.md:303` |
+| `prop:flatcert` (padded binary64 lower bounds) | CERTIFIED (padded binary64) at $(\lambda,m)=(6,0.008)$, $N_k=2050$ and $(8,0.005)$, $N_k=3074$ | unchanged label and numbers; keeps its scope | `main.tex` lines 386 to 394 |
+| `prop:flatcross` (crossing of the scaling limit) | NUMERICAL | NUMERICAL, unchanged | `main.tex` lines 364 to 384 |
 
-## 3. Claims carried forward from version 1
+## 3. Carried forward
 
-The results of records R0 to R5, their labels and their scope are those of the released first version; the `CLAIMS.md` of the first release (tag `v1.0.0`) remains their authoritative map and the manuscript restates them in Sections~\ref{sec:model} and~\ref{sec:results} without change of statement, label or constant. Three wording changes were made in the restated text, none of them a change of claim:
+Every other statement of versions 1 and 2 keeps its label, its record and its wording, including rows C1 to C8 of
+the version 2 map: the flat-sheet scaling limit (PROVED, R6), the numerical crossing of that limit (NUMERICAL, R6),
+the padded binary64 bounds (CERTIFIED (padded binary64), R6), the CDW caveat (NUMERICAL scope restriction, R6),
+coarea sufficiency and the layer-cake reduction (PROVED with CERTIFIED constants, R6), the all-$x$ Young-ball
+closure and the small-$x$ curved-surface window (PROVED, R6), and the supersession note. Record labels: R0 to R6 as
+in version 2, R7 the finite-model certificate of this version.
 
-1. Bounds are attributed to $\Tlin$, the onset of the linearized model, wherever the earlier text could be read as a statement about a $T_c$; the phrase "a material's $T_c$" survives in a single negative scope sentence.
-2. The review verdict word in the source note of the signed-form identity became prose ("the review ... found the record acceptable as a whole"), and the one executable name in the trust-base paragraph became "the radial enclosure".
-3. The record list runs from R0 to R6; the supporting-material paragraph and the introduction now both say so.
+## 4. Claims the manuscript does not make
 
-## 4. Sections changed in `main.tex` relative to the version 1 manuscript
+- **(V) is not a certified separation.** No certified upper bound on $\lambda_{\rm ME}$ exists; the comparison of
+  the full kernel with the rainbow column is a binary64 `eigsh` comparison on the same lattices.
+- **No continuum claim.** The certificate is at fixed $N_k=24$, $N_w=12$; the $N_k=48,64$ and $N_w=16$ values are
+  binary64 diagnostics and the Matsubara tail has no enclosure.
+- **No material claim.** No measured $T_c$, no material prediction, and no statement that the vertex correction
+  lifts a ceiling for any physical system. The band is nested, and the static charge response indicates that the
+  chain and Peierls channels compete.
+- **No theorem beyond the record.** The number of checkers, the refusal of the ten variants, the 400-bit replay
+  and the two checker programs of the $m=1/200$ crossing stage are reported exactly as they stand in `CERT.md`.
 
-- Title: adds "a geometric dichotomy" and keeps the vertex-correction claim.
-- Abstract: rewritten around the dichotomy; "What is shown" now has the flat-sheet, crossing, curved-surface and carried-forward items; "What is not claimed" gains the ground-state and charge-channel caveat.
-- New `Version 2 note` paragraph; record list extended to R6; plan paragraph points at Sections~\ref{sec:flat}, \ref{sec:curved} and \ref{sec:conclusions}; notation paragraph gains $\CLC$, $\vmax$, $\rho$, $x_*$ as needed.
-- New Section~\ref{sec:flat} (`Nested flat sheets: a crossing limit that does not vanish`) with `Definition~\ref{def:flat}`, `Theorem~\ref{thm:flat}`, `Lemma~\ref{lem:residue}`, `Proposition~\ref{prop:flatcross}`, `Proposition~\ref{prop:flatcert}`, `Remarks~\ref{rem:cdw}`.
-- New Section~\ref{sec:curved} (`Curved Fermi surfaces`) with `Lemma~\ref{lem:coarea}`, `Lemma~\ref{lem:layercake}`, `Theorem~\ref{thm:curved}`, plus the supersession remark after `thm:V3a`.
-- New proof-sketch subsections for the four new statements; the earlier sketches are unchanged.
-- Verification section: table row R6, a reproduction paragraph for R6, and the trust-base paragraph extended to the R6 artifacts.
-- New Section~\ref{sec:conclusions} (`Discussion and conclusions`).
-- Section~\ref{sec:open}: `prob:universal` is replaced by `prob:intermediate` (widened), `prob:asymmetry`, `prob:flatcert` and `prob:tangency`; the other three problems are unchanged.
-- Supporting material: R0 to R6, and the claims table is cited without a file name.
-- Review pass: the hypotheses of `def:curved` now carry inversion parity, the DOS normalization and the transfer symmetry of `records/R6-flat-sheet/RIGOR.md:93-94`; the flat-sheet discretization is described as uniform in $y$ with a lumped analytical tail, matching `records/R6-flat-sheet/verify_1d_counterexample.py:53-70`; `eq:curvedF` is stated under its constant-transfer hypothesis of `records/R6-flat-sheet/RIGOR.md:155-160`, with the general-transfer subcase using $F[y]\ge Q_0[y]+F_{\mathrm{ME}}[y;u]-10L_XQ_0[y]$ of `records/R6-flat-sheet/RIGOR.md:160`; the R6 replay paragraph separates its `CERTIFIED` constants from its two `NUMERICAL` cross-checks as `records/R6-flat-sheet/replay.py:73-216` does. No label, bound or scope statement changed.
+## 5. Policy checks of this version
+
+- Byline: Davis Rens, SuperMatics Inc., ORCID 0000-0001-5839-5197. Unchanged from version 2.
+- "This preprint has not been peer reviewed." appears exactly once in `paper/main.tex`, in the section "Supporting
+  material and data availability", which also carries the unchanged version 2 sentence about AI-generated
+  proofs, code and manuscript drafts.
+- No em dash anywhere in `main.tex` or in the rendered text; no internal project or process name.
+- The released manuscript still carries the version 2 record identifiers in its DOI macros (`\MSPAPERDOI`
+  10.5281/zenodo.24410274, `\MSSUPPDOI` 10.5281/zenodo.24410273), because the deposited PDF is the reviewed
+  text and was not rebuilt for the release. The records of this version are 10.5281/zenodo.24415577 (paper) and
+  10.5281/zenodo.24415572 (supplement); the difference is metadata only and is recorded in the release ledger.
+  `README.md`, `CITATION.cff` and this file carry the version 3 identifiers.
+- No placeholder marker remains in `main.tex`: the $m=1/200$ second-checker run passed (`[J] PASS`, `exit=0`) and
+  its result is written into item (S) and into the `Version 3 note` paragraph.
+- Every hash in this file is of a released file: `BUILD.md` sections 1 and 3 list the bytes, and the manifests
+  verify the tree in CI.

@@ -1,0 +1,11 @@
+[model main] Nk=24 Nw=12  M=24 D=576  lam=8 m=1/100 eta=1  mutate=float_leak  prec=200 bits
+[1/6] float candidate Sigma_0:  ||Phi(Sigma_0) - Sigma_0||_inf = 4.178e-17   (9.6s)
+[2/6] model fidelity (numerical): closed-form Phi vs FFT 8.89e-17 ; B vs apply_full 6.66e-16 ; Jacobian vs FD 5.53e-10 ; float lambda_max 1.005797513 ; ||B-B^T||_inf 1.67e-16
+[2b/6] reference solve_finite_m_lattice: lambda_full 1.005797512 (delta 2.2e-10), lambda_me 0.980079149
+      guards: ball radius >= rho in every component -> True ; couplings computed in arb (radius > 0) -> False
+[3/6] interval enclosure: Phi, DPhi over the box (8.2s);  min |Im u| >= 0.0565776818037
+[4/6] Krawczyk/Banach: ||A(Phi(S0)-S0)|| <= 5.73296127735E-17 ; ||I - A(I - DPhi(box))|| <= 3.25923533821E-10 (split bound 3.25923187449E-10)
+      criterion: r + k*rho <= rho  (5.733e-17 <= 1.000e-12) -> True ;  k < 1 -> True ;  unique fixed point in ||Sigma-Sigma_0||_inf <= 5.73296127921E-17
+[5/6] Rayleigh: <v,B v>/<v,v> >= 1.00579751250 ;  antisym part of enclosure <= 1.608E-10 (diagnostic True)
+      criterion: bound >= 1 + 5.0e-03  -> True (margin >= 0.000797512500371)
+[6/6] FAILED  (constant guard: a certified coupling was lifted from binary64)  wall 51.5s

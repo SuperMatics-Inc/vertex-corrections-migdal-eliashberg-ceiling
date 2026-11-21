@@ -1,0 +1,14 @@
+independent checker (MPFR directed rounding, 160 bits): Nk=24 Nw=12 M=24 D=576 lam=8 m=1/100 eta=1/1 mu0=-2/5 rho=1e-12 theta=5e-3
+[A] float fixed point candidate: ||Phi(S0)-S0||_inf = 7.076e-17
+[B] Jacobian vs central differences: 4.19e-10 ; float lambda_max = 1.005797513 (asym 1.4e-16)
+[C] audited artifact solve_finite_m_lattice: lambda_full 1.005797512 (delta 2.2e-10) ; lambda_me 0.980079149 ; min_u 1.2381
+[D0] guards: box covers Sigma_0 +- rho in every component -> True ; 1/Nk exact ((1/Nk)*Nk contains 1) -> True
+[D] min |Im (i w_n nu - xi - Sigma)| over the box >= 5.657768e-02
+[E] tables and Phi(box) enclosed (199.1s)
+[F] DPhi(box) enclosed (741.9s)
+[G] ||A||_inf = 2.151e+00 (A's nonsingularity follows from k < 1, not from this float)
+[H] Banach/Krawczyk: r = ||A(Phi(S0)-S0)||_inf <= 1.43466873225E-16 ; k = ||I - A(I-DPhi)||_inf <= 1.53363171691E-9
+    r + k rho <= 1.43468406857E-16 <= rho = 9.9999999999E-13 -> True ; k < 1 -> True ; unique fixed point with ||Sigma* - Sigma_0||_inf <= r/(1-k) <= 1.43466873445E-16
+[I] Rayleigh: <v,B v>/<v,v> >= 1.00579751243  (B enclosed entrywise, symmetrised) ; lambda_max >= 1.00579751243  (378.3s)
+    diagnostic only: ||B-B^T||_inf <= 5.033E-10 (enclosure width);  criterion: bound >= 1 + 5e-3  (slack >= 0.000797512433561) -> True
+[J] PASS  (all certified inequalities hold)   wall 2551.3s
