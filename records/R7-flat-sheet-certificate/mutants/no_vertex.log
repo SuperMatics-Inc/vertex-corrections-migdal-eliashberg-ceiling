@@ -1,0 +1,11 @@
+[model main] Nk=24 Nw=12  M=24 D=576  lam=8 m=1/100 eta=1  mutate=no_vertex  prec=200 bits
+[1/6] float candidate Sigma_0:  ||Phi(Sigma_0) - Sigma_0||_inf = 2.776e-17   (7.4s)
+[2/6] model fidelity (numerical): closed-form Phi vs FFT 5.55e-17 ; B vs apply_full 3.05e-16 ; Jacobian vs FD 1.93e-10 ; float lambda_max 0.980079149 ; ||B-B^T||_inf 2.78e-17
+[2b/6] reference solve_finite_m_lattice: lambda_full 1.005797512 (delta 2.6e-02), lambda_me 0.980079149
+      guards: ball radius >= rho in every component -> True ; couplings computed in arb (radius > 0) -> False
+[3/6] interval enclosure: Phi, DPhi over the box (5.4s);  min |Im u| >= 0.132390036285
+[4/6] Krawczyk/Banach: ||A(Phi(S0)-S0)|| <= 5.62892558068E-17 ; ||I - A(I - DPhi(box))|| <= 7.02901131961E-11 (split bound 7.02895619605E-11)
+      criterion: r + k*rho <= rho  (5.629e-17 <= 1.000e-12) -> True ;  k < 1 -> True ;  unique fixed point in ||Sigma-Sigma_0||_inf <= 5.62892558108E-17
+[5/6] Rayleigh: <v,B v>/<v,v> >= 0.980079148926 ;  antisym part of enclosure <= 4.232E-11 (diagnostic True)
+      criterion: bound >= 1 + 5.0e-03  -> False (margin >= -0.0249208510736)
+[6/6] FAILED  (reference lambda mismatch, constant guard: a certified coupling was lifted from binary64, Rayleigh lower bound)  wall 41.4s

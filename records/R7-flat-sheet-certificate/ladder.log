@@ -1,0 +1,44 @@
+[model m400] Nk=24 Nw=12  M=24 D=576  lam=8 m=1/400 eta=1  mutate=none  prec=200 bits
+[1/6] float candidate Sigma_0:  ||Phi(Sigma_0) - Sigma_0||_inf = 2.781e-17   (13.2s)
+[2/6] model fidelity (numerical): closed-form Phi vs FFT 3.50e-17 ; B vs apply_full 1.33e-15 ; Jacobian vs FD 9.99e-11 ; float lambda_max 1.068128352 ; ||B-B^T||_inf 1.11e-16
+[2b/6] reference solve_finite_m_lattice: lambda_full 1.068128353 (delta 2.4e-10), lambda_me 1.025402255
+[3/3] float-only: residual 2.78e-17 ; lambda_max 1.068128352 vs 1 + 5.0e-03 -> True ; wall 34.6s
+[m400] NUMERICAL diagnostic only (not part of the certified exit code): criteria met
+[model nk48] Nk=48 Nw=12  M=24 D=1152  lam=8 m=1/100 eta=1  mutate=none  prec=200 bits
+[1/6] float candidate Sigma_0:  ||Phi(Sigma_0) - Sigma_0||_inf = 3.103e-17   (22.6s)
+[2/6] model fidelity (numerical): closed-form Phi vs FFT 1.26e-16 ; B vs apply_full 5.83e-16 ; Jacobian vs FD 4.48e-10 ; float lambda_max 1.007403386 ; ||B-B^T||_inf 5.55e-17
+[2b/6] reference solve_finite_m_lattice: lambda_full 1.007403386 (delta 3.7e-11), lambda_me 0.981144509
+[3/3] float-only: residual 3.10e-17 ; lambda_max 1.007403386 vs 1 + 5.0e-03 -> True ; wall 113.5s
+[nk48] NUMERICAL diagnostic only (not part of the certified exit code): criteria met
+[model nk64] Nk=64 Nw=12  M=24 D=1536  lam=8 m=1/100 eta=1  mutate=none  prec=200 bits
+[1/6] float candidate Sigma_0:  ||Phi(Sigma_0) - Sigma_0||_inf = 4.291e-17   (24.5s)
+[2/6] model fidelity (numerical): closed-form Phi vs FFT 1.70e-16 ; B vs apply_full 5.00e-16 ; Jacobian vs FD 5.23e-10 ; float lambda_max 1.007334935 ; ||B-B^T||_inf 3.47e-17
+[2b/6] reference solve_finite_m_lattice: lambda_full 1.007334935 (delta 3.5e-11), lambda_me 0.981132153
+[3/3] float-only: residual 4.29e-17 ; lambda_max 1.007334935 vs 1 + 5.0e-03 -> True ; wall 151.5s
+[nk64] NUMERICAL diagnostic only (not part of the certified exit code): criteria met
+[model nw16] Nk=24 Nw=16  M=32 D=768  lam=8 m=1/100 eta=1  mutate=none  prec=200 bits
+[1/6] float candidate Sigma_0:  ||Phi(Sigma_0) - Sigma_0||_inf = 5.722e-17   (11.4s)
+[2/6] model fidelity (numerical): closed-form Phi vs FFT 1.21e-16 ; B vs apply_full 5.20e-16 ; Jacobian vs FD 5.60e-10 ; float lambda_max 1.005480060 ; ||B-B^T||_inf 5.55e-17
+[2b/6] reference solve_finite_m_lattice: lambda_full 1.005480060 (delta 1.7e-10), lambda_me 0.979880758
+[3/3] float-only: residual 5.72e-17 ; lambda_max 1.005480060 vs 1 + 5.0e-03 -> True ; wall 53.3s
+[nw16] NUMERICAL diagnostic only (not part of the certified exit code): criteria met
+[model m20] Nk=24 Nw=12  M=24 D=576  lam=8 m=2/100 eta=1  mutate=none  prec=200 bits
+[1/6] float candidate Sigma_0:  ||Phi(Sigma_0) - Sigma_0||_inf = 8.356e-17   (8.2s)
+[2/6] model fidelity (numerical): closed-form Phi vs FFT 2.53e-16 ; B vs apply_full 6.66e-16 ; Jacobian vs FD 8.31e-10 ; float lambda_max 0.996966756 ; ||B-B^T||_inf 8.33e-17
+[2b/6] reference solve_finite_m_lattice: lambda_full 0.996966756 (delta 7.2e-13), lambda_me 0.971723907
+[3/3] float-only: residual 8.36e-17 ; lambda_max 0.996966756 vs 1 + 5.0e-03 -> False ; wall 25.0s
+[m20] NUMERICAL diagnostic only (not part of the certified exit code): criteria not met: float criterion (numerical stage)
+[model lam6] Nk=24 Nw=12  M=24 D=576  lam=6 m=1/100 eta=1  mutate=none  prec=200 bits
+[1/6] float candidate Sigma_0:  ||Phi(Sigma_0) - Sigma_0||_inf = 2.861e-17   (8.0s)
+[2/6] model fidelity (numerical): closed-form Phi vs FFT 1.00e-16 ; B vs apply_full 7.22e-16 ; Jacobian vs FD 2.91e-10 ; float lambda_max 1.006179806 ; ||B-B^T||_inf 1.11e-16
+[2b/6] reference solve_finite_m_lattice: lambda_full 1.006179806 (delta 2.9e-11), lambda_me 0.977772858
+[3/3] float-only: residual 2.86e-17 ; lambda_max 1.006179806 vs 1 + 5.0e-03 -> True ; wall 24.6s
+[lam6] NUMERICAL diagnostic only (not part of the certified exit code): criteria met
+
+=== summary (none) ===
+m400   Nk=24  Nw=12 D=576  lambda_max ~ 1.0681283523   NUMERICAL
+nk48   Nk=48  Nw=12 D=1152 lambda_max ~ 1.0074033857   NUMERICAL
+nk64   Nk=64  Nw=12 D=1536 lambda_max ~ 1.0073349348   NUMERICAL
+nw16   Nk=24  Nw=16 D=768  lambda_max ~ 1.0054800598   NUMERICAL
+m20    Nk=24  Nw=12 D=576  lambda_max ~ 0.9969667561   FAILED: float criterion (numerical stage)
+lam6   Nk=24  Nw=12 D=576  lambda_max ~ 1.0061798062   NUMERICAL

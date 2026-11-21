@@ -1,0 +1,11 @@
+[model main] Nk=24 Nw=12  M=24 D=576  lam=8 m=1/100 eta=1  mutate=m_threshold  prec=200 bits
+[1/6] float candidate Sigma_0:  ||Phi(Sigma_0) - Sigma_0||_inf = 8.356e-17   (9.6s)
+[2/6] model fidelity (numerical): closed-form Phi vs FFT 2.53e-16 ; B vs apply_full 6.66e-16 ; Jacobian vs FD 8.31e-10 ; float lambda_max 0.996966756 ; ||B-B^T||_inf 8.33e-17
+[2b/6] reference solve_finite_m_lattice: lambda_full 0.996966756 (delta 7.2e-13), lambda_me 0.971723907
+      guards: ball radius >= rho in every component -> True ; couplings computed in arb (radius > 0) -> True
+[3/6] interval enclosure: Phi, DPhi over the box (5.8s);  min |Im u| >= 0.0801723770333
+[4/6] Krawczyk/Banach: ||A(Phi(S0)-S0)|| <= 1.97835196400E-16 ; ||I - A(I - DPhi(box))|| <= 3.65201935861E-10 (split bound 3.65201664020E-10)
+      criterion: r + k*rho <= rho  (1.978e-16 <= 1.000e-12) -> True ;  k < 1 -> True ;  unique fixed point in ||Sigma-Sigma_0||_inf <= 1.97835196472E-16
+[5/6] Rayleigh: <v,B v>/<v,v> >= 0.996966756079 ;  antisym part of enclosure <= 1.146E-10 (diagnostic True)
+      criterion: bound >= 1 + 5.0e-03  -> False (margin >= -0.00803324392063)
+[6/6] FAILED  (Rayleigh lower bound)  wall 38.6s
