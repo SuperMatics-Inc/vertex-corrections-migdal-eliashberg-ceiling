@@ -1,0 +1,53 @@
+=== 1) Continuation in lam at eta=1.000 (Nw=12, Ymax=120, Ny=241, exact-sym) ===
+lam= 0.5 | ME=0.624776 | Full=0.614321 | min_u=1.0484 | sym=3.0e-18 | res=3.8e-12 (2.7s)
+lam= 1.0 | ME=0.797570 | Full=0.805914 | min_u=1.0767 | sym=7.9e-18 | res=5.8e-11 (2.6s)
+lam= 2.0 | ME=0.913267 | Full=0.943590 | min_u=1.1251 | sym=0.0e+00 | res=4.0e-11 (3.4s)
+lam= 4.0 | ME=0.969789 | Full=1.003420 | min_u=1.2131 | sym=1.4e-17 | res=7.5e-11 (3.4s)
+lam= 6.0 | ME=0.984918 | Full=1.014193 | min_u=1.2975 | sym=1.0e-17 | res=7.6e-11 (3.2s)
+lam= 8.0 | ME=0.991048 | Full=1.016838 | min_u=1.3800 | sym=3.2e-18 | res=8.8e-11 (3.1s)
+lam=10.0 | ME=0.994115 | Full=1.017703 | min_u=1.4613 | sym=2.5e-17 | res=6.6e-11 (2.9s)
+
+=== 2) eta_crit root finding (exact-sym continuum) ===
+lam=4.0 Nw=12 Ymax=120.0 Ny=241 | eta_crit=1.008588 | Full=1.000000 | ME=0.967077 | sym=0.0e+00 | res=8.6e-11
+lam=4.0 Nw=16 Ymax=180.0 Ny=361 | eta_crit=1.008871 | Full=1.000000 | ME=0.966518 | sym=8.1e-18 | res=1.3e-11
+lam=6.0 Nw=12 Ymax=120.0 Ny=241 | eta_crit=1.046460 | Full=1.000000 | ME=0.973854 | sym=1.0e-17 | res=1.1e-11
+lam=6.0 Nw=16 Ymax=180.0 Ny=361 | eta_crit=1.045617 | Full=1.000000 | ME=0.973725 | sym=1.6e-17 | res=8.9e-12
+lam=8.0 Nw=12 Ymax=120.0 Ny=241 | eta_crit=1.068560 | Full=1.000000 | ME=0.978038 | sym=9.7e-18 | res=9.6e-11
+lam=8.0 Nw=16 Ymax=180.0 Ny=361 | eta_crit=1.065128 | Full=1.000000 | ME=0.978393 | sym=8.6e-18 | res=9.4e-11
+
+=== 3) Convergence table & Richardson extrapolation at eta=1.000 (lam=4, 6, 8) ===
+-- lam=4.0 --
+  Nw=12 Ymax=120.0 Ny=241 dy=1.00 | ME=0.969789 | Full=1.003420 | min_u=1.2131 | sym=1.4e-17 | res=7.5e-11 (3.0s)
+  Nw=12 Ymax=240.0 Ny=481 dy=1.00 | ME=0.969789 | Full=1.004632 | min_u=1.2144 | sym=4.2e-18 | res=8.0e-11 (5.5s)
+  Nw=16 Ymax=120.0 Ny=241 dy=1.00 | ME=0.969308 | Full=1.002760 | min_u=1.1595 | sym=0.0e+00 | res=7.8e-11 (4.3s)
+  Nw=16 Ymax=120.0 Ny=481 dy=0.50 | ME=0.969308 | Full=1.002691 | min_u=1.1595 | sym=4.5e-19 | res=7.8e-11 (9.6s)
+  Nw=16 Ymax=180.0 Ny=361 dy=1.00 | ME=0.969308 | Full=1.003513 | min_u=1.1599 | sym=0.0e+00 | res=7.9e-11 (8.3s)
+  Nw=16 Ymax=240.0 Ny=481 dy=1.00 | ME=0.969308 | Full=1.003971 | min_u=1.1602 | sym=7.1e-18 | res=8.2e-11 (8.6s)
+  Nw=24 Ymax=180.0 Ny=361 dy=1.00 | ME=0.968965 | Full=1.003043 | min_u=1.1064 | sym=2.7e-18 | res=8.2e-11 (26.2s)
+  Richardson (lam=4.0): base(16,240)=1.003971, d_ymax=+0.001211, d_dy=-0.000091, d_nw=-0.000846 => extrap=1.004245
+-- lam=6.0 --
+  Nw=12 Ymax=120.0 Ny=241 dy=1.00 | ME=0.984918 | Full=1.014193 | min_u=1.2975 | sym=1.0e-17 | res=7.6e-11 (2.8s)
+  Nw=12 Ymax=240.0 Ny=481 dy=1.00 | ME=0.984918 | Full=1.014530 | min_u=1.2998 | sym=1.8e-18 | res=5.9e-11 (5.5s)
+  Nw=16 Ymax=120.0 Ny=241 dy=1.00 | ME=0.984565 | Full=1.013728 | min_u=1.2226 | sym=2.0e-17 | res=8.0e-11 (4.2s)
+  Nw=16 Ymax=120.0 Ny=481 dy=0.50 | ME=0.984565 | Full=1.013638 | min_u=1.2226 | sym=1.5e-18 | res=8.0e-11 (9.0s)
+  Nw=16 Ymax=180.0 Ny=361 dy=1.00 | ME=0.984565 | Full=1.013859 | min_u=1.2233 | sym=1.3e-17 | res=9.3e-11 (8.5s)
+  Nw=16 Ymax=240.0 Ny=481 dy=1.00 | ME=0.984565 | Full=1.014061 | min_u=1.2239 | sym=4.3e-18 | res=2.7e-11 (8.3s)
+  Nw=24 Ymax=180.0 Ny=361 dy=1.00 | ME=0.984313 | Full=1.013527 | min_u=1.1485 | sym=7.2e-18 | res=9.1e-11 (25.6s)
+  Richardson (lam=6.0): base(16,240)=1.014061, d_ymax=+0.000333, d_dy=-0.000120, d_nw=-0.000597 => extrap=1.013678
+-- lam=8.0 --
+  Nw=12 Ymax=120.0 Ny=241 dy=1.00 | ME=0.991048 | Full=1.016838 | min_u=1.3800 | sym=3.2e-18 | res=8.8e-11 (2.3s)
+  Nw=12 Ymax=240.0 Ny=481 dy=1.00 | ME=0.991048 | Full=1.016220 | min_u=1.3836 | sym=1.0e-17 | res=5.7e-11 (5.0s)
+  Nw=16 Ymax=120.0 Ny=241 dy=1.00 | ME=0.990770 | Full=1.016483 | min_u=1.2844 | sym=0.0e+00 | res=9.2e-11 (3.4s)
+  Nw=16 Ymax=120.0 Ny=481 dy=0.50 | ME=0.990770 | Full=1.016371 | min_u=1.2844 | sym=2.6e-18 | res=9.2e-11 (7.7s)
+  Nw=16 Ymax=180.0 Ny=361 dy=1.00 | ME=0.990770 | Full=1.015933 | min_u=1.2855 | sym=2.9e-18 | res=8.3e-12 (8.2s)
+  Nw=16 Ymax=240.0 Ny=481 dy=1.00 | ME=0.990770 | Full=1.015859 | min_u=1.2864 | sym=2.7e-18 | res=6.3e-11 (8.5s)
+  Nw=24 Ymax=180.0 Ny=361 dy=1.00 | ME=0.990572 | Full=1.015679 | min_u=1.1899 | sym=4.2e-18 | res=2.8e-11 (25.2s)
+  Richardson (lam=8.0): base(16,240)=1.015859, d_ymax=-0.000624, d_dy=-0.000149, d_nw=-0.000458 => extrap=1.014628
+
+=== 4) Exact-symmetric finite-m periodic lattice & interval Rayleigh lower bound (mu0=-0.4) ===
+lam=6.0 m=0.0120 Nk=1538 Nw=12 | ME=0.975378 | Full=1.005499 | min_u=1.1903 | rpa_2kf=8.4297 | sym=5.5e-18 | res=4.9e-11 (8.9s)
+lam=6.0 m=0.0080 Nk=2050 Nw=12 | ME=0.978534 | Full=1.009087 | rq_lo=1.0090706553 | min_u=1.2120 | rpa_2kf=8.4092 | sym=7.6e-18 | res=5.6e-11 (11.4s)
+lam=8.0 m=0.0200 Nk=1026 Nw=12 | ME=0.971691 | Full=0.996985 | min_u=1.1802 | rpa_2kf=10.3743 | sym=1.3e-18 | res=5.6e-11 (7.3s)
+lam=8.0 m=0.0120 Nk=1538 Nw=12 | ME=0.979201 | Full=1.005204 | min_u=1.2239 | rpa_2kf=9.9731 | sym=3.5e-18 | res=1.7e-11 (9.4s)
+lam=8.0 m=0.0080 Nk=2050 Nw=12 | ME=0.983070 | Full=1.009412 | min_u=1.2531 | rpa_2kf=9.8285 | sym=5.1e-18 | res=1.3e-11 (12.0s)
+lam=8.0 m=0.0050 Nk=3074 Nw=12 | ME=0.986022 | Full=1.012327 | rq_lo=1.0123025473 | min_u=1.2799 | rpa_2kf=9.7963 | sym=8.6e-19 | res=3.3e-11 (19.8s)

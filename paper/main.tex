@@ -1,5 +1,5 @@
 % SuperMatics preprint. Every statement is traced to a source record in CLAIMS.md.
-% Record labels R0 to R5 are defined in the introduction; the full mapping is in CLAIMS.md.
+% Record labels R0 to R6 are defined in the introduction; the full mapping is in CLAIMS.md.
 \documentclass[11pt]{article}
 \usepackage[a4paper,margin=1in]{geometry}
 \usepackage{amsmath,amssymb,amsthm}
@@ -12,6 +12,8 @@
 \pgfplotsset{compat=1.16}
 \usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
 \usepackage{xurl}
+% Standard TeX stretch so the bibliography does not set underfull lines.
+\setlength{\emergencystretch}{1.5em}
 
 % ---------- evidence labels ----------
 \newcommand{\PROVED}{\upshape\mdseries\textsc{Proved}}
@@ -27,6 +29,9 @@
 \newcommand{\Rg}{\mathrm{ME}}
 \newcommand{\dd}{\,\mathrm d}
 \newcommand{\sS}{\sup\sigma S}
+\newcommand{\Cgeom}{C_{\mathrm{geom}}}
+\newcommand{\CLC}{C_{\mathrm{LC}}}
+\newcommand{\vmax}{v_{\max}}
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{proposition}[theorem]{Proposition}
@@ -37,10 +42,10 @@
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
 
-\title{Vertex corrections and the Migdal--Eliashberg ceiling:\\ rigorous bounds in a spherical overlap model}
+\title{Vertex corrections and the Migdal--Eliashberg ceiling:\\ a geometric dichotomy between nested and curved Fermi surfaces}
 \author{Davis Rens, SuperMatics Inc.\\\href{https://orcid.org/0000-0001-5839-5197}{ORCID 0000-0001-5839-5197}}
-\newcommand{\MSPAPERDOI}{10.5281/zenodo.24407163}
-\newcommand{\MSSUPPDOI}{10.5281/zenodo.24407165}
+\newcommand{\MSPAPERDOI}{10.5281/zenodo.24410274}
+\newcommand{\MSSUPPDOI}{10.5281/zenodo.24410273}
 \newcommand{\MSREPOURL}{https://github.com/SuperMatics-Inc/vertex-corrections-migdal-eliashberg-ceiling}
 \date{Preprint:~\href{https://doi.org/\MSPAPERDOI}{doi:\MSPAPERDOI}\\
 Supplementary records:~\href{https://doi.org/\MSSUPPDOI}{doi:\MSSUPPDOI}\\
@@ -50,9 +55,13 @@ Source:~\url{\MSREPOURL}}
 \maketitle
 
 \begin{abstract}
-The phonon-only scalar Migdal--Eliashberg (ME) equations on the positive reflected normal branches specified below have the ceiling $\kB\Tlin<\Cinf\sqrt{AM}$, where $A$ is the relative height of the electronic density of states and $M=\int\Omega^2\dd\lambda(\Omega)$ is the phonon spectral moment. The exact coefficient $\Cinf$ rounds to $0.18272624777232952$ \cite{RensScalar}. We ask whether this ceiling survives addition of the first crossed skeleton to the rainbow self-energy.
-For a local flat band we obtain an explicit inflation and recover the uninflated bound at fixed coupling for sufficiently small $\Omega_{\max}/W$. In a projected spherical band we prove stability above an inflated threshold within a small-$x$ window. A pointwise contraction for $AR(T)\le1/9$ gives a high-temperature bound if $A\lambda<1/9$ and an onset bound strictly below the ceiling if $A\lambda\le1/26^2$. An overlap argument gives the uninflated bound for bounded weak coupling under a sufficient bandwidth-ratio guard.
-For the spherical Einstein model at $1/9\le\lambda\le2$, continuum estimates and finite arithmetic certificates extend coverage but leave regions above the ceiling unclosed. A separate lattice calculation gives three grid-refined numerical pairing roots below the ceiling. Neither a universal bound for the crossed skeleton nor a counterexample is established.
+The phonon-only scalar Migdal--Eliashberg (ME) equations on the positive reflected normal branches specified below have the ceiling $\kB\Tlin<\Cinf\sqrt{AM}$, where $A$ is the relative height of the electronic density of states and $M=\int\Omega^2\dd\lambda(\Omega)$ is the phonon spectral moment. The exact coefficient $\Cinf$ rounds to $0.18272624777232952$ \cite{RensScalar}. We ask whether this ceiling survives addition of the first crossed skeleton to the rainbow self-energy, and the answer we obtain is a geometric dichotomy rather than a single uniform bound.
+
+On the negative side, bounded density of states, a constant transfer $V_j=K_j/N_0$ and a fixed bare chemical potential are not sufficient. On a one-dimensional band, and on the parallel flat sheets of a two-dimensional band, the crossed skeleton has a nonvanishing limit as $\Omega/W\to0$: three of the four sheet combinations satisfy linear energy conservation, the fourth is separated by the full bandwidth, and the crossed channels reduce to two exact Cauchy residues. The linearized pairing operator of that limit is self-adjoint and its top eigenvalue crosses unity at $\lambda=4,6,8$, with Richardson values $1.004245$, $1.013678$, $1.014628$, so the onset lies $0.9\%$ to $6.5\%$ above the ceiling. The crossing itself is numerical. A padded binary64 Rayleigh quotient certifies only that the discretized operator at two fixed parameters exceeds one. The band is nested, its $2k_F$ charge response is strongly enhanced, and the branch used is therefore not a physical ground state.
+
+On the positive side, the small-$x$ exclusion proved here for a spherical band is a special case of a statement about curvature. For every $d\ge2$, a compact $C^2$ dispersion whose energy collars are strictly convex, with nondegenerate pocket tangencies, satisfies a uniform three-line strip overlap bound in which a coarea estimate along the collars replaces the spherical joint density. A layer-cake reduction turns that bound into a relative crossed correction of order $x(1+\log_+(1/x))^{4}$ in $d=2$ and $x(1+\log_+(1/x))^{3}$ in $d\ge3$, and the crossed form is then a relative $o(1)$ perturbation of the ME form in the adiabatic window, on any sign-preserving normal branch with the stated bounds. The all-$x$ Young-ball closure of the pointwise criterion $AR\le1/9$ survives unchanged for a constant transfer and a particle-hole-even density of states.
+
+The earlier results remain: an explicit inflation for a local flat band, stability above an inflated threshold in the spherical window, an onset bound strictly below the ceiling for $A\lambda\le1/26^2$, continuum estimates and finite arithmetic certificates for the spherical Einstein model at $1/9\le\lambda\le2$, and three grid-refined numerical pairing roots in a finite lattice. What remains open is narrower than before: intermediate $x$ at $\lambda\ge1/9$ without spherical symmetry, existence of the normal branch without particle-hole symmetry, end-to-end certification of the flat-sheet crossing, and degenerate tangencies.
 \end{abstract}
 
 \tableofcontents
@@ -73,18 +82,24 @@ Migdal's approximation neglects vertex corrections, and the first of them is the
 Here ``survive'' refers to the upper linear pairing boundary on a named normal branch where it exists, for rainbow plus first crossed with bare phonons, fixed chemical potential and no Coulomb term. Most bounds use the regular branch; Theorem~\ref{thm:V1} applies to any solution with the specified centering and widths.
 
 \paragraph{What is shown.}
+The question above does not have a single answer, and the central result of this version is that it splits along the geometry of the energy surfaces. Bounded density of states, a constant transfer and a fixed chemical potential do not bound the crossed skeleton on nested sheets, and strict convexity of the energy collars does bound it on curved ones.
 \begin{itemize}
+\item \PROVED\ On a one-dimensional band, and on the parallel flat sheets of a two-dimensional band, the crossed skeleton has an $O(1)$ limit as $\Omega_{\max}/W\to0$. Three of the four sheet combinations satisfy linear energy conservation, the fourth is separated by the bandwidth, and the two crossed channels reduce to the exact residues $I_1$ and $I_{23}$ (Theorem~\ref{thm:flat}). The first crossed correction does not vanish as $m\to0$ on these bands.
+\item \NUM\ and \CERT\ (padded binary64) at two fixed parameters: the self-adjoint pairing operator of that limit has top eigenvalue $1.004245$, $1.013678$, $1.014628$ after Richardson extrapolation at $\lambda=4,6,8$, so the linear onset lies $0.9\%$ to $6.5\%$ above the ceiling (Proposition~\ref{prop:flatcross}). The band is nested and its static $2k_F$ charge response is strongly enhanced, so this is a statement about the truncated equations and not about a ground state.
+\item \PROVED\ For every $d\ge2$, strict convexity of the energy collars, a uniform lower bound on the Fermi velocity and nondegenerate pocket tangencies give the three-line strip overlap bound used before only in spherical or balanced geometry (Lemma~\ref{lem:coarea}). A layer-cake reduction then makes the crossed form a relative $o(1)$ correction to the ME form in the small-$x$ window (Lemma~\ref{lem:layercake}, Theorem~\ref{thm:curved}). The spherical small-$x$ exclusion of Theorem~\ref{thm:V3a} is the spherical special case.
 \item \PROVED\ A local crossed skeleton with flat DOS obeys the ceiling inflated by a factor that tends to $1$ as $\Omega_{\max}/W\to0$ at fixed $\lambda$ (Theorem~\ref{thm:V1}), and two tempting estimates are shown to be false (Proposition~\ref{prop:obstruction}, Theorem~\ref{thm:V2}).
 \item \PROVED\ The spherical estimate excludes instability within $x\le x_*$ above an inflated threshold (Theorem~\ref{thm:V3a}). The pointwise Young-ball criterion $AR(T)\le1/9$ gives stability above $\tau_Y$ if $A\lambda<1/9$, and an onset bound strictly below the ceiling if $A\lambda\le1/26^2$ (Theorem~\ref{thm:V3b}). The overlap theorem gives the uninflated bound under a sufficient guard (Theorem~\ref{thm:B2}).
 \item \PROVED\ and \CERT\ for the spherical Einstein model at $1/9\le\lambda\le2$, two full-coupling windows, a weak edge interval, and finite grids (Theorem~\ref{thm:V4} and Propositions~\ref{prop:V4grid},~\ref{prop:V4static}). The grid labels certify nodes, not a continuum of parameters.
 \item \NUM\ Three grid-refined homogeneous-branch pairing roots below the ceiling at fixed density in a finite-DOS lattice (Section~\ref{sec:lattice}); the largest onset over all branches is unknown.
 \end{itemize}
 
-\paragraph{What is not claimed.} We do not claim that vertex corrections preserve or violate the ceiling in general, or that the local conserving crossed treatment is new \cite{Miller}. An earlier \NUM\ van Hove model gave $134.27$~K against a rounded $A=1$ scalar reference of $129.85$~K on a $24\times24$ grid with 24 positive Matsubara frequencies. The momentum grid is not converged and the DOS has $A=\infty$, so the reference is not its ceiling (Section~\ref{sec:lattice}). Nothing here is a measurement or a prediction of a material's $T_c$.
+\paragraph{What is not claimed.} We do not claim that vertex corrections preserve or violate the ceiling in general, or that the local conserving crossed treatment is new \cite{Miller}. The flat-sheet result does not claim that any material is superconducting, and it does not claim that pairing wins against the charge or Peierls instability of that band; the opposite is indicated by the enhancement reported with it. The curved-surface result does not claim that the crossed skeleton can lower the onset, only that in the adiabatic window it cannot raise it by more than a relative amount that vanishes with $x$. An earlier \NUM\ van Hove model gave $134.27$~K against a rounded $A=1$ scalar reference of $129.85$~K on a $24\times24$ grid with 24 positive Matsubara frequencies. The momentum grid is not converged and the DOS has $A=\infty$, so the reference is not its ceiling (Section~\ref{sec:lattice}). Nothing here is a measurement or a prediction of a material's $T_c$.
 
-\paragraph{Supplementary records.} The full proofs, replay scripts, certificate logs and independent review records accompany this preprint as supplementary material and are grouped as R0 to R5: R0 the scalar ceiling, R1 the local crossed skeleton, R2 the signed momentum-resolved form together with its formalised algebra, R3 the spherical onset estimates, R4 the spherical Einstein gap and grid, and R5 the finite lattice. Each statement below names the record, section and line that prove it.
+\paragraph{Version 2 note.} This version adds two results and rewrites what follows from them. The released first version left the universal onset question open in both directions, with neither a uniform bound for the crossed skeleton nor a counterexample. The added results settle one direction on nested sheets and widen the other direction from a spherical model to a curvature condition: Theorem~\ref{thm:flat} and Propositions~\ref{prop:flatcross} and~\ref{prop:flatcert} supply the counterexample (analytic scaling limit, numerical crossing, and padded-binary64 finite-band lower bounds) and Lemmas~\ref{lem:coarea},~\ref{lem:layercake} and Theorem~\ref{thm:curved} supply the bound. Nothing asserted in the first version is withdrawn. Theorem~\ref{thm:V3a} keeps its statement and its proof and is now understood as the spherical instance of Theorem~\ref{thm:curved}; Theorem~\ref{thm:V3b} keeps its statement and appears again as part (1) of Theorem~\ref{thm:curved}, where its two extra hypotheses are shown to be necessary for an all-$x$ closure. The statement of Theorem~\ref{thm:V2} that the universal onset question was open, and the open problem of Section~\ref{sec:open} that carried the same name, are superseded: the question is now posed as four separate problems, and the first of them, the intermediate-$x$ window at $\lambda\ge1/9$, is where the remaining difficulty sits.
 
-\paragraph{Plan.} Section~\ref{sec:model} defines the model. Section~\ref{sec:results} states the results with exact hypotheses and displays their coverage in the $(x,\lambda)$ plane. Section~\ref{sec:proofs} gives proof sketches and points to the full proofs in the records R1 to R5. Section~\ref{sec:verification} describes the computer-assisted and Lean verification and its limits, Section~\ref{sec:lattice} the finite-lattice numerics, and Section~\ref{sec:open} what remains open.
+\paragraph{Supplementary records.} The full proofs, replay scripts and certificate logs accompany this preprint as supplementary material and are grouped as R0 to R6: R0 the scalar ceiling, R1 the local crossed skeleton, R2 the signed momentum-resolved form together with its formalised algebra, R3 the spherical onset estimates, R4 the spherical Einstein gap and grid, R5 the finite lattice, and R6 the flat-sheet limit and the curved-surface bound added in this version. Each statement below names the record, section and line that prove it. Numerical work is reproduced by the replay supplement described in Section~\ref{sec:verification}.
+
+\paragraph{Plan.} Section~\ref{sec:model} defines the model. Section~\ref{sec:results} states the earlier results with exact hypotheses and displays their coverage in the $(x,\lambda)$ plane. Section~\ref{sec:flat} and Section~\ref{sec:curved} state the two results added in this version, Section~\ref{sec:proofs} gives proof sketches and points to the full proofs in the records R1 to R6, Section~\ref{sec:verification} describes the computer-assisted and Lean verification and its limits, Section~\ref{sec:lattice} the finite-lattice numerics, Section~\ref{sec:conclusions} the dichotomy and its scope, and Section~\ref{sec:open} what remains open.
 
 %--------------------------------------------------------------------
 \section{Model}\label{sec:model}
@@ -168,7 +183,7 @@ Let the first crossed skeleton be momentum resolved with Einstein phonons and $\
 \item[(iii)] \emph{Overlap window.} In the spherical overlap model of Definition~\ref{def:spherical} with Einstein coupling $\lambda$, there is $t_0(\lambda)<\Cinf\sqrt\lambda$ and $x_\lambda>0$ such that the regular branch has no even-frequency singlet onset for $t_0(\lambda)\,\Omega\le\tau\le x_\lambda W/\pi$ (the window is non-empty for $\Omega/W$ small enough), and $|F_X|/Q_0=O_\lambda\big((\tau/W)[1+\log(W/\tau)]^3\big)$ as $\tau/W\to0$. The result is qualitative in $\lambda$ and not uniform as $\lambda\to\infty$.
 \item[(iv)] \emph{Weak coupling in the projected spherical Einstein model of (iii).} For $0<\lambda\le2^{-20}$ the regular branch is stable at every $\tau\ge\sqrt\lambda\,\Omega/8$, without restriction on $m$. Hence $\tau_{\rm lin}\le\sqrt\lambda\,\Omega/8<\Cinf\sqrt M$.
 \end{enumerate}
-The universal onset statement is \OPEN.
+The universal onset statement of the first version is not settled by this theorem; Section~\ref{sec:flat} and Section~\ref{sec:curved} replace it by the dichotomy stated in this version.
 \end{theorem}
 
 Part~(ii) is the reason the proofs below cannot treat the crossed term as a small perturbation of the ME gap. The Lean-checked finite algebra behind parts of this theorem is listed in Section~\ref{sec:verification}.
@@ -182,6 +197,8 @@ F[y]\;\ge\;\big[1-\sS(1)-C_0x\big]\,Q_0[\bar y]+\tfrac38\,Q_0[y_\perp],\qquad C_
 \end{equation}
 where $\bar y_n$ is the mean over all momentum variables in the probability measure proportional to $|Q_n|$, and $y_\perp=y-\bar y$. Within $0<x\le x_*$, stability holds for $T\ge\Tceil(1+52000\,B^4\rho)$. The constants are sufficient, not sharp, and not uniform as $B\to\infty$.
 \end{theorem}
+
+\noindent\emph{Relation to the new curved-surface result.} The statement and proof of Theorem~\ref{thm:V3a} are unchanged in this version. It is now the rotationally symmetric instance of part (2) of Theorem~\ref{thm:curved}: the coarea bound of Lemma~\ref{lem:coarea} reduces to the spherical joint density and its constants, so the spherical exclusion is neither withdrawn nor weakened, only narrowed to the case where the extra symmetry was doing no work.
 
 \begin{theorem}[Young-ball criterion and weak-coupling onset bound]\label{thm:V3b}\hfill\PROVED\\
 Use a constant spatial transfer on an inversion-invariant projected continuum domain or additive momentum group with Haar measure, with $\xi(-k)=\xi(k)$ almost everywhere and an even normalized marginal DOS bounded by $AN_0$. At any $\tau>0$ such that $r=AR(\tau)\le1/9$, contraction gives the unique regular solution within $\|\Sigma\|_\infty\le\nu/3$, and pairing has absolute Schur bound strictly below one. The criterion holds at every $\tau\ge\tau_Y$ if $A\lambda<1/9$, yielding
@@ -199,7 +216,7 @@ For fixed Einstein $0<\lambda<1/9$ and sufficiently small $\Omega/W$, the spheri
 with $\delta_*=\inf_{\lambda\le\Lambda}\delta_\lambda>0$, $B=1+\Lambda+3\sqrt\Lambda$ and $x_h=\min(x_*,\delta_*/(2C_0))$. The two contraction regimes overlap on $\max(x_c,x_Y)<x<x_h$, where $x_c=\pi\tau_c/W$ and $x_Y=\pi\rho/\sqrt{12(1/9-\Lambda)}$. On that branch $\tau_{\rm lin}\le\tau_c$. The result is not uniform in unbounded coupling and contains no claim of a crossing or of a universal ceiling.
 \end{theorem}
 
-\noindent\OPEN: marginal DOS control alone gives neither the joint-density regularity nor the balanced variance estimate. The Young-ball high-temperature conclusion for $A\lambda<1/9$ does not address larger couplings, and the small-$x$ estimates deteriorate with growing $\lambda$.
+\noindent\OPEN: marginal DOS control alone gives neither the joint-density regularity nor the balanced variance estimate. (Sections~\ref{sec:flat} and~\ref{sec:curved} show that bounded DOS alone fails on nested sheets and that strict convexity replaces the spherical joint density at small $x$.) The Young-ball high-temperature conclusion for $A\lambda<1/9$ does not address larger couplings, and the small-$x$ estimates deteriorate with growing $\lambda$.
 
 \subsection{Spherical Einstein model at \texorpdfstring{$1/9\le\lambda\le2$}{couplings from 1/9 to 2}}
 
@@ -281,9 +298,179 @@ Figure~\ref{fig:coverage} shows the two finite Einstein slices. Since $\Omega/W=
 \end{figure}
 
 %--------------------------------------------------------------------
+\section{Nested flat sheets: a crossed limit that does not vanish}\label{sec:flat}
+
+The negative half of the dichotomy uses a band in which every hypothesis of the ceiling problem except the geometry is intact. The density of states is flat, the transfer is momentum independent, the chemical potential is fixed, and the interaction is weak in the sense that $\lambda\Omega/W\to0$. In the adiabatic limit the crossed skeleton still keeps a size of order one, and the linearized pairing operator built from it lies above the ceiling.
+
+\subsection{The bands}
+
+\begin{definition}[Flat-sheet bands]\label{def:flat}
+On $\mathcal B_1=[-\pi,\pi)$ with the normalized measure $\dd k/(2\pi)$ let
+\begin{equation}\label{eq:flatdisp}
+\xi(k)=W\Big(\frac{2|k|}{\pi}-1\Big)-\mu_0,\qquad |\mu_0|<W,\qquad N_0=\frac{1}{2W},\qquad A=1,
+\end{equation}
+with the Einstein transfer $V_j=K_j/N_0$, $K_j=\lambda\Omega^2/(\Omega^2+(2\nu j)^2)$, $M=\lambda\Omega^2$ and $\kB\Tceil=\Cinf\sqrt\lambda\,\Omega$. The band has two Fermi points $\pm k_F$ with $k_F=\frac{\pi}{2}(1+\mu_0/W)\in(0,\pi)$. Take also the two-dimensional band $\xi(k_x,k_y)=W(2|k_x|/\pi-1)-\mu_0$ on $[-\pi,\pi)^2$ with the normalized measure; it has the same density of states $A=1$, its transfer is constant, and its normal and pairing equations at fixed $k_y$ are the one-dimensional equations, so every statement below holds for it without change.
+\end{definition}
+
+Both bands are perfectly nested: the vector $2k_F$ connects the two sheets of the line, and the two-dimensional band consists of parallel flat sheets nested along $k_x$ for every $k_y$.
+
+\subsection{The limit at fixed ratio \texorpdfstring{$\eta=T/\Tceil$}{eta}}
+
+\begin{theorem}[Flat-sheet scaling limit]\label{thm:flat}\hfill\PROVED\\
+Fix $\lambda>0$ and $\eta>0$; put $\tau=\eta\,\kB\Tceil$, $\nu=\pi\tau$, $m=\Omega/W$ and $x=\nu/W$. Then $\tau/\Omega=\eta\Cinf\sqrt\lambda$ and the Matsubara ratio $\Omega/(2\nu)=(2\pi\eta\Cinf\sqrt\lambda)^{-1}$ do not depend on $m$. Write $y=\xi/\nu$ on each sheet, that is $k=\pm(k_F+\frac{\pi\nu}{2W}y)$, and $\tilde z(n,y)=\nu z_n(\nu y)=(iw_n-y-\tilde\Sigma(n,y))^{-1}$ with $w_n=2n+1$ and $\tilde\Sigma=\Sigma/\nu$. Assume $4k_F\notin2\pi\mathbb Z$, so that $-3k_F$ is not congruent to $\pm k_F$ modulo $2\pi$; $\mu_0=-0.4W$ gives $k_F=0.3\pi$ and $-3k_F=-0.9\pi$. Then, as $m\to0$ with $\eta$ fixed:
+\begin{enumerate}
+\item[(i)] \emph{Sheet decomposition.} Of the eight combinations $(\sigma_k,\sigma_a,\sigma_c)\in\{\pm\}^3$, three keep the middle line in the collar: for $\sigma_k=+$ they give $\xi_b/\nu$ equal to $y_a+y_c-y$, $y_c-y_a+y$ and $y_a-y_c+y$, all of order one. In the fourth, $k_b=-3k_F+O(m)$ stays at distance $\Theta(1)$ from both Fermi points, so $|\xi_b|=\Theta(W)$, $\nu z_b=O(m)$, and that channel drops out.
+\item[(ii)] \emph{The prefactors do not carry $m$.} Each sheet has weight $\frac12N_0\nu$ in $\dd k/(2\pi)=\frac12N_0\dd\xi$, so $\frac{\tau K_j}{\nu N_0}\frac{N_0\nu}{2}=\frac{K_j}{2\pi}$ and $\frac{\tau^2K_jK_l}{\nu N_0^2}\big(\frac{N_0\nu}{2}\big)^2=\frac{K_jK_l}{4\pi^2}$. The rainbow and crossed prefactors of the rescaled equations are independent of $m$.
+\item[(iii)] \emph{The real rainbow shift is a translation.} On the finite band $\operatorname{Re}\Sigma_{\mathrm{RB}}(n)=-\frac{\nu}{\pi}R\log\frac{W-\mu_0}{W+\mu_0}+O(m\nu)$ holds at every order, is of order one in units of $\nu$, and is independent of $n$ up to $O(m)$. The limiting equations depend on $y$ only through $y+\operatorname{Re}\tilde\Sigma_{\mathrm{RB}}$, so on the infinite line the shift $y\mapsto y-\operatorname{Re}\tilde\Sigma_{\mathrm{RB}}$ removes it. Nothing else of $\operatorname{Re}\Sigma$ survives: the rainbow limit is purely imaginary,
+\begin{equation}\label{eq:flatrb}
+\tilde\Sigma_{\mathrm{RB}}(n)=\frac1\pi\sum_{j}K_j\lim_{Y\to\infty}\int_{-Y}^{Y}\tilde z(n-j,y_a)\dd y_a ,
+\end{equation}
+and for the bare propagator the summand equals $-i\operatorname{sgn}(w_{n-j})$.
+\item[(iv)] \emph{The crossed limit does not vanish.} Collecting the three surviving channels,
+\begin{equation}\label{eq:flatx}
+\begin{aligned}
+\tilde\Sigma_X(n,y)=+\frac{1}{\pi^2}\sum_{j,l}K_jK_l\iint_{\mathbb R^2}\frac{\dd y_a\dd y_c}{4}\Big[&\tilde z(a,y_a)\tilde z(c,y_c)\tilde z(b,y_a+y_c-y)\\
+&+2\tilde z(a,y_a)\tilde z(c,y_c)\tilde z(b,y_a-y_c+y)\Big],
+\end{aligned}
+\end{equation}
+with $a=n-j$, $c=n-l$ and $b=n-j-l$. For the bare propagator $\tilde z_0(m,y)=(iw_m-y)^{-1}$ both integrals are the Cauchy residues of Lemma~\ref{lem:residue}. They are independent of $m$ at fixed $y\ne0$, so
+\begin{equation}\label{eq:flatx0}
+\tilde\Sigma_X^{(0)}(n,y)=\sum_{j,l}K_jK_l\big[I_1(a,b,c;y)+2I_{23}(a,b,c;y)\big]
+\end{equation}
+has a finite value at every fixed $y\ne0$, and no estimate of the form $O(m)$ for the crossed self-energy can hold at fixed $\eta$.
+\end{enumerate}
+\end{theorem}
+
+\begin{lemma}[Two exact residues]\label{lem:residue}\hfill\PROVED\\
+For real $y\ne0$ and odd integers $w_r=2r+1$,
+\begin{align}
+I_1(w_a,w_b,w_c;y)&=\iint_{\mathbb R^2}\Big[\frac{\dd y_a}{2\pi}\frac{\dd y_c}{2\pi}\Big]\frac{1}{iw_a-y_a}\,\frac{1}{iw_c-y_c}\,\frac{1}{iw_b-(y_a+y_c-y)}\notag\\
+&=\frac{\mathbf 1\{\operatorname{sgn}w_a=\operatorname{sgn}w_c=-\operatorname{sgn}w_b\}}{i(w_a+w_c-w_b)-y},\label{eq:I1}\\
+I_{23}(w_a,w_b,w_c;y)&=+\iint_{\mathbb R^2}\Big[\frac{\dd y_a}{2\pi}\frac{\dd y_c}{2\pi}\Big]\frac{1}{iw_a-y_a}\,\frac{1}{iw_c-y_c}\,\frac{1}{iw_b-(y_a-y_c+y)}\notag\\
+&=-\frac{\mathbf 1\{\operatorname{sgn}w_a=-\operatorname{sgn}w_c=-\operatorname{sgn}w_b\}}{i(w_a-w_c-w_b)+y}.\label{eq:I23}
+\end{align}
+The first integral is evaluated by closing the $y_c$ contour in the half plane where the summand decays: the pole at $y_c=iw_c$ contributes when $\operatorname{sgn}w_c=-\operatorname{sgn}w_b$, and the remaining $y_a$ integral picks the pole at $y_a=iw_a$ (equivalently, closing in the opposite half plane at $y_a=i(w_b-w_c)+y$) when $\operatorname{sgn}w_a=-\operatorname{sgn}w_b$ as well. The second follows from the first after $y_c\mapsto-y_c$. Because $b=n-j-l$ gives $w_a+w_c-w_b=w_n$, the first residue is the indicator of its sign condition times $\tilde z_0(n,y)$, and both residues are independent of $m$ for every fixed $y$.
+\end{lemma}
+
+Equation~\eqref{eq:flatx0} is the analytic content behind the counterexample. A crossed correction that vanished with $m$ would need these residues to cancel across the frequency sum, and that is a property of the kernel at fixed $\eta$, not a consequence of the hypotheses; the crossing below shows that no such cancellation occurs at the couplings tested.
+
+\subsection{The crossing}
+
+The operator of the limit is discretized on the rescaled energy line, truncated to $|y|\le Y_{\max}$ with $N_y$ points, and given $N_w$ positive Matsubara frequencies. The truncated form is not symmetric in the naive trapezoidal weighting, so the discretization is fixed once: the grid is uniform in $y$ on $[-Y_{\max},Y_{\max}]$ with spacing $\Delta y=2Y_{\max}/(N_y-1)$, interior weights $\sqrt{\Delta y}$ on each side in the $L^2(|z|^2\dd y)$ inner product, and one lumped analytical tail degree of freedom per Matsubara frequency with weight $\sqrt{\tau_n}$, projected symmetrically onto the even subspace $\mathcal H_{\mathrm{even}}$. The symmetry defect is at most $2.5\times10^{-17}$ in every run reported here.
+
+\begin{proposition}[Crossing on the flat-sheet limit]\label{prop:flatcross}\hfill\NUM\\
+Monotone continuation in $\lambda$ at $\eta=1$ gives the following top eigenvalues of the linearized pairing operator of the limit, at two discretizations and after Richardson extrapolation, together with the critical ratio $\eta_{\rm crit}$ computed at $(16,180,361)$.
+\begin{center}
+\begin{tabular}{lccc}
+$\lambda$ & $(16,240,481)$ & $(24,180,361)$ & Richardson \\
+\hline
+4 & 1.003971 & 1.003043 & 1.004245 \\
+6 & 1.014061 & 1.013527 & 1.013678 \\
+8 & 1.015859 & 1.015679 & 1.014628 \\
+\end{tabular}
+\qquad
+\begin{tabular}{lcc}
+$\lambda$ & $\eta_{\rm crit}$ & excess over $\Tceil$ \\
+\hline
+4 & 1.008871 & $+0.89\%$ \\
+6 & 1.045617 & $+4.56\%$ \\
+8 & 1.065128 & $+6.51\%$ \\
+\end{tabular}
+\end{center}
+Here $(N_w,Y_{\max},N_y)$ names the discretization and $\eta_{\rm crit}$ is the ratio at which the top eigenvalue reaches unity, so the linear onset sits above the ceiling by the stated excess. The Migdal--Eliashberg part of the same discretization stays below unity throughout: at $(24,180)$ its top eigenvalue is $0.968965$, $0.984313$ and $0.990572$ for $\lambda=4,6,8$. The crossing is therefore produced by the crossed skeleton and not by a failure of the rainbow equation. Each continuation used seven discretizations in $N_w$, $Y_{\max}$, $N_y$ and the spacing, and the Richardson extrapolation is first order in $1/Y_{\max}$ and second order in $\Delta y^2$ and $1/N_w^2$.
+\end{proposition}
+
+\begin{proposition}[Finite-sheet lower bounds]\label{prop:flatcert}\hfill\CERT\ (padded binary64)\\
+On the periodic band of Definition~\ref{def:flat} at $\mu_0=-0.4W$, $\eta=1$ ($T=\Tceil$), and finite $m$, the largest eigenvalue of the symmetrized linearized pairing matrix of the computed normal solution satisfies
+\begin{equation}\label{eq:flatcert}
+\lambda_{\max}\big(K_{\rm sym}[\Sigma_{\rm num}]\big)\ge1.0090706553\qquad(\lambda=6,\ m=0.008,\ N_k=2050,\ N_w=12),
+\end{equation}
+\begin{equation}\label{eq:flatcert2}
+\lambda_{\max}\big(K_{\rm sym}[\Sigma_{\rm num}]\big)\ge1.0123025473\qquad(\lambda=8,\ m=0.005,\ N_k=3074,\ N_w=12).
+\end{equation}
+\end{proposition}
+
+The lower bounds are Rayleigh quotients formed in fifty-digit directed rounding and returned as binary64 with a padded forward-error bound, so they certify that the discretized operator at those two parameter points exceeds unity. They are not a directed-rounding enclosure of the continuum operator; their scope is the fixed discretization and the fixed numerical solution $\Sigma_{\rm num}$ at each point. At $\eta=1$ the certified Rayleigh margins above unity are $9.07\times10^{-3}$ at $(\lambda,m)=(6,0.008)$ and $1.23\times10^{-2}$ at $(\lambda,m)=(8,0.005)$, and the certificate is evaluated only at these two parameter points.
+
+Three gaps separate Proposition~\ref{prop:flatcert} from a certification of the crossing, and each is stated with its measured size. First, the fixed-point defect. The phase-blind supremum norm of the Jacobian of the crossed map at $\lambda=6$ and $8$ is about $2.96$, above one, so a contracted remainder bound in the supremum norm does not close, and the alternative is an explicit inversion of $I-DF$ in dimension of order $10^5$. Second, the Matsubara tail. At $N_w=12$ the phase-blind rainbow tail bound on the retained window is about $0.027$, above the $0.012$ margin by which $\lambda=8$ exceeds one, while the signed shift from $N_w=12$ to $N_w=24$ is below $10^{-3}$. Third, the two limits that remove the discretization, $N_k\to\infty$ and $m\to0$. Each of the three is a quantitative task rather than a conceptual one, and none is carried out here.
+
+\begin{remark}[Charge response and the status of the branch]\label{rem:cdw}
+The band of Definition~\ref{def:flat} is nested, and its static charge response at the nesting vector is large: the product of the resummed interaction with the static susceptibility at $2k_F$ runs from $8.41$ to $10.37$ over $\lambda=6,8$ and $m=0.005$ to $0.012$. A value above one means that the random-phase resummation of the same interaction is unstable at $2k_F$, so a charge or Peierls instability competes with, and in the mean-field sense precedes, the pairing instability of the truncated equations. The normal branch is therefore not the physical ground state of that band, and this section is a statement about the equations and their ceiling, not about a material. What it does establish is the logical point: bounded $A$, constant $V_j$ and fixed $\mu$ do not imply the ceiling.
+\end{remark}
+
+The failure is not caused by an unbounded density of states, by a momentum-dependent coupling, or by a chemical potential that moves with the phonon scale. What the flat sheets lose is the curvature that made the three energy slabs of the small-$x$ estimate intersect in a set of vanishing measure; on a nested band the middle line sits on the Fermi surface along a whole one-parameter family of the two momenta, and the excess survives the limit. That contrast is the content of Section~\ref{sec:curved}.
+
+%--------------------------------------------------------------------
+\section{Curved Fermi surfaces: a universal small-\texorpdfstring{$x$}{x} window}\label{sec:curved}
+
+The positive half replaces the spherical joint density by a coarea estimate and a layer-cake reduction. Neither step uses rotational symmetry: the sphere enters only through the constancy of its curvature and through the explicit value of its admissibility constant. The hypotheses constrain the dispersion and the normal branch, and the conclusion is a statement about the relative size of the crossed form in the adiabatic window.
+
+\begin{definition}[Curvature class]\label{def:curved}
+Let $d\ge2$, let $\xi\in C^2(\mathcal B)$ on a compact band domain $\mathcal B\subset\mathbb R^d$ be inversion-even, $\xi(-\mathbf k)=\xi(\mathbf k)\in[-W,W]$, and let $\nu=\pi\tau$. Assume
+\begin{enumerate}
+\item[(H1)] on the collar $\{|\xi|\le\varepsilon_0\}$ the gradient does not vanish, $|\nabla\xi|\ge v_{\min}>0$, and $|D^2\xi|\le M_2$;
+\item[(H2)] the density of states is normalized by $0<N_0=N(0)<\infty$ and bounded by $N(\xi)\le AN_0<\infty$, and the transfer obeys $0\le V_j(\mathbf q)=V_j(-\mathbf q)=V_{-j}(\mathbf q)\le\vmax K_j/N_0$;
+\item[(H3)] every level set $\Sigma_\xi$ in the collar is a finite union of smooth strictly convex $C^2$ hypersurfaces with all principal curvatures at least $\kappa_{\min}>0$, and for distinct components with parallel or antiparallel normals the relative curvature is nondegenerate, $\det(\Pi_b\mp\Pi_c)\ne0$ at every critical pair $(\mathbf k_b^*,\mathbf k_c^*)$.
+\end{enumerate}
+\end{definition}
+
+Hypothesis (H3) says that the neighbouring energy surfaces of the collar are strictly convex, that their principal curvatures stay bounded below by $\kappa_{\min}>0$, and that any parallel or antiparallel tangency between distinct components has nondegenerate relative curvature $\det(\Pi_b\mp\Pi_c)\ne0$. The geometric constant $\Cgeom$ depends only on $v_{\min}$, $M_2$, $\kappa_{\min}$, $\varepsilon_0$ and the number of components.
+
+\begin{lemma}[Coarea curvature suffices for the strip overlap]\label{lem:coarea}\hfill\PROVED\\
+Let $\xi$ satisfy the hypotheses of Definition~\ref{def:curved}. For $I_k(u_a,u_b,u_c)$ the normalized integral of $\mathbf 1\{|\xi_a|\le u_a\}\mathbf 1\{|\xi_b|\le u_b\}\mathbf 1\{|\xi_c|\le u_c\}$,
+\begin{equation}\label{eq:coarea}
+I_k(u_a,u_b,u_c)\le \Cgeom (AN_0)^2\,\frac{u_au_bu_c}{W^{\alpha}}\min(u_a,u_b,u_c)^{\alpha-1}\Big(1+\log_+\frac{W}{\min(u_a,u_b,u_c)}\Big)^{\beta},
+\end{equation}
+with $\alpha=1$, $\beta=1$ in $d=2$ and $\alpha=1$, $\beta=0$ in $d\ge3$, and a constant $\Cgeom$ that depends on $v_{\min}$, $M_2$, $\kappa_{\min}$, $\varepsilon_0$ and the number of components only.
+\end{lemma}
+
+The proof is invariant under permutations of $(u_a,u_b,u_c)$, so the smallest slab can be called $u_1$. A slab thicker than the collar is bounded by dropping its indicator and using the density-of-states bound twice. Inside the collar the coarea formula on the two remaining momenta turns each slab into a thickness divided by $|\nabla\xi|$, and the inner integral of the middle slab is bounded by its width divided by the modulus of the tangential gradient. That modulus is bounded below off the tangency sets, where the two level sets cross transversally. Near a forward tangency the Gauss map of a strictly convex level set is bilipschitz with constant $1/\kappa_{\min}$, so the configuration collapses to a ball around the point, and the remaining collar is controlled by the second variation of $\xi$ along the tangential direction. Near an antiparallel tangency the quadratic expansion in $2(d-1)$ tangential variables is positive definite with a lower bound proportional to $v_{\min}\kappa_{\min}$, so its slab has measure of order $u_2$. The logarithmic factor of $d=2$ comes from the annular integral over the distance between the two lower-dimensional level sets; in $d\ge3$ that integral converges at the lower end and the logarithm is absent.
+
+Two features of Lemma~\ref{lem:coarea} matter for the dichotomy. The bound is uniform in the shapes of the level sets once their curvatures are bounded away from zero, which is what turns a spherical statement into a geometric one. And the same estimate fails on the nested band of Section~\ref{sec:flat}, where two of the three slabs are parallel and their intersection is a segment of fixed length; in $d=1$ there is no tangential direction at all. The convexity hypothesis therefore cannot be replaced by nesting or by small curvature.
+
+\begin{lemma}[Layer-cake reduction]\label{lem:layercake}\hfill\PROVED\ with \CERT\ constants\\
+Assume (H1) to (H3) and write $D_n(\xi)=(\omega_n^2+\xi^2)^{-1/2}$ and $x=\nu/W\le1$. Then for every $\mathbf k$ and all Matsubara indices $a,b,c$,
+\begin{equation}\label{eq:layercake}
+\mathcal J_3(\mathbf k;a,b,c)=\iint_{\mathcal B^2}D_a(\xi_a)D_b(\xi_b)D_c(\xi_c)\dd\mu(\mathbf k_a)\dd\mu(\mathbf k_c)\le\frac{\CLC}{\nu}(AN_0)^2x^{\alpha}\Big(1+\log_+\frac1x\Big)^{3+\beta},
+\end{equation}
+uniformly for $\alpha\in(0,1]$, with $\CLC=3\Cgeom+34$. The numerical constants entering $\CLC$ are certified in the replay supplement ($2\sqrt2<3$ and $24\sqrt2<34$); the same supplement certifies the Young-ball constants of Theorem~\ref{thm:curved}(1) ($c_{\mathrm H}<4$ for the triple-H\"older constant, image $<0.3187<1/3$, Lipschitz constant $<0.9340<1$, and $u_n/|\omega_n|\ge2/3$).
+\end{lemma}
+
+The reduction uses $(m^2+\xi^2)^{-1/2}\le\sqrt2\max(m,|\xi|)^{-1}=\sqrt2\int_m^\infty u^{-2}\mathbf 1\{|\xi|\le u\}\dd u$, which is an identity of the layer cake and is sharp at $|\xi|=m$, so each power of a propagator becomes one layer. Multiplying the three layers and using $|\omega_n|\ge\nu$, the region where one layer exceeds $W$ contributes $24\sqrt2\,\nu^{-1}(AN_0)^2x(1+\log_+(1/x))^2$ with the density-of-states bound $\int\mathbf 1\{|\xi|\le u\}\dd\mu\le\min(2AN_0u,1)$, and the region where all three stay below $W$ contributes $3\Cgeom\nu^{-1}(AN_0)^2x^\alpha(1+\log_+(1/x))^{3+\beta}$ by Lemma~\ref{lem:coarea} with $\min(u_a,u_b,u_c)^{\alpha-1}\le\nu^{\alpha-1}$. The sum of the two is the stated constant, with no singularity as $\alpha\to1^-$.
+
+\begin{theorem}[Two regular regimes on curved Fermi surfaces]\label{thm:curved}\hfill\PROVED, with the scope stated in each part\\
+Write $\nu=\pi\tau$, $x=\nu/W$, $B=\max(1,A\vmax R)$ and $\rho=m\sqrt\lambda$.
+\begin{enumerate}
+\item[(1)] \emph{All $x$: Young ball under a constant transfer and an even density of states.} Assume $V_j=K_j/N_0$, $N(-\xi)=N(\xi)$ and $\lambda\le\Lambda<\infty$. At any $\tau>0$ with $AR(\tau)\le1/9$ the regular solution is unique within $\|\Sigma\|_\infty\le\nu/3$ with $u_n|\omega_n|^{-1}\ge2/3$, and pairing has absolute Schur bound strictly below one. The criterion holds at every $\tau\ge\tau_Y$ if $A\lambda<1/9$, with
+\begin{equation}\label{eq:curvedV3b}
+\kB\Tlin\le\tau_Y=\frac{9\,AM_1}{2(1-9A\lambda)},\qquad M_1=\int\Omega\dd\lambda(\Omega),
+\end{equation}
+and if $A\lambda\le1/26^2$ then $\tau_Y\le(117/667)\sqrt{AM}<\Cinf\sqrt{AM}$, with no adiabatic assumption and no curvature hypothesis. Both extra hypotheses are needed for a statement valid at every $x$: without a particle--hole-even density of states and a constant transfer, the bare rainbow shift $\operatorname{Re}\Sigma^{(0)}_{\mathrm{RB}}=\Theta(\nu A\vmax R\log(1/x))$ leaves every ball of fixed radius as $x\to0$, however small $AR$ is.
+\item[(2)] \emph{Small $x$: crossed correction in the adiabatic window.} Assume (H1) to (H3) and let a sign-preserving normal branch exist with $u_n(\mathbf k)\ge c_0|\omega_n|$, $c_0\in(0,1]$, and $|\operatorname{Re}\Sigma_n(\mathbf k)|\le\Delta_R$. Put $\gamma=1+\Delta_R/(c_0\nu)$; in the small-shift regime $\Delta_R\le c_1\nu$ one has $\gamma=O(1)$, and for $\Delta_R\le C_{\mathrm{Re}}\nu(1+\log_+(1/x))$ the factor $\gamma^3$ adds at most three logarithmic powers and preserves the vanishing in $x$. Then
+\begin{equation}\label{eq:curvedLX}
+L_X\le\frac{\gamma^3c_0^{\alpha-1}\CLC}{\pi^2}B^2x^{\alpha}\Big(1+\log_+\frac{1}{c_0x}\Big)^{3+\beta},\qquad |F_X[y]|\le10L_XQ_0[y],
+\end{equation}
+For a constant transfer $V_j=K_j/N_0$, splitting $y=\bar y+y_\perp$ into the $|Q|$-weighted mean over the momentum measure and its orthogonal part gives
+\begin{equation}\label{eq:curvedF}
+F[y]\ge\big(1-\sS(b)-10L_X\big)Q_0[\bar y]+\big(1-10L_X\big)Q_0[y_\perp],
+\end{equation}
+with $b_n=\frac{1}{\pi AN_0}\int u_n\dd\mu/(u_n^2+(\xi+\operatorname{Re}\Sigma_n)^2)\in(0,1]$. There is therefore a window $x\le x_*(B,\text{geometry})$ in which, on that same branch,
+\begin{enumerate}
+\item[(i)] for a constant transfer and an even density of states, whose branch lies within $O(\nu L_X)$ of the purely imaginary rainbow solution, one has $|{\sS(b)-\sS(b^*)}|=O(L_X)$ and hence $\kB\Tlin\le\Cinf\sqrt{AM}\,(1+C_3B^2\rho^{\alpha}(1+\log_+(1/\rho))^{3+\beta})$ with an explicit $C_3$, while the ME onset of the branch is shifted by a relative factor at most $1+O(L_X)$;
+\item[(ii)] for a constant transfer $V_j=K_j/N_0$ and a general asymmetric density of states, where $b_n\le1$ does not imply $\sS(b)\le\sS(1)$ because $S(b)$ carries a negative normal-mass diagonal, the comparison is with $\frac{1}{\pi\sqrt2}\sqrt{AM}$ on every positive time-reversal-reflected branch, with the same relative correction $1+C_3B^2\rho^\alpha(1+\log_+(1/\rho))^{3+\beta}$, and the momentum-resolved ME onset of that branch is shifted by a relative factor at most $1+O(L_X)$;
+\item[(iii)] for a general momentum-dependent transfer $0\le V_j\le\vmax K_j/N_0$, where only $F[y]\ge Q_0[y]+F_{\mathrm{ME}}[y;u]-10L_XQ_0[y]$ holds and the split of the pairing form is unavailable, the first crossed skeleton shifts the momentum-resolved ME onset of that branch by a relative factor at most $1+O\big((A\vmax R)^2\rho^{\alpha}(1+\log_+(1/\rho))^{3+\beta}\big)$.
+\end{enumerate}
+\end{enumerate}
+\end{theorem}
+
+Part (1) is the Young-ball closure of the earlier version, restated as the all-$x$ half of the dichotomy; its statement, its proof and its constants are unchanged, and the particle--hole symmetry and the constant transfer appear there as hypotheses rather than as conveniences. Part (2) is the exact form of the statement that the small-$x$ exclusion of the spherical model is not an artifact of the sphere. The sphere satisfies (H1) to (H3): in its collar the level sets are spheres, the gradient is bounded away from zero, and the principal curvatures equal $1/|k|$, which is bounded below on the collar. Theorem~\ref{thm:V3a} keeps its statement and its proof and is recovered from part (2) with the spherical admissibility constant.
+
+What part (2) does not do is part of its content. The window is small $x$ at fixed $\lambda$, so it does not reach the intermediate-$x$ region where the crossed correction competes with a right-hand side that stays of order one. The comparison is against the ME onset on the same branch, and against the ceiling itself only in the symmetric case of (2)(i). And the conclusion is one-sided by construction: it shows that the crossed skeleton cannot raise the onset by more than a relative amount that vanishes with $x$, and it asserts nothing about a decrease.
+
+%--------------------------------------------------------------------
 \section{Proof sketches}\label{sec:proofs}
 
-Full proofs are in the \texttt{RIGOR.md} files named in each paragraph, which are supplementary material to this preprint; the mapping from numbered statements to file and line is in the accompanying \texttt{CLAIMS.md}. What follows records the structure only.
+Full proofs are in the record files (R0 to R6) named in each paragraph, which are supplementary material to this preprint; the mapping from numbered statements to record, section and line is in the accompanying claims table. What follows records the structure only.
 
 \subsection{The signed identity}
 
@@ -297,7 +484,7 @@ F_X&=\tau^2\!\int V_s V_t\Big[-\tfrac14 Q_pQ_aQ_bQ_c|y_p-y_a+y_b-y_c|^2\nonumber
 where $v$ ranges over three corner occurrences and $v',v''$ denote the other two. Polarization extends the identity to complex trials in the same parity sector.
 \end{lemma}
 
-\noindent\emph{Source.} R2 \texttt{RIGOR.md}, \S1, lines 3--29. The first term of $F_X$ is the alternating four-corner square, the second the three real-line-weighted pair squares. Keeping only the four-corner square misses a genuine forward contribution. The identity is exact; the review audited the signs, the coefficients and the form domain (verdict \texttt{ACCEPT-WITH-FIXES} for R2 as a whole).
+\noindent\emph{Source.} R2 \texttt{RIGOR.md}, \S1, lines 3--29. The first term of $F_X$ is the alternating four-corner square, the second the three real-line-weighted pair squares. Keeping only the four-corner square misses a genuine forward contribution. The identity is exact; the review audited the signs, the coefficients and the form domain and found the record acceptable as a whole.
 
 \begin{lemma}[Local reduction, four-corner square]\label{lem:local}
 Under the centered flat-band normal-branch hypotheses of Theorem~\ref{thm:V1}, write $a=n-j$, $b=n-j-l$, $c=n-l$, $w_n=2n+1$, $s_n=|u_n|/(\pi\tau)$, $\sigma_n=\operatorname{sgn}(w_n)=\operatorname{sgn}(u_n)$ and $b_n=\tfrac2\pi\arctan(W/(\pi\tau s_n))$. Set $q_n=\sigma_n b_n$, $y_n=\varphi_n/u_n$, $\kappa=\pi^2\tau N_0=\pi^2\tau/(2W)$. The equations are
@@ -373,6 +560,26 @@ The review checked the large-$x$ contraction and the small-$x$ argument using th
 
 The grid uses peak majorants, finite-transfer signed tubes and momentum-dependent radial centers. The last method encloses a cellwise approximate inverse and gives a contraction for the preconditioned normal map on each continuation slab, then bounds the full pairing form. The radial center does not restrict the trial gap to radial functions. See R4 \texttt{RIGOR.md}, \S\S4--7, 9.
 
+\subsection{Theorem~\ref{thm:flat} and Lemma~\ref{lem:residue}}
+
+\emph{The sheet count.} Fix $\sigma_k=+$ and put $k=k_F+\frac{\pi\nu}{2W}y$, $k_a=k_F+\frac{\pi\nu}{2W}y_a$ and $k_c=u\,k_F+\frac{\pi\nu}{2W}y_c$ with $u=\sigma_c=\pm1$. Since $\xi$ is $2\pi$ periodic and odd about each Fermi point, $\xi_b/\nu=y_a+y_c-y$ for $u=+1$ and $y_a-y_c+y$ for $u=-1$ to leading order in $m$. The absent combination, $\sigma_a=-1$, is recovered from the same formula with $y_a$ replaced by $-y_a$, which gives $y_c-y_a+y$ after the reflection of the measure. The fourth sheet sum, $\sigma_a=\sigma_c=-1$, sends $k_b$ to $-3k_F$ with a correction of order $m$, and the assumption $4k_F\notin2\pi\mathbb Z$ keeps that point at a fixed distance from both Fermi points, so its propagator carries a factor $\nu/(W|\xi_b|)$ of order $m$.
+
+\emph{The prefactors.} The measure near one Fermi point is $\dd k=\frac{\pi\nu}{2W}\dd y$ on a band of unit length, so a single sum over the sheet contributes $\frac{N_0\nu}{2}$ per unit of $y$, and the $(2\pi)^{-1}$ of the normalized measure combines with the $\tau$ or $\tau^2$ of the self-energy and the $\nu^{-1}$ or $\nu^{-2}$ of the propagators to give the constants of Theorem~\ref{thm:flat}(ii).
+
+\emph{The residues.} Lemma~\ref{lem:residue} is the residue theorem applied twice, once in $y_c$ and once in $y_a$, with the contour closed where the summand decays. The sign conditions are the statement that the two inner frequencies must carry opposite signs, which is the flat-sheet remnant of energy conservation: only one of the two sign patterns survives in each channel, so the double frequency sum does not double count.
+
+\emph{The eigenproblem.} The pairing operator of the limit acts on $y$-dependent functions of one variable. Its discretization is the one stated before Proposition~\ref{prop:flatcross}: the unknown is projected onto the even subspace $\mathcal H_{\mathrm{even}}$, the interior grid is uniform in $y$ on $[-Y_{\max},Y_{\max}]$ with symmetric weights $\sqrt{\Delta y}$, and each Matsubara frequency carries one lumped analytical tail degree of freedom with weight $\sqrt{\tau_n}$. Without the lumping and the symmetrization the operator is not self-adjoint at finite resolution and its top eigenvalue is not a Rayleigh quotient, which is why the lumped-tail symmetric discretization is used here. The continuation in $\lambda$ starts at $\lambda=0.5$, where the top eigenvalue is below unity, and steps upward; $\eta_{\rm crit}$ is then located by a bracketed root find in $\eta$ at each coupling.
+
+\emph{The lower bounds.} Proposition~\ref{prop:flatcert} evaluates the Rayleigh quotient $\langle y,Ky\rangle/\langle y,y\rangle$ of the symmetrized matrix in fifty-digit directed rounding, adds a forward-error bound for the summation, and returns the padded value as binary64. The scope is the fixed discretization and the fixed numerical solution, so the proposition certifies a discretized statement and nothing more.
+
+\subsection{Lemmas~\ref{lem:coarea} and~\ref{lem:layercake}, Theorem~\ref{thm:curved}}
+
+\emph{The overlap.} Lemma~\ref{lem:coarea} is symmetric under permutations of the three slabs, so the smallest one is called $u_1$. Above the collar, the indicator of the largest slab is dropped and the density-of-states bound gives $\min(2AN_0u,1)$ twice. Inside the collar, the coarea formula in $\mathbf k_a$ and $\mathbf k_c$ replaces each slab by a thickness divided by $|\nabla\xi|$, and the middle slab is the only one that must be measured along a level set: its width is $u_2$ divided by the modulus of the tangential gradient of $\xi(\mathbf k_a+\mathbf k_c-\mathbf k)$. That modulus is bounded below by $v_{\min}\delta_0$ off the tangency sets. Near a forward tangency the Gauss map of a strictly convex level set is bilipschitz with constant $1/\kappa_{\min}$, which reduces the configuration to a ball of radius of order $u_2$ around the tangency point, and the collar of that ball is controlled by the second variation of $\xi$ along the tangential direction, giving the factor $u_2(1+\log_+(W/u_2))$ in $d=2$ and $u_2$ in $d\ge3$. Near an antiparallel tangency the quadratic expansion in the $2(d-1)$ tangential variables is positive definite with lower bound proportional to $v_{\min}\kappa_{\min}$, so the slab has measure of order $u_2$ in every dimension.
+
+\emph{The layers.} Lemma~\ref{lem:layercake} rewrites each propagator as a layer integral, multiplies the three layers and integrates. The region where one layer exceeds the bandwidth contributes the constant $24\sqrt2<34$ times $x(1+\log_+(1/x))^2$; the region where all three stay below contributes $3\Cgeom x^{\alpha}(1+\log_+(1/x))^{3+\beta}$. Because $\min(u_a,u_b,u_c)^{\alpha-1}\le\nu^{\alpha-1}$ is used rather than an integral of a power, the constant is continuous at $\alpha=1$ and no $1/(1-\alpha)$ appears.
+
+\emph{The window.} In Theorem~\ref{thm:curved}(2) the crossed form is bounded in absolute value by $10L_XQ_0[y]$, so it perturbs the ME form, which is bounded below by $(1-\sS(b))Q_0$ on the mean sector, by a relative amount that vanishes with $x$. The mean and orthogonal sectors separate because the cross term of $Q_0$ cancels identically against the ME cross term when $y=\bar y+y_\perp$ and the mean is taken with the $|Q|$ weights. Two steps turn the estimate for $b$ into an estimate for $\sS(b)$: first $\|b-b^*\|_\infty=O(L_X)$, because $b$ depends on $u$ and on $\operatorname{Re}\Sigma$ through functions whose variation is bounded by $L_X$; second, $\sup\sigma S(b)$ is locally Lipschitz in $b$ around $b^*$ on the core Matsubara indices, since $S(b)$ is a rational function of $b$ of bounded degree there, while the Matsubara tail beyond the core contributes $O(K_{N_c})$ in operator norm, and $K_n\to0$. The margin of $S(b^*)$ below one is quantitative in $(\tau-\Tceil)/\Tceil$ by the scalar comparison of Lemma~\ref{lem:import}, which is why the window must stay away from the crossing in $\eta$.
+
 %--------------------------------------------------------------------
 \section{Computer-assisted and Lean verification}\label{sec:verification}
 
@@ -383,19 +590,22 @@ Table~\ref{tab:verify} lists artifacts that check finite algebra, arithmetic enc
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.9cm}>{\raggedright\arraybackslash}p{5.1cm}>{\raggedright\arraybackslash}p{5.0cm}@{}}
 \toprule
 Record & Artifact (exit 0 unless noted) & Scope\\\midrule
-R1 local skeleton & \texttt{Core.lean}, \texttt{check\_exact.py}; Lean 4.35.0, \texttt{lean.exe -j1}; reviewer reran both & finite algebra only; axioms propext, Classical.choice, Quot.sound\\
-R2 signed form & \texttt{replay\_form.py}, \texttt{replay\_bounds.py} (11 mutants rejected); reviewer \texttt{independent\_checks.py} & Nambu interpolation, ME folding, localized margin $55/262144>1/8192$\\
-R2 formalised algebra & \texttt{build.ps1}, \texttt{lake build}; 13 theorems & forward\_guards, corner\_window, forward\_geometry, witness\_guards, angular\_guards, angular\_absorption, angular\_partial\_fraction, overlap\_jacobian, overlap\_guards, nambu\_interpolation, nambu\_normal, odd\_interpolation, four\_anchor; no \texttt{sorry}, no \texttt{native\_decide}\\
-R3 onset & \texttt{replay.py} (625 joint-density fixtures, six mutants); reviewer \texttt{independent\_checks.py} (second machine) & joint-density replay; no Lean\\
+R1 local skeleton & \texttt{Core.lean} and an exact-rational checker, Lean 4.35.0 built single threaded; reviewer reran both & finite algebra only; axioms propext, Classical.choice, Quot.sound\\
+R2 signed form & the signed-form replay and the bound replay (11 mutants rejected); reviewer's independent checks & Nambu interpolation, ME folding, localized margin $55/262144>1/8192$\\
+R2 formalised algebra & the formalised-algebra project, 13 theorems & forward\_guards, corner\_window, forward\_geometry, witness\_guards, angular\_guards, angular\_absorption, angular\_partial\_fraction, overlap\_jacobian, overlap\_guards, nambu\_interpolation, nambu\_normal, odd\_interpolation, four\_anchor; no \texttt{sorry}, no \texttt{native\_decide}\\
+R3 onset & the joint-density replay (625 fixtures, six mutants); reviewer's independent checks on a second machine & joint-density replay; no Lean\\
 R4 gap and grid
- & \texttt{replay.py}; \texttt{static.py} (two spatial enclosures); \texttt{finite.py} and \texttt{finite\_check.py}; \texttt{radial\_check.py}; \texttt{grid\_receipts.py} & Constants, grid enclosures and mutant fixtures; the last script audits the 28-node momentum-dependent receipts only. Unresolved selections return nonzero. No Lean.\\\bottomrule
+ & the constant replay, two spatial enclosures, the finite-grid enumerations and their check, the radial enclosure, and the grid receipts & Constants, grid enclosures and mutant fixtures; the receipt audit covers the 28-node momentum-dependent receipts only. Unresolved selections return nonzero. No Lean.\\
+R6 flat sheets and curves & the crossed-vertex replay (exact rational and 60-digit interval constants, four formula mutants rejected) and the flat-sheet solver's own checks & certified constants of Lemma~\ref{lem:layercake}, the crossing and its convergence tables, the Rayleigh lower bounds; no Lean\\\bottomrule
 \end{tabular}
 \caption{Verification artifacts. Exit codes are those reported in the source records or, where noted, by the reviewers. No verification artifact was rerun by the manuscript author, other than the single spot check noted in the trust-base paragraph below.}\label{tab:verify}
 \end{table}
 
-\paragraph{Lean.} The file \texttt{Core.lean} of R1 and the formalised-algebra project of R2 cover finite algebra only. For the latter, the 13 theorems above were built with exit 0 using the axioms propext, Classical.choice and Quot.sound. \emph{Not} formalised: the analytic integrals, the finite-grid replay totals, the external spectral enclosure, branch existence, limits, and onset exclusion. R3 and R4 carry no Lean. The scalar ceiling itself has a machine-checked finite and algebraic core in case~(e) of R0.
+\paragraph{Reproduction of R6.} The crossed-vertex replay of R6 certifies the constants of Lemma~\ref{lem:layercake} and Theorem~\ref{thm:curved}(1) together with the exact flat-sheet overlap ratio $9/4$, using exact rational arithmetic and sixty-digit directed-rounding decimal intervals (\CERT), and it independently cross-checks the bare crossed residue $I_1$ by a 2D FFT convolution on $[-2000,2000]$ and the 2D circle strip-overlap decay (\NUM). Four deliberate formula mutants are rejected with nonzero exit: a changed layer-cake factor, a perturbed Young-ball width floor $u_n/|\omega_n|\ge2/3$, a flipped residue sign, and a suppressed 2D curved-circle overlap decay. The flat-sheet solver checked in R6 rebuilds the continuum tables of Proposition~\ref{prop:flatcross} and the finite-band bounds of Proposition~\ref{prop:flatcert} from the stated parameters. Its last recorded run exits zero after $462$ seconds of wall time, and every run reports a symmetry defect of the symmetrized operator at most $2.5\times10^{-17}$.
 
-\paragraph{Trust base.} The peak guards involve no floating-point arithmetic: they are checked by exact rational and interval calculations. The signed-tube and radial enclosures, including the static grid, use padded IEEE~754 binary64 arithmetic with round-to-nearest. All floating-point work is IEEE~754 binary64 with round-to-nearest, and every elementary operation is assumed accurately rounded, that is, within the standard binary64 bound of at most a few units in the last place. The signed-tube enclosures additionally assume a conventional binary64 product/sum rounding bound for the BLAS kernels they call; the radial enclosures assume \texttt{abs}, \texttt{sqrt}, and \texttt{hypot} are evaluated to standard binary64 accuracy. They are not interval-library or proof-assistant certificates. The static replays use different spatial enclosures but share padding and tail logic. For the 28 added finite Einstein nodes, the reviewer checked a second spatial/frequency implementation with shared slab, pairing-growth and moment bounds, not a second independent proof. Fixtures reject a correlation sign error, an omitted positive transfer wing, and a corrupted inverse entry. The 28-node momentum-dependent receipt audit pins the exact node set and checks both reported upper bounds against historical closure records. It does not rerun the operator enclosures. Separately, \texttt{radial\_averaged.py} was rerun at $(\lambda,\eta,x)=(1,1,1/2)$: the node closed with exit 0, pairing top $\le0.6481$ and preconditioned contraction bound $q_G\le0.6481$. The published maxima are still those of the historical receipts. See R4 \texttt{RIGOR.md}, \S\S4, 6, 7, 9 and the review of R4.
+\paragraph{Lean.} The file \texttt{Core.lean} of R1 and the formalised-algebra project of R2 cover finite algebra only. For the latter, the 13 theorems above were built with exit 0 using the axioms propext, Classical.choice and Quot.sound. \emph{Not} formalised: the analytic integrals, the finite-grid replay totals, the external spectral enclosure, branch existence, limits, and onset exclusion. R3, R4 and R6 carry no Lean. The scalar ceiling itself has a machine-checked finite and algebraic core in case~(e) of R0.
+
+\paragraph{Trust base.} The peak guards involve no floating-point arithmetic: they are checked by exact rational and interval calculations. The signed-tube and radial enclosures, including the static grid, use padded IEEE~754 binary64 arithmetic with round-to-nearest. All floating-point work is IEEE~754 binary64 with round-to-nearest, and every elementary operation is assumed accurately rounded, that is, within the standard binary64 bound of at most a few units in the last place. The signed-tube enclosures additionally assume a conventional binary64 product/sum rounding bound for the BLAS kernels they call; the radial enclosures assume \texttt{abs}, \texttt{sqrt}, and \texttt{hypot} are evaluated to standard binary64 accuracy. They are not interval-library or proof-assistant certificates. The static replays use different spatial enclosures but share padding and tail logic. For the 28 added finite Einstein nodes, the reviewer checked a second spatial/frequency implementation with shared slab, pairing-growth and moment bounds, not a second independent proof. Fixtures reject a correlation sign error, an omitted positive transfer wing, and a corrupted inverse entry. The 28-node momentum-dependent receipt audit pins the exact node set and checks both reported upper bounds against historical closure records. It does not rerun the operator enclosures. Separately, the radial enclosure was rerun at $(\lambda,\eta,x)=(1,1,1/2)$: the node closed with exit 0, pairing top $\le0.6481$ and preconditioned contraction bound $q_G\le0.6481$. The published maxima are still those of the historical receipts. See R4 \texttt{RIGOR.md}, \S\S4, 6, 7, 9 and the review of R4.
 
 %--------------------------------------------------------------------
 \section{Finite lattice numerics}\label{sec:lattice}
@@ -422,18 +632,39 @@ The other six of the nine points are non-converged or branch-ambiguous. The earl
 \emph{Conclusion.} A ceiling for the finite-$A$ lattice remains \OPEN. The earlier \NUM\ van Hove calculation gave $134.27/129.85=13427/12985\simeq1.034039276088$ relative to the rounded $A=1$ scalar reference, with $\lambda=1.5$, $\Omega=\varepsilon_F=0.05$~eV, a $24\times24$ spatial grid and 24 positive frequencies. The grid is not momentum-converged and the band has $A=\infty$; that comparison cannot test either finite-$A$ ceiling.
 
 %--------------------------------------------------------------------
+\section{Discussion and conclusions}\label{sec:conclusions}
+
+The question the first version left open has an answer, and the answer is not a single bound. Bounded density of states, a constant transfer and a fixed chemical potential constrain the crossed skeleton only through the geometry of the energy surfaces.
+
+On a nested band those constraints are not enough. The adiabatic limit of the crossed skeleton is a self-adjoint operator with two exact Cauchy residues that do not carry the phonon-to-bandwidth ratio, and it crosses unity at moderate coupling. The mechanism is visible in the sheet count of Theorem~\ref{thm:flat}: three of the four sheet combinations keep all three energies in the collar along a one-parameter family of the two loop momenta, so the crossing of the energy surfaces is a segment rather than a point, and the small-$x$ suppression that the ceiling argument relies on never appears. The failure therefore comes from the shape of the surfaces and from nothing else in the hypotheses. Its price is stated with it: the same nesting that produces the excess also enhances the static charge response at the nesting vector above the mean-field stability threshold, so the branch on which the excess appears is not the ground state of that band. Whether the excess survives in a band whose charge channel is stabilized, for example by a longer-range interaction or by a lattice superstructure that removes the nesting, is not addressed here.
+
+On a curved surface the constraints are enough, up to a relative amount that vanishes in the adiabatic window. Strict convexity of the energy collars replaces rotational symmetry, and the only ingredients are a coarea estimate for the three-line overlap and a layer-cake reduction that turns each power of a propagator into one energy slice. The window is small $x$ at fixed $\lambda$, so this is not the intermediate region, and the comparison is with the ME onset on the same branch except in the symmetric case. Where the branch is particle-hole even and the transfer is constant, the Young-ball closure of the earlier version remains the only statement available at every $x$, and its two extra hypotheses are now understood as necessary rather than convenient.
+
+The two halves combine into a criterion of a different kind from the one the earlier version sought. A bound on the crossed skeleton at adiabatic ratio and fixed chemical potential can be expected wherever the energy collars of the relevant branch are strictly convex with curvatures bounded away from zero, and it can be expected to fail wherever they are nested. Both statements are conditioned on the existence of the sign-preserving normal branch at the temperatures in question, which is proved here only in the symmetric Young-ball regime ($AR\le1/9$, constant $V_j$, even DOS) and in the spherical small-$x$ and large-$x$ regimes of Section~\ref{sec:results}.
+
+Three limits of the present work bear on how the negative half should be read. The crossing is established numerically, with a certified lower bound at two parameter points, and not as an interval enclosure of the continuum operator. The result is a statement about the linearized equations and their onset temperature, not about a measured transition, a material, or the winner among competing instabilities. And the frequency truncation, the momentum discretization and the band limit are each separated by a gap from the certified statement, which is the content of Open problem~\ref{prob:flatcert}.
+
+%--------------------------------------------------------------------
 \section{What remains open}\label{sec:open}
 
-\begin{problem}[Intermediate temperature at $\lambda\ge1/9$]\label{prob:intermediate}
-The continuum windows, peak-box extensions and finite grid leave unclosed regions. In the two finite Einstein slices of Figure~\ref{fig:coverage}, 16 nodes remain unclosed; a failed sufficient guard or a truncated pairing top below unity does not decide stability there. A regular-branch and pairing enclosure above the ceiling outside the covered sets is still missing.
+\begin{problem}[Intermediate temperature at $\lambda\ge1/9$ without spherical symmetry]\label{prob:intermediate}
+The continuum windows, peak-box extensions and finite grid leave unclosed regions. In the two finite Einstein slices of Figure~\ref{fig:coverage}, 16 nodes remain unclosed; a failed sufficient guard or a truncated pairing top below unity does not decide stability there. A regular-branch and pairing enclosure above the ceiling outside the covered sets is still missing. Theorem~\ref{thm:curved} settles the small-$x$ end of this problem for strictly convex surfaces and leaves the region $x>x_*$ with $\lambda\ge1/9$ and no rotational symmetry untouched; that is now the quantitative core of the question.
 \end{problem}
 
-\begin{problem}[Universal onset]\label{prob:universal}
-Prove or refute $\kB\Tlin\le\Cinf\sqrt{AM}$ uniformly in $\lambda$ and $\Omega/W$ for the first crossed skeleton. Theorem~\ref{thm:V2}(ii) shows any proof must control the full dressed pairing form.
+\begin{problem}[Existence of the normal branch without particle--hole symmetry]\label{prob:asymmetry}
+Part (2) of Theorem~\ref{thm:curved} assumes a sign-preserving branch with $u_n\ge c_0|\omega_n|$ and a bounded real part. Existence of such a branch is proved only where $AR\le1/9$ with an even density of states and a constant transfer. Without those hypotheses the bare rainbow shift is of order $\nu\log(1/x)$ and the ball argument fails at every fixed radius, so a scale-invariant existence argument or an explicit small-$x$ construction is needed. With it, the asymmetric ceiling $\frac{1}{\pi\sqrt2}\sqrt{AM}$ could be compared with $\Cinf\sqrt{AM}$ on the same branch.
+\end{problem}
+
+\begin{problem}[End-to-end certification of the flat-sheet crossing]\label{prob:flatcert}
+Three gaps separate Proposition~\ref{prop:flatcert} from a certified crossing, and each needs a specific technique. The fixed-point defect requires an inversion or a resolvent estimate for $I-DF$ in dimension of order $10^5$, or a norm tailored to the sign structure of the crossed map, where the phase-blind supremum norm fails at about $2.96$. The Matsubara tail requires a bound on the retained window below the $0.012$ margin at $\lambda=8$, or a certified statement at larger $N_w$ where the signed shift is already below $10^{-3}$. The continuum limit requires control of $N_k\to\infty$ and $m\to0$ at fixed $\eta$, for which Theorem~\ref{thm:flat} supplies the limit but not a rate.
+\end{problem}
+
+\begin{problem}[Degenerate tangencies]\label{prob:tangency}
+Hypothesis (H3) excludes relative curvature degeneracy, that is, level sets that touch to second order. A band whose collars contain a tangency of higher order, an inflection, or a curvature that vanishes on a set of positive measure falls outside Theorem~\ref{thm:curved}, and so does the intermediate case of a curvature that tends to zero as the collar is approached. Whether the $x^\alpha$ rate degrades to a logarithmic or slower vanishing there, and whether it can degrade to the nested behaviour of Section~\ref{sec:flat}, is open.
 \end{problem}
 
 \begin{problem}[Other channels and momentum-dependent coupling]\label{prob:channels}
-Odd-frequency and triplet channels, and arbitrary momentum-dependent $V_j(q)$ with bounded DOS only, are untreated. Theorem~\ref{thm:V3b} needs constant-in-momentum transfer, and Theorem~\ref{thm:V3a} needs the spherical or balanced geometry.
+Odd-frequency and triplet channels, and arbitrary momentum-dependent $V_j(q)$ with bounded DOS only, are untreated. Part (1) of Theorem~\ref{thm:curved} needs a constant transfer and an even density of states, and part (2) needs strictly convex collars with nondegenerate tangencies; a momentum-dependent coupling with bounded density of states alone is not covered by either.
 \end{problem}
 
 \begin{problem}[Higher skeletons]\label{prob:higher}
@@ -441,7 +672,7 @@ Skeletons beyond rainbow plus first crossed, bare versus dressed phonons, Coulom
 \end{problem}
 
 \begin{problem}[A signed lattice extension]\label{prob:lattice}
-The signed estimates of Theorem~\ref{thm:V3a} rely on the spherical joint density. A lattice with finite $A$ and a signed extension is missing, and the finite-lattice numerics of Section~\ref{sec:lattice} do not substitute for it.
+Theorem~\ref{thm:curved}(2) supplies a small-$x$ signed bound on $d\ge2$ lattice bands whose energy collars are strictly convex with nondegenerate tangencies, but a signed extension covering non-convex or van Hove lattice bands, one-dimensional lattices, and intermediate $x$ at $\lambda\ge1/9$ is still missing, and the finite-lattice numerics of Section~\ref{sec:lattice} do not substitute for it.
 \end{problem}
 
 \paragraph{Remarks on scope.} The Lean artifacts cover finite algebra only. The results are about the linear instability of a truncated Eliashberg equation on a named branch; they are not exact transition temperatures, they do not assess competing orders, and a numerical onset in a model is not a measurement of any material.
@@ -449,7 +680,7 @@ The signed estimates of Theorem~\ref{thm:V3a} rely on the spherical joint densit
 %--------------------------------------------------------------------
 \section*{Supporting material and data availability}
 This preprint is archived at \url{https://doi.org/\MSPAPERDOI} and the supporting records at \url{https://doi.org/\MSSUPPDOI}. The source of both is \url{\MSREPOURL}.
-The full proofs, replay scripts, certificate logs and independent review records R0 to R5 accompany this preprint as supplementary material. The mapping from each numbered statement to its record, file and line is in \texttt{CLAIMS.md}. No empirical data are used. Every number in this paper is computed from the model parameters stated in the text, and the scripts in records R0 to R5 reproduce it. AI agents generated the proofs, code, and manuscript drafts under D. Rens' direction. Separate AI agents performed the independent reviews. This preprint has not been peer reviewed.
+The full proofs, replay scripts and certificate logs of records R0 to R6 accompany this preprint as supplementary material; independent review records are not included in the supplement. The mapping from each numbered statement to its record, section and line is in the accompanying claims table. No empirical data are used. Every number in this paper is computed from the model parameters stated in the text, and the scripts in records R0 to R6 reproduce it. AI agents generated the proofs, code, and manuscript drafts under D. Rens' direction. Separate AI agents performed the independent reviews. This preprint has not been peer reviewed.
 
 %--------------------------------------------------------------------
 \bibliographystyle{plain}
