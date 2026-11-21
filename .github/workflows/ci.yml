@@ -121,13 +121,23 @@ jobs:
         run: |
           set -euo pipefail
           python -B cert.py | tee cert.out
-          grep -qF 'lambda_max >= 1.00579751250' cert.out
-          grep -qF 'lambda_max >= 1.01993371122' cert.out
-          grep -qF 'unique fixed point in ||Sigma-Sigma_0||_inf <= 5.83329104641E-17' cert.out
-          grep -qF 'unique fixed point in ||Sigma-Sigma_0||_inf <= 3.63702630192E-17' cert.out
-          grep -qF 'min |Im u| >= 0.0565776818037' cert.out
-          grep -qF 'min |Im u| >= 0.0384152648904' cert.out
           test "$(grep -cF 'CERTIFIED  (all inequalities hold)' cert.out)" -eq 2
+          test "$(grep -cF 'k < 1 -> True' cert.out)" -eq 2
+          python - <<'EOF'
+          # Checked numerically with a fixed slack: the enclosure lower bounds move only in their
+          # last digits across platforms, and the fixed-point radius depends on the floating
+          # candidate, so exact strings would make the job tied to one machine.
+          import re
+          t = open('cert.out', encoding='utf-8').read()
+          lam = [float(x) for x in re.findall(r'lambda_max >= ([0-9.]+)', t)]
+          imu = [float(x) for x in re.findall(r'min \|Im u\| >= ([0-9.]+)', t)]
+          rad = [float(x) for x in re.findall(r'unique fixed point in \|\|Sigma-Sigma_0\|\|_inf <= ([0-9.E+-]+)', t)]
+          assert len(lam) == len(imu) == len(rad) == 2, (lam, imu, rad)
+          assert lam[0] >= 1.0057975124 and lam[1] >= 1.0199337112, lam
+          assert imu[0] >= 0.056577681803 and imu[1] >= 0.038415264890, imu
+          assert rad[0] <= 5.834e-17 and rad[1] <= 3.638e-17, rad
+          print('lambda_max', lam, 'min |Im u|', imu, 'fixed-point radii', rad, 'within bounds')
+          EOF
       - name: R7 second-checker self-tests
         working-directory: records/R7-flat-sheet-certificate
         run: |
